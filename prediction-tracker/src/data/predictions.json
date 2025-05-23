@@ -1,0 +1,46 @@
+[{
+  "id": "agents-2025",
+  "text": "We'll have some version of actually impactful AI agents before the end of 2025",
+  "confidence": 85,
+  "dateCreated": "2024-12-31",
+  "targetDate": "2025-12-31",
+  "status": "on_track",
+  "category": "ai_capabilities",
+  "reasoning": "Test time compute paradigm of o1 series makes this even more likely. 'Meaningfully impact our lives' is vague, but we'll know it when we see it.",
+  "source": "https://nathanlubchenco.substack.com/p/reflecting-and-projecting-about-ai",
+  "evidence": [
+    {
+      "date": "2025-01-23",
+      "note": "OpenAI released Operator agent",
+      "link": "https://nathanlubchenco.substack.com/p/openais-operator"
+    }
+  ]
+}, {
+  "id": "customer-support-2025",
+  "text": "The first industry that will be hugely disrupted is customer support agents in call centers",
+  "confidence": 90,
+  "dateCreated": "2024-12-31",
+  "targetDate": "2025-12-31",
+  "status": "pending",
+  "category": "economic",
+  "reasoning": "At least one firm will do major layoffs in this area and replace/supplement workers with AI systems. Customer satisfaction will go up not down.",
+  "source": "https://nathanlubchenco.substack.com/p/reflecting-and-projecting-about-ai",
+  "evidence": []
+}, {
+  "id": "hiring-change-2025",
+  "text": "At least one, but certainly not the majority of major tech companies dramatically changes hiring methodology in light of AI",
+  "confidence": 70,
+  "dateCreated": "2024-12-31",
+  "targetDate": "2025-12-31",
+  "status": "at_risk",
+  "category": "adoption",
+  "reasoning": "For example, allowing the use of models during an interview, but having higher expectations",
+  "source": "https://nathanlubchenco.substack.com/p/reflecting-and-projecting-about-ai",
+  "evidence": [
+    {
+      "date": "2025-06-15",
+      "note": "No major announcements yet, checking in at halfway point",
+      "link": "https://nathanlubchenco.substack.com/p/interviewing-software-engineers-in"
+    }
+  ]
+}]

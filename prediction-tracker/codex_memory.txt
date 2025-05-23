@@ -1,0 +1,55 @@
+# Codex Memory
+
+This file tracks the plan and notes for implementing the Prediction Tracker MVP.
+
+## High-Level Plan
+
+1. Define data structures and types
+   - Create `src/types/prediction.ts` with `Prediction` and `Evidence` interfaces.
+2. Add initial data source
+   - Create `src/data/predictions.json` with initial predictions array.
+3. Build utilities
+   - Create `src/utils/dateHelpers.ts` for date functions.
+   - Create `src/utils/calculateCalibration.ts` for calibration logic.
+   - Create `src/utils/filtering.ts` for filtering and sorting.
+4. Develop UI components
+   - `src/components/StatusIcon.tsx`
+   - `src/components/PredictionCard.tsx`
+   - `src/components/FilterBar.tsx`
+   - `src/components/CalibrationSummary.tsx`
+5. Implement main page
+   - Update `src/app/page.tsx` to import data, manage filters, and render components.
+6. Styling and layout
+   - Apply dark theme with Tailwind CSS classes.
+   - Ensure mobile-responsive design.
+7. Test and polish
+   - Verify filters, progress bars, and summary.
+   - Cross-device testing.
+8. Deployment preparation
+   - Update README.
+   - Configure Vercel deployment.
+
+## Notes
+
+- Use Lucide React icons for status.
+- Use Framer Motion for expand/collapse animations.
+
+## Step 1: Define Data Structures and Types
+- Created `src/types/prediction.ts` with `Prediction` and `Evidence` interfaces.
+
+## Step 2: Add Initial Data Source
+- Created `src/data/predictions.json` with initial prediction entries.
+
+## Step 3: Build Utilities
+- Created `src/utils/dateHelpers.ts` with `calculateDaysRemaining` function.
+- Created `src/utils/calculateCalibration.ts` with `calculateCalibrationScore` stub.
+- Created `src/utils/filtering.ts` with `filterPredictions` and `sortPredictionsByDate` stubs.
+
+## Step 4: Develop UI Components
+- Created `src/components/StatusIcon.tsx` stub.
+- Created `src/components/PredictionCard.tsx` stub.
++- Created `src/components/FilterBar.tsx` stub.
+- Created `src/components/CalibrationSummary.tsx` stub.
+
+## Step 5: Implement Main Page
+- Created initial layout in `src/app/page.tsx` to import data, manage filters, and render components.
