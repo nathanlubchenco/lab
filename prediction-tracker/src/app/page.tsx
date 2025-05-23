@@ -1,11 +1,9 @@
 "use client";
 
-import Image from "next/image";
-
 import React, { useState } from 'react';
 import { Prediction } from '../types/prediction';
 import predictionsData from '../data/predictions.json';
-import { filterPredictions, sortPredictionsByDate } from '../utils/filtering';
+import { filterPredictions, sortPredictionsByDate, Filters } from '../utils/filtering';
 import { calculateCalibrationScore } from '../utils/calculateCalibration';
 import { calculateDaysRemaining } from '../utils/dateHelpers';
 import { FilterBar } from '../components/FilterBar';
@@ -13,28 +11,33 @@ import { CalibrationSummary } from '../components/CalibrationSummary';
 import { PredictionCard } from '../components/PredictionCard';
 
 export default function Home() {
-  const [filters, setFilters] = useState({ statuses: [], categories: [], minConfidence: 0, maxConfidence: 100 });
-  const predictions: Prediction[] = predictionsData;
+  const [filters, setFilters] = useState<Filters>({ statuses: [], categories: [], minConfidence: 0, maxConfidence: 100 });
+  const predictions = predictionsData as Prediction[];
 
   const filtered = filterPredictions(predictions, filters);
   const sorted = sortPredictionsByDate(filtered);
   const calibrationScore = calculateCalibrationScore(predictions);
 
   return (
-    <div className="bg-gray-900 text-gray-100 min-h-screen p-4 sm:p-8">
-      <header className="mb-6">
-        <CalibrationSummary score={calibrationScore} total={predictions.length} />
-        <FilterBar filters={filters} onChange={setFilters} />
-      </header>
-      <main className="space-y-4">
-        {sorted.map(prediction => (
-          <PredictionCard
-            key={prediction.id}
-            prediction={prediction}
-            daysRemaining={calculateDaysRemaining(prediction.targetDate)}
-          />
-        ))}
-      </main>
+    <div className="min-h-screen">
+      <div className="container mx-auto p-4 sm:p-8">
+        <header className="mb-6">
+          <h1 className="text-4xl font-extrabold text-white mb-4">
+            AI Prediction Tracker
+          </h1>
+          <CalibrationSummary score={calibrationScore} total={predictions.length} />
+          <FilterBar filters={filters} onChange={setFilters} />
+        </header>
+        <main className="space-y-6">
+          {sorted.map(prediction => (
+            <PredictionCard
+              key={prediction.id}
+              prediction={prediction}
+              daysRemaining={calculateDaysRemaining(prediction.targetDate)}
+            />
+          ))}
+        </main>
+      </div>
     </div>
   );
 }
