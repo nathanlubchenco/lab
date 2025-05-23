@@ -37,6 +37,9 @@ export default function Home() {
             />
           ))}
         </main>
+        <footer className="mt-8 text-center text-sm text-gray-500">
+          R. Mutt 2025
+        </footer>
       </div>
     </div>
   );

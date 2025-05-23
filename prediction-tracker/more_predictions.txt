@@ -1,49 +1,7 @@
-[{
-  "id": "agents-2025",
-  "text": "We'll have some version of actually impactful AI agents before the end of 2025",
-  "confidence": 85,
-  "dateCreated": "2024-12-31",
-  "targetDate": "2025-12-31",
-  "status": "on_track",
-  "category": "ai_capabilities",
-  "reasoning": "Test time compute paradigm of o1 series makes this even more likely. 'Meaningfully impact our lives' is vague, but we'll know it when we see it.",
-  "source": "https://nathanlubchenco.substack.com/p/reflecting-and-projecting-about-ai",
-  "evidence": [
-    {
-      "date": "2025-01-23",
-      "note": "OpenAI released Operator agent",
-      "link": "https://nathanlubchenco.substack.com/p/openais-operator"
-    }
-  ]
-}, {
-  "id": "customer-support-2025",
-  "text": "The first industry that will be hugely disrupted is customer support agents in call centers",
-  "confidence": 90,
-  "dateCreated": "2024-12-31",
-  "targetDate": "2025-12-31",
-  "status": "pending",
-  "category": "economic",
-  "reasoning": "At least one firm will do major layoffs in this area and replace/supplement workers with AI systems. Customer satisfaction will go up not down.",
-  "source": "https://nathanlubchenco.substack.com/p/reflecting-and-projecting-about-ai",
-  "evidence": []
-}, {
-  "id": "hiring-change-2025",
-  "text": "At least one, but certainly not the majority of major tech companies dramatically changes hiring methodology in light of AI",
-  "confidence": 70,
-  "dateCreated": "2024-12-31",
-  "targetDate": "2025-12-31",
-  "status": "at_risk",
-  "category": "adoption",
-  "reasoning": "For example, allowing the use of models during an interview, but having higher expectations",
-  "source": "https://nathanlubchenco.substack.com/p/reflecting-and-projecting-about-ai",
-  "evidence": [
-    {
-      "date": "2025-06-15",
-      "note": "No major announcements yet, checking in at halfway point",
-      "link": "https://nathanlubchenco.substack.com/p/interviewing-software-engineers-in"
-    }
-  ]
-}, {
+Additional Predictions from Blog Posts
+Based on a thorough review of the blog posts, here are additional predictions to add to the tracker:
+From "Reflecting and Projecting about AI" (December 2024)
+json{
   "id": "ai-anxiety-peak-2026",
   "text": "Peak AI anxiety will occur in 2026 or 2027 (not 2025)",
   "confidence": 75,
@@ -53,7 +11,8 @@
   "category": "social",
   "reasoning": "Normal people will become increasingly concerned about whether it will impact their industry and jobs",
   "source": "https://nathanlubchenco.substack.com/p/reflecting-and-projecting-about-ai"
-}, {
+},
+{
   "id": "ai-pervasive-2026",
   "text": "By 2026 AI will be pervasive enough that the predominant way of using AI will not be through chat/co-pilots",
   "confidence": 80,
@@ -63,7 +22,9 @@
   "category": "adoption",
   "reasoning": "People will still think primarily of chat interfaces as AI, but this will begin shifting in 2025",
   "source": "https://nathanlubchenco.substack.com/p/reflecting-and-projecting-about-ai"
-}, {
+}
+From "OpenAI's Operator" (January 2025)
+json{
   "id": "useful-agents-september-2025",
   "text": "Useful AI agents by September or October 2025",
   "confidence": 70,
@@ -79,7 +40,9 @@
       "note": "Operator released but underwhelming for demoed use cases"
     }
   ]
-}, {
+}
+From "Gradually, Then Suddenly" (April 2025)
+json{
   "id": "jarring-step-function-2025",
   "text": "A jarring step-function level release sometime later this year",
   "confidence": 85,
@@ -89,7 +52,9 @@
   "category": "ai_capabilities",
   "reasoning": "Perhaps GPT5, perhaps an agent, maybe whatever is next from Anthropic",
   "source": "https://nathanlubchenco.substack.com/p/gradually-then-suddenly"
-}, {
+}
+From "What Should a Knowledge Worker Be Doing" (February 2025)
+json{
   "id": "task-horizon-32-hours",
   "text": "AI task horizon will reach ~32 hours (work week) with just 3 doublings in 2 years",
   "confidence": 80,
@@ -99,7 +64,9 @@
   "category": "ai_capabilities",
   "reasoning": "Based on METR data showing doubling of task length capability",
   "source": "https://nathanlubchenco.substack.com/p/what-should-a-knowledge-worker-be"
-}, {
+}
+From Original March 2024 Email
+json{
   "id": "ai-music-hit-song",
   "text": "There will be a widely popular AI generated song",
   "confidence": 85,
@@ -109,7 +76,8 @@
   "category": "social",
   "reasoning": "There's just too much latent creativity in the world that is enabled by these tools",
   "source": "https://nathanlubchenco.substack.com/p/reflecting-and-projecting-about-ai"
-}, {
+},
+{
   "id": "video-generation-timeline",
   "text": "AI video generation as creative hobby possible in 3-5 years",
   "confidence": 60,
@@ -125,7 +93,9 @@
       "note": "Sora is just not that good yet. Updated timelines from 2025 to 3-5 years"
     }
   ]
-}, {
+}
+From "Proactively Preserving My Human Capital" (May 2025)
+json{
   "id": "task-doublings-aggressive",
   "text": "10 doublings in AI task capability over next 2 years (90th percentile case)",
   "confidence": 10,
@@ -135,7 +105,8 @@
   "category": "ai_capabilities",
   "reasoning": "Doublings every 3 months for next year, then every 2 months following year. Would mean AI handles year-long tasks.",
   "source": "https://nathanlubchenco.substack.com/p/proactively-preserving-my-human-capital"
-}, {
+},
+{
   "id": "not-using-codex-cli",
   "text": "I will not be regularly using codex-cli in 3-6 months",
   "confidence": 90,
@@ -145,7 +116,9 @@
   "category": "adoption",
   "reasoning": "I just think there will be something better",
   "source": "https://nathanlubchenco.substack.com/p/proactively-preserving-my-human-capital"
-}, {
+}
+From "Interviewing Software Engineers" (June 2025)
+json{
   "id": "competitive-coding-solved-2025",
   "text": "AI will reach top 50 worldwide at competitive coding with next release",
   "confidence": 80,
@@ -155,7 +128,9 @@
   "category": "ai_capabilities",
   "reasoning": "o3/o4-mini already top 200. Similar 800 point jump would put next release at ~3500 ELO",
   "source": "https://nathanlubchenco.substack.com/p/interviewing-software-engineers-in"
-}, {
+}
+Implicit Predictions to Track
+json{
   "id": "no-ubi-trials-successful",
   "text": "UBI trials in the US will continue to show disappointing results",
   "confidence": 65,
@@ -165,7 +140,8 @@
   "category": "economic",
   "reasoning": "Less optimistic than I once was about this as a path forward",
   "source": "https://nathanlubchenco.substack.com/p/deep-research"
-}, {
+},
+{
   "id": "intermediate-knowledge-commoditized",
   "text": "Majority of current intermediate-level knowledge work will be automatable",
   "confidence": 90,
@@ -176,4 +152,33 @@
   "reasoning": "15th-85th percentile understanding will be increasingly done by AI",
   "source": "https://nathanlubchenco.substack.com/p/what-should-a-knowledge-worker-be"
 }
-]
+Summary of All Predictions by Category
+AI Capabilities (7)
+
+AI agents by end of 2025
+Useful agents by Sept/Oct 2025
+Jarring step-function release in 2025
+32-hour task horizon in 2 years
+Video generation 3-5 years
+10 doublings in 2 years (low confidence)
+Top 50 competitive coding
+
+Adoption (3)
+
+Major tech hiring change
+AI beyond chat interfaces by 2026
+Not using codex-cli in 6 months
+
+Economic (3)
+
+Customer support disruption
+UBI trials disappointing
+Intermediate knowledge work automated
+
+Social (3)
+
+Peak AI anxiety in 2026-2027
+Popular AI-generated song
+(Could add more from blog discussions)
+
+This gives us a robust set of 15+ predictions to track, with good distribution across categories and time horizons. The predictions range from very near-term (months) to medium-term (2-3 years), with confidence levels from 10% to 90%.RetryClaude can make mistakes. Please double-check responses. Opus 4
