@@ -11,8 +11,13 @@
   "evidence": [
     {
       "date": "2025-01-23",
-      "note": "OpenAI released Operator agent",
+      "note": "OpenAI released Operator agent -- evidence mixed, is an agent, utility extremely limited",
       "link": "https://nathanlubchenco.substack.com/p/openais-operator"
+    },
+    {
+      "date": "2025-03-06",
+      "note": "OpenAI released Deep Resarch agent -- evidence strong, is an agent, utility is strong",
+      "link": "https://nathanlubchenco.substack.com/p/deep-research"
     }
   ]
 }, {
@@ -21,11 +26,17 @@
   "confidence": 90,
   "dateCreated": "2024-12-31",
   "targetDate": "2025-12-31",
-  "status": "pending",
+  "status": "at_risk",
   "category": "economic",
   "reasoning": "At least one firm will do major layoffs in this area and replace/supplement workers with AI systems. Customer satisfaction will go up not down.",
   "source": "https://nathanlubchenco.substack.com/p/reflecting-and-projecting-about-ai",
-  "evidence": []
+  "evidence": [
+    {
+      "date": "2025-05-09",
+      "note": "Klarna is re-hiring after making a big todo about going AI first, not yet definitive because its only May, but some negative evidence that customer support agents aren't ready for prime time.  However, I think there's still a world of opportunity here and its unclear to me how much better they need to be.",
+      "link": "https://www.entrepreneur.com/business-news/klarna-ceo-reverses-course-by-hiring-more-humans-not-ai/491396"
+    }
+  ]
 }, {
   "id": "hiring-change-2025",
   "text": "At least one, but certainly not the majority of major tech companies dramatically changes hiring methodology in light of AI",
@@ -46,7 +57,7 @@
 }, {
   "id": "ai-anxiety-peak-2026",
   "text": "Peak AI anxiety will occur in 2026 or 2027 (not 2025)",
-  "confidence": 75,
+  "confidence": 65,
   "dateCreated": "2024-12-31",
   "targetDate": "2027-12-31",
   "status": "pending",
@@ -56,7 +67,7 @@
 }, {
   "id": "ai-pervasive-2026",
   "text": "By 2026 AI will be pervasive enough that the predominant way of using AI will not be through chat/co-pilots",
-  "confidence": 80,
+  "confidence": 65,
   "dateCreated": "2024-12-31",
   "targetDate": "2026-12-31",
   "status": "pending",
@@ -82,17 +93,17 @@
 }, {
   "id": "jarring-step-function-2025",
   "text": "A jarring step-function level release sometime later this year",
-  "confidence": 85,
+  "confidence": 75,
   "dateCreated": "2025-04-16",
   "targetDate": "2025-12-31",
-  "status": "pending",
+  "status": "at_risk",
   "category": "ai_capabilities",
   "reasoning": "Perhaps GPT5, perhaps an agent, maybe whatever is next from Anthropic",
   "source": "https://nathanlubchenco.substack.com/p/gradually-then-suddenly"
 }, {
   "id": "task-horizon-32-hours",
   "text": "AI task horizon will reach ~32 hours (work week) with just 3 doublings in 2 years",
-  "confidence": 80,
+  "confidence": 60,
   "dateCreated": "2025-02-11",
   "targetDate": "2027-02-11",
   "status": "pending",
@@ -102,7 +113,7 @@
 }, {
   "id": "ai-music-hit-song",
   "text": "There will be a widely popular AI generated song",
-  "confidence": 85,
+  "confidence": 75,
   "dateCreated": "2024-03-15",
   "targetDate": "2026-12-31",
   "status": "pending",
