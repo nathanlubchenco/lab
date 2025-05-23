@@ -25,6 +25,17 @@ export default function Home() {
           <h1 className="text-4xl font-extrabold text-white mb-4">
             AI Prediction Tracker
           </h1>
+          <p className="text-gray-300 mb-4">
+            These predictions are pulled from previous posts on{' '}
+            <a
+              href="https://nathanlubchenco.substack.com/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-blue-400 hover:underline"
+            >
+              The Future Was Yesterday
+            </a>.
+          </p>
           <CalibrationSummary score={calibrationScore} total={predictions.length} />
           <FilterBar filters={filters} onChange={setFilters} />
         </header>
