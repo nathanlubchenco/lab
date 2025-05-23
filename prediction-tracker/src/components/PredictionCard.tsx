@@ -5,6 +5,15 @@ import { Prediction } from '../types/prediction';
 import { StatusIcon } from './StatusIcon';
 import { format, parseISO } from 'date-fns';
 
+const statusLabels: Record<Prediction['status'], string> = {
+  pending: 'Pending',
+  on_track: 'On track',
+  at_risk: 'At risk',
+  succeeded: 'Succeeded',
+  failed: 'Failed',
+  revised: 'Revised',
+};
+
 export interface PredictionCardProps {
   prediction: Prediction;
   daysRemaining: number;
@@ -31,11 +40,17 @@ export const PredictionCard: React.FC<PredictionCardProps> = ({
     >
       <div className="flex justify-between items-center">
         <h2 className="text-lg font-semibold text-white">{prediction.text}</h2>
-        <StatusIcon status={prediction.status} />
+        <div className="flex items-center space-x-1">
+          <StatusIcon status={prediction.status} />
+          <span className="text-sm font-medium text-gray-200">
+            {statusLabels[prediction.status]}
+          </span>
+        </div>
       </div>
       <div className="mt-2 flex flex-wrap text-sm text-gray-400 gap-4">
         <span>Created: {format(created, 'MMM d, yyyy')}</span>
         <span>Target: {format(target, 'MMM d, yyyy')}</span>
+        <span>Confidence: {prediction.confidence}%</span>
       </div>
       <div className="mt-3">
         <div className="relative w-full bg-gray-700 rounded-full h-2 overflow-hidden">
