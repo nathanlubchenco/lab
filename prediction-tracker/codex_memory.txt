@@ -52,4 +52,6 @@ This file tracks the plan and notes for implementing the Prediction Tracker MVP.
 - Created `src/components/CalibrationSummary.tsx` stub.
 
 ## Step 5: Implement Main Page
-- Created initial layout in `src/app/page.tsx` to import data, manage filters, and render components.
++ Created initial layout in `src/app/page.tsx` to import data, manage filters, and render components.
++- Configured `useState` for filters (statuses, categories, confidence range).
++- Integrated utilities: `filterPredictions`, `sortPredictionsByDate`, `calculateCalibrationScore`, and `calculateDaysRemaining`.
