@@ -34,7 +34,15 @@ export default function Home() {
               className="text-blue-400 hover:underline"
             >
               The Future Was Yesterday
-            </a>.
+            </a>.{' '}
+            <a
+              href="/ai_displacement_analysis.html"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-green-400 hover:underline"
+            >
+              View AI Job Displacement Analysis
+            </a>
           </p>
           <CalibrationSummary score={calibrationScore} total={predictions.length} />
           <FilterBar filters={filters} onChange={setFilters} />

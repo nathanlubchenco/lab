@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Job Displacement: Enhanced Analysis 2025-2030</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #2c3e50;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            text-align: center;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        
+        .header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .header p {
+            font-size: 1.2em;
+            color: #666;
+            margin-bottom: 20px;
+        }
+        
+        .nav-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-tab {
+            padding: 12px 24px;
+            background: #f8f9fa;
+            border: none;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+        
+        .nav-tab.active {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .nav-tab:hover:not(.active) {
+            background: #e9ecef;
+            transform: translateY(-1px);
+        }
+        
+        .content-panel {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 40px;
+            margin-bottom: 30px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+            display: none;
+        }
+        
+        .content-panel.active {
+            display: block;
+            animation: fadeInUp 0.5s ease;
+        }
+        
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            margin: 30px 0;
+        }
+        
+        .card {
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 15px;
+            padding: 30px;
+            border-left: 5px solid #667eea;
+        }
+        
+        .card h3 {
+            color: #2c3e50;
+            margin-bottom: 15px;
+            font-size: 1.3em;
+        }
+        
+        .risk-matrix {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin: 30px 0;
+        }
+        
+        .risk-cell {
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            color: white;
+            font-weight: bold;
+        }
+        
+        .risk-low { background: linear-gradient(135deg, #27ae60, #2ecc71); }
+        .risk-medium { background: linear-gradient(135deg, #f39c12, #e67e22); }
+        .risk-high { background: linear-gradient(135deg, #e74c3c, #c0392b); }
+        
+        .timeline {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin: 30px 0;
+            overflow-x: auto;
+            padding: 20px 0;
+        }
+        
+        .timeline-item {
+            flex: 1;
+            text-align: center;
+            position: relative;
+            min-width: 150px;
+        }
+        
+        .timeline-item:not(:last-child):after {
+            content: '';
+            position: absolute;
+            top: 25px;
+            right: -40%;
+            width: 80%;
+            height: 3px;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+        }
+        
+        .timeline-dot {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            margin: 0 auto 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4);
+        }
+        
+        .chart-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 30px;
+            margin: 30px 0;
+        }
+        
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 30px 0;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .data-table th {
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            color: white;
+            padding: 15px;
+            text-align: left;
+            font-weight: 600;
+        }
+        
+        .data-table td {
+            padding: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .data-table tr:hover {
+            background: #f8f9fa;
+        }
+        
+        .insight-box {
+            background: linear-gradient(135deg, #667eea10, #764ba210);
+            border-left: 4px solid #667eea;
+            border-radius: 10px;
+            padding: 25px;
+            margin: 25px 0;
+        }
+        
+        .insight-box h4 {
+            color: #667eea;
+            margin-bottom: 10px;
+            font-size: 1.1em;
+        }
+        
+        .progress-bar {
+            background: #e9ecef;
+            border-radius: 25px;
+            height: 20px;
+            margin: 10px 0;
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #667eea, #764ba2);
+            border-radius: 25px;
+            transition: width 1s ease;
+        }
+        
+        .stat-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin: 30px 0;
+        }
+        
+        .stat-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            text-align: center;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+        
+        .stat-number {
+            font-size: 2.5em;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: 10px;
+        }
+        
+        .methodology-note {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            font-size: 0.9em;
+            color: #666;
+            border-left: 3px solid #667eea;
+        }
+        
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2em; }
+            .nav-tabs { flex-direction: column; align-items: center; }
+            .grid { grid-template-columns: 1fr; }
+            .timeline { flex-direction: column; gap: 20px; }
+            .timeline-item:after { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>AI Job Displacement Analysis</h1>
+            <p>Enhanced 2025-2030 Model Incorporating METR Task-Doubling Data</p>
+            <div class="nav-tabs">
+                <button class="nav-tab active" onclick="showPanel('overview')">Executive Summary</button>
+                <button class="nav-tab" onclick="showPanel('methodology')">Enhanced Methodology</button>
+                <button class="nav-tab" onclick="showPanel('analysis')">Risk Analysis</button>
+                <button class="nav-tab" onclick="showPanel('timeline')">Timeline & Scenarios</button>
+                <button class="nav-tab" onclick="showPanel('implications')">Strategic Implications</button>
+            </div>
+        </div>
+
+        <div id="overview" class="content-panel active">
+            <h2>Executive Summary</h2>
+            
+            <div class="stat-grid">
+                <div class="stat-card">
+                    <div class="stat-number">45-55%</div>
+                    <p>of work hours potentially automated by 2030</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">6-10mo</div>
+                    <p>AI task capability doubling time (METR data)</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">60-80%</div>
+                    <p>exposure risk for routine cognitive jobs</p>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number">3-5yr</div>
+                    <p>timeline for major workforce transitions</p>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <h4>🎯 Key Insight: The Barbell Effect</h4>
+                <p>AI automation risk is concentrated in the middle skill tier. High-skill strategic roles and low-skill embodied work show greater resilience, creating a "barbell" distribution of job security.</p>
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>🔄 Revised Assumptions</h3>
+                    <p>Incorporating METR's finding that AI task complexity doubles every 6-10 months, far exceeding previous 12-18 month estimates. This acceleration fundamentally changes displacement timelines.</p>
+                </div>
+                <div class="card">
+                    <h3>⚡ Platform Maturity</h3>
+                    <p>Emergence of integrated agent toolchains (AutoGen, LangGraph) reduces deployment friction, enabling workflow automation rather than just task automation.</p>
+                </div>
+                <div class="card">
+                    <h3>🌍 Geographic Variation</h3>
+                    <p>Regulatory environments create patchwork adoption patterns. EU AI Act compliance costs may slow deployment versus more permissive jurisdictions.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="methodology" class="content-panel">
+            <h2>Enhanced Methodology</h2>
+            
+            <div class="insight-box">
+                <h4>🔬 Methodological Improvements Over Original MIT-IBM Model</h4>
+                <p>Our enhanced model addresses key limitations in prior work by incorporating dynamic capability curves, economic feedback loops, and implementation constraints.</p>
+            </div>
+
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Factor</th>
+                        <th>MIT-IBM Baseline</th>
+                        <th>Enhanced Model</th>
+                        <th>Impact</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Capability Benchmark</td>
+                        <td>GPT-3.5 level</td>
+                        <td>GPT-4.5/5 + agents</td>
+                        <td>+15-25% exposure</td>
+                    </tr>
+                    <tr>
+                        <td>Task Doubling Time</td>
+                        <td>12-18 months</td>
+                        <td>6-10 months (METR)</td>
+                        <td>Accelerated timeline</td>
+                    </tr>
+                    <tr>
+                        <td>Implementation Costs</td>
+                        <td>Uniform assumption</td>
+                        <td>Size/sector specific</td>
+                        <td>Uneven adoption</td>
+                    </tr>
+                    <tr>
+                        <td>Regulatory Friction</td>
+                        <td>Moderate uniform</td>
+                        <td>Geographic variation</td>
+                        <td>Patchwork deployment</td>
+                    </tr>
+                    <tr>
+                        <td>Economic Feedback</td>
+                        <td>Not modeled</td>
+                        <td>Demand elasticity</td>
+                        <td>Job creation offsets</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="methodology-note">
+                <strong>Data Sources:</strong> METR Task Evaluation (2024), OpenAI API usage statistics, Bureau of Labor Statistics O*NET database, McKinsey Global Institute automation potential studies, EU AI Act compliance cost estimates.
+            </div>
+
+            <div class="grid">
+                <div class="card">
+                    <h3>🎯 Task Granularity</h3>
+                    <p>Analysis at sub-occupation level using O*NET task descriptions, weighted by time allocation and automation feasibility scores derived from current AI capabilities.</p>
+                </div>
+                <div class="card">
+                    <h3>💰 Economic Modeling</h3>
+                    <p>Incorporates wage elasticity, substitution costs, and productivity spillovers. Higher-wage roles face faster automation incentives despite higher implementation costs.</p>
+                </div>
+                <div class="card">
+                    <h3>🏢 Firm Size Effects</h3>
+                    <p>Large enterprises (>1000 employees) show 3-5x faster adoption rates due to economies of scale in AI implementation and training.</p>
+                </div>
+            </div>
+        </div>
+
+        <div id="analysis" class="content-panel">
+            <h2>Occupation Risk Analysis</h2>
+            
+            <div class="risk-matrix">
+                <div class="risk-cell risk-high">
+                    <h4>High Risk (60-80%)</h4>
+                    <p>Routine Cognitive</p>
+                </div>
+                <div class="risk-cell risk-medium">
+                    <h4>Medium Risk (45-65%)</h4>
+                    <p>Analytical Professional</p>
+                </div>
+                <div class="risk-cell risk-low">
+                    <h4>Low Risk (20-40%)</h4>
+                    <p>Strategic/Creative</p>
+                </div>
+                <div class="risk-cell risk-low">
+                    <h4>Low Risk (&lt;15%)</h4>
+                    <p>Manual/Embodied</p>
+                </div>
+                <div class="risk-cell risk-medium">
+                    <h4>Medium Risk (20-30%)</h4>
+                    <p>Customer/Social</p>
+                </div>
+                <div class="risk-cell risk-high">
+                    <h4>Emerging Risk</h4>
+                    <p>Code Generation</p>
+                </div>
+            </div>
+
+            <h3>Detailed Risk Breakdown</h3>
+            
+            <div class="card">
+                <h3>🔴 Highest Risk: Routine Cognitive (60-80% exposure)</h3>
+                <p><strong>Examples:</strong> Legal clerks, insurance claims processors, compliance officers, schedulers</p>
+                <p><strong>Why vulnerable:</strong> High task repetition, clear success metrics, extensive training data available</p>
+                <p><strong>Timeline:</strong> Significant impact by 2026-2027</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 75%"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🟡 Medium-High Risk: Analytical Professional (45-65% exposure)</h3>
+                <p><strong>Examples:</strong> Junior accountants, market researchers, data analysts, technical writers</p>
+                <p><strong>Why vulnerable:</strong> Structured inputs/outputs, but requires domain knowledge and judgment</p>
+                <p><strong>Timeline:</strong> Gradual displacement 2027-2030, with augmentation preceding replacement</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 55%"></div>
+                </div>
+            </div>
+
+            <div class="card">
+                <h3>🟢 Lower Risk: Strategic/Creative (20-40% exposure)</h3>
+                <p><strong>Examples:</strong> Product managers, UX designers, lawyers, engineers</p>
+                <p><strong>Why resilient:</strong> High-stakes decisions, novel problem solving, human stakeholder management</p>
+                <p><strong>Outlook:</strong> Significant augmentation, selective task automation, productivity gains</p>
+                <div class="progress-bar">
+                    <div class="progress-fill" style="width: 30%"></div>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <h4>💡 Emerging Pattern: Code Generation Risk</h4>
+                <p>Software development, traditionally considered high-skill and safe, now shows 40-60% task automation potential due to advances in code generation models. However, system design and architecture roles remain more secure.</p>
+            </div>
+        </div>
+
+        <div id="timeline" class="content-panel">
+            <h2>Timeline & Adoption Scenarios</h2>
+            
+            <div class="timeline">
+                <div class="timeline-item">
+                    <div class="timeline-dot">2025</div>
+                    <h4>Foundation Year</h4>
+                    <p>GPT-4.5 + basic agents<br>8-12% hours automated</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2026</div>
+                    <h4>Acceleration</h4>
+                    <p>Agent orchestration mature<br>15-22% hours automated</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2027</div>
+                    <h4>Mainstream</h4>
+                    <p>Enterprise integration<br>25-35% hours automated</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2028</div>
+                    <h4>Transformation</h4>
+                    <p>Workflow-native AI<br>35-45% hours automated</p>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-dot">2030</div>
+                    <h4>Maturity</h4>
+                    <p>Stable equilibrium<br>45-55% hours automated</p>
+                </div>
+            </div>
+
+            <h3>Scenario Analysis</h3>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>🚀 Fast Adoption (30% of organizations)</h3>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li>Tech-native companies</li>
+                        <li>High wage pressure sectors</li>
+                        <li>Regulatory permissive regions</li>
+                        <li>70% automation by 2030</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>⚖️ Medium Adoption (50% of organizations)</h3>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li>Traditional enterprises</li>
+                        <li>Risk-averse sectors</li>
+                        <li>Mixed regulatory environment</li>
+                        <li>60% automation by 2030</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🐌 Slow Adoption (20% of organizations)</h3>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li>Heavily regulated industries</li>
+                        <li>Small/traditional organizations</li>
+                        <li>High compliance costs</li>
+                        <li>25% automation by 2030</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="chart-container">
+                <h3>Cumulative Job Hours Automated Over Time</h3>
+                <div style="height: 300px; display: flex; align-items: end; justify-content: space-around; border-bottom: 2px solid #667eea;">
+                    <div style="background: linear-gradient(to top, #667eea, #764ba2); width: 60px; height: 60px; display: flex; align-items: end; color: white; justify-content: center; padding-bottom: 5px;">10%</div>
+                    <div style="background: linear-gradient(to top, #667eea, #764ba2); width: 60px; height: 120px; display: flex; align-items: end; color: white; justify-content: center; padding-bottom: 5px;">20%</div>
+                    <div style="background: linear-gradient(to top, #667eea, #764ba2); width: 60px; height: 180px; display: flex; align-items: end; color: white; justify-content: center; padding-bottom: 5px;">30%</div>
+                    <div style="background: linear-gradient(to top, #667eea, #764ba2); width: 60px; height: 240px; display: flex; align-items: end; color: white; justify-content: center; padding-bottom: 5px;">40%</div>
+                    <div style="background: linear-gradient(to top, #667eea, #764ba2); width: 60px; height: 275px; display: flex; align-items: end; color: white; justify-content: center; padding-bottom: 5px;">50%</div>
+                </div>
+                <div style="display: flex; justify-content: space-around; margin-top: 10px; font-weight: bold;">
+                    <span>2025</span><span>2026</span><span>2027</span><span>2028</span><span>2030</span>
+                </div>
+            </div>
+        </div>
+
+        <div id="implications" class="content-panel">
+            <h2>Strategic Implications</h2>
+            
+            <div class="grid">
+                <div class="card">
+                    <h3>🏢 For Organizations</h3>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li><strong>Workforce Planning:</strong> Begin retraining high-risk roles now</li>
+                        <li><strong>Technology Investment:</strong> Prioritize augmentation over replacement</li>
+                        <li><strong>Change Management:</strong> Transparent communication about AI adoption</li>
+                        <li><strong>Talent Strategy:</strong> Recruit for AI-complementary skills</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>🏛️ For Policymakers</h3>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li><strong>Education Reform:</strong> Curriculum focused on AI-resistant skills</li>
+                        <li><strong>Social Safety Net:</strong> Enhanced transition support programs</li>
+                        <li><strong>Regulation Balance:</strong> Innovation vs. worker protection</li>
+                        <li><strong>Immigration Policy:</strong> AI talent retention and attraction</li>
+                    </ul>
+                </div>
+                <div class="card">
+                    <h3>👤 For Individuals</h3>
+                    <ul style="margin-top: 15px; padding-left: 20px;">
+                        <li><strong>Skill Development:</strong> Focus on uniquely human capabilities</li>
+                        <li><strong>AI Literacy:</strong> Learn to work with, not against, AI tools</li>
+                        <li><strong>Career Pivot:</strong> Consider transitions from high-risk roles</li>
+                        <li><strong>Continuous Learning:</strong> Embrace lifelong education model</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="insight-box">
+                <h4>🎯 Critical Success Factor: Human-AI Collaboration</h4>
+                <p>The organizations and individuals who thrive will be those who master human-AI collaboration rather than viewing AI as pure replacement technology. This requires new mental models, workflows, and skill sets.</p>
+            </div>
+
+            <h3>Sector-Specific Recommendations</h3>
+            
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>Sector</th>
+                        <th>Risk Level</th>
+                        <th>Primary Actions</th>
+                        <th>Timeline</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Financial Services</td>
+                        <td>High</td>
+                        <td>Accelerate process automation, retrain analysts</td>
+                        <td>2025-2027</td>
+                    </tr>
+                    <tr>
+                        <td>Legal</td>
+                        <td>Medium-High</td>
+                        <td>AI-assisted research, focus on strategy/negotiation</td>
+                        <td>2026-2029</td>
+                    </tr>
+                    <tr>
+                        <td>Healthcare</td>
+                        <td>Medium</td>
+                        <td>Diagnostic augmentation, administrative automation</td>
+                        <td>2027-2030</td>
+                    </tr>
+                    <tr>
+                        <td>Education</td>
+                        <td>Medium</td>
+                        <td>Personalized learning, teacher role evolution</td>
+                        <td>2026-2030</td>
+                    </tr>
+                    <tr>
+                        <td>Manufacturing</td>
+                        <td>Low</td>
+                        <td>Quality inspection, predictive maintenance</td>
+                        <td>2028-2032</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="methodology-note">
+                <strong>Implementation Note:</strong> Success in managing AI transition requires coordinated action across stakeholders. Organizations should begin workforce planning immediately, while policymakers need to balance innovation incentives with worker protection measures.
+            </div>
+        </div>
+    </div>
+
+    <footer style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 20px; padding: 20px; margin: 30px auto; max-width: 1200px; text-align: center; box-shadow: 0 20px 40px rgba(0,0,0,0.1);">
+        <p style="color: #666; font-size: 0.9em; margin-bottom: 10px;">
+            <a href="/" style="color: #667eea; text-decoration: none; margin-right: 20px;">
+                ← Back to AI Prediction Tracker
+            </a>
+        </p>
+        <p style="color: #666; font-size: 0.9em;">
+            This analysis was created with Claude AI. View the original conversation: 
+            <a href="https://claude.ai/share/c8a03c86-f47b-42df-8167-c26e4fb19f3e" target="_blank" rel="noopener noreferrer" style="color: #667eea; text-decoration: none;">
+                claude.ai/share/c8a03c86-f47b-42df-8167-c26e4fb19f3e
+            </a>
+        </p>
+    </footer>
+
+    <script>
+        function showPanel(panelId) {
+            // Hide all panels
+            const panels = document.querySelectorAll('.content-panel');
+            panels.forEach(panel => {
+                panel.classList.remove('active');
+            });
+            
+            // Remove active class from all tabs
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => {
+                tab.classList.remove('active');
+            });
+            
+            // Show selected panel
+            document.getElementById(panelId).classList.add('active');
+            
+            // Add active class to clicked tab
+            event.target.classList.add('active');
+            
+            // Animate progress bars when risk analysis panel is shown
+            if (panelId === 'analysis') {
+                setTimeout(() => {
+                    const progressBars = document.querySelectorAll('.progress-fill');
+                    progressBars.forEach(bar => {
+                        const width = bar.style.width;
+                        bar.style.width = '0%';
+                        setTimeout(() => {
+                            bar.style.width = width;
+                        }, 100);
+                    });
+                }, 200);
+            }
+        }
+        
+        // Initialize progress bar animations
+        document.addEventListener('DOMContentLoaded', function() {
+            setTimeout(() => {
+                const progressBars = document.querySelectorAll('.progress-fill');
+                progressBars.forEach(bar => {
+                    const width = bar.style.width;
+                    bar.style.width = '0%';
+                    setTimeout(() => {
+                        bar.style.width = width;
+                    }, 100);
+                });
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
