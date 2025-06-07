@@ -11,16 +11,19 @@
   "dependencies": {
     "date-fns": "^4.1.0",
     "framer-motion": "^12.12.1",
+    "katex": "^0.16.22",
     "lucide-react": "^0.511.0",
     "next": "^15.3.2",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "react-dom": "^19.0.0",
+    "react-katex": "^3.1.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/react-katex": "^3.0.4",
     "eslint": "^9",
     "eslint-config-next": "15.1.8",
     "postcss": "^8",

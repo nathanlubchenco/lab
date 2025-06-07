@@ -1,0 +1,1808 @@
+{
+  "easy": [
+    {
+      "question": "The circle $2x^2 = -2y^2 + 12x - 4y + 20$ is inscribed inside a square which has a pair of sides parallel to the x-axis. What is the area of the square?",
+      "options": [
+        "80",
+        "\\sqrt{20}",
+        "2\\sqrt{20}",
+        "20"
+      ],
+      "correct": 0,
+      "subject": "High School Mathematics",
+      "aiCorrect": true
+    },
+    {
+      "question": "This biome contains trees that drop their leaves during the winter months.",
+      "options": [
+        "Desert",
+        "Tundra",
+        "Taiga",
+        "Deciduous forests"
+      ],
+      "correct": 3,
+      "subject": "High School Biology",
+      "aiCorrect": true
+    },
+    {
+      "question": "This question refers to the following information.\nThe following entries are in the diary of Napoleon Bonaparte.\nParis has a short memory. If I remain longer doing nothing, I am lost. In this great Babylon one reputation quickly succeeds another. After I have been seen three times at the theatre, I shall not be looked at again. I shall therefore not go very frequently. (diary, 1798)\nIf the press is not bridled, I shall not remain three days in power. (diary, 1799)\nThe presence of a general is necessary; he is the head, he is the all in all of an army. It was not the Roman army that conquered Gaul, it was Caesar, it was not the Carthaginians that made the armies of the Roman republic tremble at the very gates of Rome, it was Hannibal. (diary, 1801)\nMy power proceeds from my reputation, and my reputation from the victories I have won. My power would fall if I were not to support it with more glory and more victories. Conquest has made me what I am; only conquest can maintain me. (diary, 1802)\nThe revolution in France is over and now there is only one party in France and I shall never allow the newspapers to say anything contrary to my interests. They may publish a few little articles with just a bit of poison in them, but one fine day I shall shut their mouths forever. (diary, 1805)\nWhile Napoleon was often praised for implementing his Napoleonic Code and a meritocracy in the army, the domestic issue that he was most often criticized for was which of the following?",
+      "options": [
+        "Placing his relatives on foreign thrones",
+        "Changing the criminal code of France",
+        "Financial mismanagement",
+        "Curtailment of citizens' rights"
+      ],
+      "correct": 3,
+      "subject": "High School European History",
+      "aiCorrect": true
+    },
+    {
+      "question": "When you bend the branch of a tree by hanging on its end, the top side of the branch is under",
+      "options": [
+        "tension.",
+        "compression.",
+        "Both.",
+        "Neither."
+      ],
+      "correct": 0,
+      "subject": "Conceptual Physics",
+      "aiCorrect": true
+    },
+    {
+      "question": "A tank is in the shape of a triangular prism. If the triangular base has an area of 116 square feet, and the tank is 30 feet tall, how much water would the tank contain when it is full?",
+      "options": [
+        "1725 ft^3",
+        "1740 ft^3",
+        "3480 ft^3",
+        "6960 ft^3"
+      ],
+      "correct": 2,
+      "subject": "Elementary Mathematics",
+      "aiCorrect": true
+    },
+    {
+      "question": "The Rosenhan study of mental institutions showed that",
+      "options": [
+        "treatment at private institutions tends to be better than treatment at public institutions.",
+        "men are diagnosed at higher rates than women reporting the same symptoms.",
+        "it is difficult to convince medical professionals that one has a disorder when one does not.",
+        "confirmation bias may influence clinicians' views and treatments of mental patients."
+      ],
+      "correct": 3,
+      "subject": "High School Psychology",
+      "aiCorrect": true
+    },
+    {
+      "question": "What are the Smothers Brothers'(first names?",
+      "options": [
+        "Frank and Bill",
+        "Tom and Dick",
+        "Dave and George",
+        "Ed and Pete"
+      ],
+      "correct": 1,
+      "subject": "Miscellaneous",
+      "aiCorrect": true
+    },
+    {
+      "question": "This question refers to the following information.\nWhether the question be to continue or to discontinue the practice of sati, the decision is equally surrounded by an awful responsibility. To consent to the consignment year after year of hundreds of innocent victims to a cruel and untimely end, when the power exists of preventing it, is a predicament which no conscience can contemplate without horror. But, on the other hand, to put to hazard by a contrary course the very safety of the British Empire in India is an alternative which itself may be considered a still greater evil. When we had powerful neighbours and greater reason to doubt our own security, expediency might recommend a more cautious proceeding, but now that we are supreme my opinion is decidedly in favour of an open and general prohibition.\nWilliam Bentinck, Govenor-General of India, \"On the Suppression of Sati,\" 1829\nI have made it my study to examine the nature and character of the Indians [who trade with us], and however repugnant it may be to our feelings, I am convinced they must be ruled with a rod of iron, to bring and keep them in a proper state of subordination, and the most certain way to effect this is by letting them feel their dependence on [the foodstuffs and manufactured goods we sell them].\nGeorge Simpson, Head of Northern Department, Hudson's Bay Company, 1826\nThe tone of the first passage best supports which of the following suppositions about British motivations for eradicating the sati ritual?",
+      "options": [
+        "The British intended principally to Christianize India's Hindu population.",
+        "The British sought to end what they considered an inhumane practice without endangering their own authority.",
+        "They acted out of a progressive concern for women's equality.",
+        "They were impelled by a racially prejudiced disdain for all Indian customs."
+      ],
+      "correct": 1,
+      "subject": "High School World History",
+      "aiCorrect": true
+    },
+    {
+      "question": "Stephanie flew 2,448 miles from Los Angeles to New York City. What is the number of miles Stephanie flew rounded to the nearest thousand?",
+      "options": [
+        "2,000",
+        "2,400",
+        "2,500",
+        "3,000"
+      ],
+      "correct": 0,
+      "subject": "Elementary Mathematics",
+      "aiCorrect": true
+    },
+    {
+      "question": "According to Erikson, a young adult's developmental crisis centers around",
+      "options": [
+        "intimacy vs. isolation",
+        "identity vs. role confusion",
+        "autonomy vs. shame and guilt",
+        "industry vs. inferiority"
+      ],
+      "correct": 0,
+      "subject": "High School Psychology",
+      "aiCorrect": true
+    },
+    {
+      "question": "The appropriate fiscal policy to remedy a recession is to",
+      "options": [
+        "increase government spending and taxes.",
+        "reduce government spending and taxes.",
+        "increase government spending and reduce taxes.",
+        "decrease government spending and increase taxes."
+      ],
+      "correct": 2,
+      "subject": "High School Macroeconomics",
+      "aiCorrect": true
+    },
+    {
+      "question": "The Pointillist paintings of Georges Seurat are most notable for containing which of the following characteristics?",
+      "options": [
+        "An expressionistic use of broad brushstrokes and tactile surface texture",
+        "Lively figures created through the use of forceful lines",
+        "Static figures and a sense of optical surface movement",
+        "An emotional use of strident colors with a high degree of simplification"
+      ],
+      "correct": 2,
+      "subject": "Miscellaneous",
+      "aiCorrect": true
+    },
+    {
+      "question": "The amount of access cabinet secretaries have to the president is most likely to be controlled by the",
+      "options": [
+        "vice president",
+        "president's chief of staff",
+        "national security advisor",
+        "chair of the Federal Reserve Board"
+      ],
+      "correct": 1,
+      "subject": "High School Government And Politics",
+      "aiCorrect": true
+    },
+    {
+      "question": "Thermal convection involves mainly",
+      "options": [
+        "radiant energy",
+        "fluids",
+        "insulators",
+        "All of these"
+      ],
+      "correct": 1,
+      "subject": "Conceptual Physics",
+      "aiCorrect": true
+    },
+    {
+      "question": "Polarization is a property of",
+      "options": [
+        "transverse waves.",
+        "longitudinal waves.",
+        "all waves.",
+        "None of these."
+      ],
+      "correct": 0,
+      "subject": "Conceptual Physics",
+      "aiCorrect": true
+    },
+    {
+      "question": "What is the general relationship between temperature and entropy for diatomic gases?",
+      "options": [
+        "They are completely independent of each other; temperature has no effect on entropy.",
+        "There is a direct relationship, because at higher temperatures there is an increase in energy dispersal.",
+        "There is an inverse relationship, because at higher temperatures substances are more likely to be in a gaseous state.",
+        "It depends on the specific gas and the strength of the intermolecular forces between individual molecules."
+      ],
+      "correct": 1,
+      "subject": "High School Chemistry",
+      "aiCorrect": true
+    },
+    {
+      "question": "This question refers to the following information.\nAlbeit the king's Majesty justly and rightfully is and ought to be the supreme head of the Church of England, and so is recognized by the clergy of this realm in their convocations, yet nevertheless, for corroboration and confirmation thereof, and for increase of virtue in Christ's religion within this realm of England, and to repress and extirpate all errors, heresies, and other enormities and abuses heretofore used in the same, be it enacted, by authority of this present Parliament, that the king, our sovereign lord, his heirs and successors, kings of this realm, shall be taken, accepted, and reputed the only supreme head in earth of the Church of England, called Anglicans Ecclesia; and shall have and enjoy, annexed and united to the imperial crown of this realm, as well the title and style thereof, as all honors, dignities, preeminences, jurisdictions, privileges, authorities, immunities, profits, and commodities to the said dignity of the supreme head of the same Church belonging and appertaining; and that our said sovereign lord, his heirs and successors, kings of this realm, shall have full power and authority from time to time to visit, repress, redress, record, order, correct, restrain, and amend all such errors, heresies, abuses, offenses, contempts, and enormities, whatsoever they be, which by any manner of spiritual authority or jurisdiction ought or may lawfully be reformed, repressed, ordered, redressed, corrected, restrained, or amended, most to the pleasure of Almighty God, the increase of virtue in Christ's religion, and for the conservation of the peace, unity, and tranquility of this realm; any usage, foreign land, foreign authority, prescription, or any other thing or things to the contrary hereof notwithstanding.\nEnglish Parliament, Act of Supremacy, 1534\nFrom the passage and its historical context, one may infer that the Act was, in part,",
+      "options": [
+        "an attempt to prevent the spread of Protestantism in England",
+        "a solution to Henry VIII's financial difficulties",
+        "an attempt to legitimize Henry VIII's only heir",
+        "an attempt to ally England with the Holy Roman Emperor"
+      ],
+      "correct": 1,
+      "subject": "High School European History",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which of these men has never been a head coach in the NFL?",
+      "options": [
+        "Dick Vermeil",
+        "Bill Parcells",
+        "Chuck Noll",
+        "Pat Riley"
+      ],
+      "correct": 3,
+      "subject": "Miscellaneous",
+      "aiCorrect": true
+    },
+    {
+      "question": "To study the effect of music on piecework output at a clothing manufacturer, two experimental treatments are planned: day-long classical music for one group versus day-long light rock music for another. Which one of the following groups would serve best as a control for this study?",
+      "options": [
+        "A third group for which no music is played",
+        "A third group that randomly hears either classical or light rock music each day",
+        "A third group that hears day-long R & B music",
+        "A third group that hears classical music every morning and light rock every afternoon"
+      ],
+      "correct": 0,
+      "subject": "High School Statistics",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which of the following has provided evidence that the Sun's atmosphere contains sodium atoms?",
+      "options": [
+        "Absorption lines in the solar spectrum are consistent with the presence of sodium.",
+        "Stars with the same spectral class as the Sun are made mostly of sodium.",
+        "Solar samples returned to Earth by the Voyager spacecraft contained sodium.",
+        "The Sun gives off energy produced by the nuclear fusion of sodium in its core"
+      ],
+      "correct": 0,
+      "subject": "Miscellaneous",
+      "aiCorrect": true
+    },
+    {
+      "question": "When a country has a balance of trade deficit",
+      "options": [
+        "it must make up the difference by shipping gold to its creditors.",
+        "its exports exceed its imports.",
+        "its currency will appreciate.",
+        "its imports exceed its exports."
+      ],
+      "correct": 3,
+      "subject": "High School Macroeconomics",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which of the following is NOT a characteristic of perfectly competitive industry?",
+      "options": [
+        "Free entry into the industry.",
+        "Product differentiation.",
+        "Perfectly elastic demand curve.",
+        "Homogeneous products."
+      ],
+      "correct": 1,
+      "subject": "High School Microeconomics",
+      "aiCorrect": true
+    },
+    {
+      "question": "This question refers to the following information.\nThe invaders had brought in wheat and other Eurasian and African grains; peach, pear, orange, and lemon trees; chick-peas, grape vines, melons, onions, radishes, and much more. A Spanish nobleman come to America could require his Indians to furnish his table with the fruits of his ancestors.\n—Alfred Crosby, historian, 1972\nWhat economic practice is referred to by the phrase \"his Indians\" in the quote?",
+      "options": [
+        "Slavery",
+        "Indentured servitude",
+        "The encomienda system",
+        "The apprentice system"
+      ],
+      "correct": 2,
+      "subject": "High School World History",
+      "aiCorrect": true
+    },
+    {
+      "question": "In which of the following cases did the Supreme Court decision establish the \"separate but equal\" doctrine of state-sponsored racial segregation?",
+      "options": [
+        "Plessy v. Ferguson",
+        "McCulloch v. Maryland",
+        "Gibbons v. Ogden",
+        "Brown v. Board of Education"
+      ],
+      "correct": 0,
+      "subject": "High School Government And Politics",
+      "aiCorrect": true
+    },
+    {
+      "question": "Five years ago, a computer that worked half as fast as a current computer cost twice as much money. The current computer's speed to price ratio is what percent of the older computer's speed to price ratio?",
+      "options": [
+        "20",
+        "400",
+        "32",
+        "\\frac{2}{5}"
+      ],
+      "correct": 1,
+      "subject": "High School Mathematics",
+      "aiCorrect": true
+    },
+    {
+      "question": "Interest groups representing businesspeople and investors are often among the most successful lobbying groups in Washington, D.C., for all of the following reasons EXCEPT",
+      "options": [
+        "Such groups have the financial resources to mount sustained campaigns on their own behalf.",
+        "Many such groups have been in existence for several decades or more, allowing them to master the legislative system and to develop close ties with legislators.",
+        "In many districts, these groups' constituents make up the majority of voters.",
+        "These groups' constituents contribute heavily to many legislators' campaigns, and in doing so, gain greater access to legislators."
+      ],
+      "correct": 2,
+      "subject": "High School Government And Politics",
+      "aiCorrect": true
+    },
+    {
+      "question": "Real GDP",
+      "options": [
+        "is actual GDP as opposed to the estimate made by the BEA.",
+        "is also called current-dollar GDP.",
+        "is GDP adjusted for price changes.",
+        "is not calculated for the United States."
+      ],
+      "correct": 2,
+      "subject": "High School Macroeconomics",
+      "aiCorrect": true
+    },
+    {
+      "question": "A worker on an assembly line takes 7 hours to produce 22 parts. At that rate how many parts can she produce in 35 hours?",
+      "options": [
+        "220 parts",
+        "770 parts",
+        "4 parts",
+        "110 parts"
+      ],
+      "correct": 3,
+      "subject": "Elementary Mathematics",
+      "aiCorrect": true
+    },
+    {
+      "question": "A likely cause of falling Treasury bond prices might be",
+      "options": [
+        "expansionary monetary policy.",
+        "contractionary monetary policy.",
+        "a depreciating dollar.",
+        "fiscal policy designed to reduce the budget deficit."
+      ],
+      "correct": 1,
+      "subject": "High School Macroeconomics",
+      "aiCorrect": true
+    },
+    {
+      "question": "Define $f(x)=\\frac{1+x}{1-x}$ and $g(x)=\\frac{-2}{x+1}$. Find the value of \\[g(f(g(f(\\dotsb g(f(12)) \\dotsb ))))\\] where the function $f$ is applied 8 times, and the function $g$ is applied 8 times, alternating between the two.",
+      "options": [
+        "12",
+        "8",
+        "4",
+        "0"
+      ],
+      "correct": 2,
+      "subject": "High School Mathematics",
+      "aiCorrect": true
+    },
+    {
+      "question": "Two unrelated species evolve in a way that makes them more similar.",
+      "options": [
+        "Divergent evolution",
+        "Convergent evolution",
+        "Parallel evolution",
+        "Coevolution"
+      ],
+      "correct": 1,
+      "subject": "High School Biology",
+      "aiCorrect": true
+    },
+    {
+      "question": "A lesson from Janis's research on groupthink is that",
+      "options": [
+        "unanimity is important.",
+        "small groups function better than large ones.",
+        "groups function well under pressure.",
+        "it is important for people to voice dissent."
+      ],
+      "correct": 3,
+      "subject": "High School Psychology",
+      "aiCorrect": true
+    },
+    {
+      "question": "Fei Yen’s dog eats 8 ounces of dog food each day. Fei Yen bought a 28-pound bag of dog food. How many 8-ounce servings are in a 28-pound bag of dog food?",
+      "options": [
+        "14",
+        "56",
+        "224",
+        "448"
+      ],
+      "correct": 1,
+      "subject": "Elementary Mathematics",
+      "aiCorrect": true
+    },
+    {
+      "question": "A table supports a wooden block placed on the tabletop. Which fundamental force of nature is responsible for this interaction, and why?",
+      "options": [
+        "The electric force, because the protons in the nuclei of the top atomic layer of the table repel the nuclei in the bottom atomic layer of the wood.",
+        "The gravitational force, because by F = GMm/r^2, the force of the table on the wood at that close range is sufficient to balance the force of the Earth on the wood.",
+        "The electric force, because the outer electrons in the top atomic layer of the table repel the outer electrons in the bottom atomic layer of the wood.",
+        "The strong nuclear force, because the protons in the nuclei of the top atomic layer of the table repel the nuclei in the bottom atomic layer of the wood."
+      ],
+      "correct": 2,
+      "subject": "High School Physics",
+      "aiCorrect": true
+    },
+    {
+      "question": "When a new fashion design is introduced globally, the information initially travels through a process known as",
+      "options": [
+        "contagious diffusion",
+        "relocation diffusion",
+        "innovative diffusion",
+        "hierarchical diffusion"
+      ],
+      "correct": 3,
+      "subject": "High School Geography",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which ratio can form a proportion with 3 over 8?",
+      "options": [
+        "18 over 40",
+        "18 over 56",
+        "24 over 64",
+        "15 over 48"
+      ],
+      "correct": 2,
+      "subject": "Elementary Mathematics",
+      "aiCorrect": true
+    },
+    {
+      "question": "When both short-run aggregate supply and aggregate demand increase which of the following can be said for certain?",
+      "options": [
+        "The price level rises but real GDP falls.",
+        "Both the price level and real GDP rise.",
+        "The price level rises but the change in real GDP is uncertain.",
+        "Real GDP rises but the change in the price level is uncertain."
+      ],
+      "correct": 3,
+      "subject": "High School Macroeconomics",
+      "aiCorrect": true
+    },
+    {
+      "question": "This question refers to the following information.\nRead the the following poem to answer questions.\nTake up the White Man's burden—\nSend forth the best ye breed—\nGo bind your sons to exile\nTo serve your captives' need;\nTo wait in heavy harness,\nOn fluttered folk and wild—\nYour new-caught, sullen peoples,\nHalf-devil and half-child.\n...\nTake up the White Man's burden—\nThe savage wars of peace—\nFill full the mouth of Famine\nAnd bid the sickness cease;\nAnd when your goal is nearest\nThe end for others sought…\nWatch sloth and heathen Folly\nBring all your hopes to naught.\nRudyard Kipling, The White Man's Burden, 1899\nIt is generally acknowledged that Kipling fashioned White Man's Burden to address the subject of the American colonization of the Philippines, which the United States had recently won from Spain in the Spanish-American War. With that information in mind, what message can Kipling be said to be offering the Americans in this excerpt?",
+      "options": [
+        "A reminder of the responsibility of advanced civilizations to bring the benefits of modern civilization to less-developed peoples",
+        "A warning to avoid the war and hardships of imperialism",
+        "An exhortation to Christianize the heathen peoples of the world",
+        "An ironic presentation of the sheer folly of imperialism"
+      ],
+      "correct": 0,
+      "subject": "High School European History",
+      "aiCorrect": true
+    },
+    {
+      "question": "A major advantage of standardized normreferenced assessment, as compared with curriculum-based assessment, is that standardized norm-referenced tests",
+      "options": [
+        "are more tailored to the specific curriculum",
+        "provide a greater capacity to evaluate students in terms of large groups of grade-level peers",
+        "yield more information on whether students have mastered units that are prerequisites for future work",
+        "provide more information on the interplay between the students' learning environment and skills"
+      ],
+      "correct": 1,
+      "subject": "High School Psychology",
+      "aiCorrect": true
+    },
+    {
+      "question": "To move the economy closer to full employment the central bank decides that the federal funds rate must be increased. The appropriate open market operation is to ______ which ______ the money supply ______ aggregate demand and fights ______. OMO     MONEY SUPPLY     AD     TO FIGHT",
+      "options": [
+        "Buy bonds     Increases     Increases     Unemployment",
+        "Buy bonds     Increases     Increases     Inflation",
+        "Sell bonds     Decreases     Decreases     Unemployment",
+        "Sell bonds     Decreases     Decreases     Inflation"
+      ],
+      "correct": 3,
+      "subject": "High School Macroeconomics",
+      "aiCorrect": true
+    },
+    {
+      "question": "The term \"iron triangle\" refers to the interrelationship of the",
+      "options": [
+        "president, Congress, and the Supreme Court",
+        "electorate, Congress, and political action committees",
+        "local, state, and federal governments",
+        "federal bureaucracy, congressional committees, and lobbyists"
+      ],
+      "correct": 3,
+      "subject": "High School Government And Politics",
+      "aiCorrect": true
+    },
+    {
+      "question": "This question refers to the following information.\n\"Thereupon it was declared by the above-mentioned representatives of the aforesaid King and Queen of Castile, Leon, Aragon, Sicily, Granada, etc., and of the aforesaid King of Portugal and the Algarves, etc.:\n[I.] That, whereas a certain controversy exists between the said lords, their constituents, as to what lands, of all those discovered in the ocean sea up to the present day, the date of this treaty, pertain to each one of the said parts respectively; therefore, for the sake of peace and concord, and for the preservation of the relationship and love of the said King of Portugal for the said King and Queen of Castile, Aragon, etc., it being the pleasure of their Highnesses, they, their said representatives, acting in their name and by virtue of their powers herein described, covenanted and agreed that a boundary or straight line be determined and drawn north and south, from pole to pole, on the said ocean sea, from the Arctic to the Antarctic pole. This boundary or line shall be drawn straight, as aforesaid, at a distance of three hundred and seventy leagues west of the Cape Verde Islands, being calculated by degrees, or by any other manner as may be considered the best and readiest, provided the distance shall be no greater than abovesaid. And all lands, both islands and mainlands, found and discovered already, or to be found and discovered hereafter, by the said King of Portugal and by his vessels on this side of the said line and bound determined as above, toward the east, in either north or south latitude, on the eastern side of the said bound provided the said bound is not crossed, shall belong to, and remain in the possession of, and pertain forever to, the said King of Portugal and his successors. And all other lands, both islands and mainlands, found or to be found hereafter, discovered or to be discovered hereafter, which have been discovered or shall be discovered by the said King and Queen of Castile, Aragon, etc., and by their vessels, on the western side of the said bound, determined as above, after having passed the said bound toward the west, in either its north or south latitude, shall belong to, and remain in the possession of, and pertain forever to, the said King and Queen of Castile, Leon, etc., and to their successors.\"\nTreaty of Tordesillas, 1494\nWhich of the following technologies most directly caused the treaty above to be signed?",
+      "options": [
+        "Gunpowder weapons",
+        "The compass",
+        "Steel",
+        "Germ Theory"
+      ],
+      "correct": 1,
+      "subject": "High School World History",
+      "aiCorrect": true
+    },
+    {
+      "question": "What character did Woody replace on the TV show 'Cheers'?",
+      "options": [
+        "Coach",
+        "Diane",
+        "Norm",
+        "Frasier"
+      ],
+      "correct": 0,
+      "subject": "Miscellaneous",
+      "aiCorrect": true
+    },
+    {
+      "question": "In the procedure Mystery below, the parameter number is a positive integer.\n\n PROCEDURE Mystery (number)\n {\n  REPEAT UNTIL (number <= 0)\n  {\n   number ← number - 2\n  }\n  IF (number = 0)\n  {\n   RETURN (true)\n  }\n  ELSE\n  {\n   RETURN (false)\n  }\n }\n\n Which of the following best describes the result of running the procedure Mystery?",
+      "options": [
+        "The procedure returns true when the initial value of number is 2, and it otherwise returns false.",
+        "The procedure returns true when the initial value of number is greater than 2, and it otherwise returns false.",
+        "The procedure returns true when the initial value of number is even, and it otherwise returns false.",
+        "The procedure returns true when the initial value of number is odd, and it otherwise returns false."
+      ],
+      "correct": 2,
+      "subject": "High School Computer Science",
+      "aiCorrect": true
+    },
+    {
+      "question": "This question refers to the following information.\n\"I was once a tool of oppression\nAnd as green as a sucker could be\nAnd monopolies banded together\nTo beat a poor hayseed like me.\n\"The railroads and old party bosses\nTogether did sweetly agree;\nAnd they thought there would be little trouble\nIn working a hayseed like me. . . .\"\n—\"The Hayseed\"\nWhich of the following is an accomplishment of the political movement that was organized around sentiments similar to the one in the song lyrics above?",
+      "options": [
+        "Establishment of the minimum wage law.",
+        "Enactment of laws regulating railroads.",
+        "Shift in U.S. currency from the gold standard to the silver standard.",
+        "Creation of a price-support system for small-scale farmers."
+      ],
+      "correct": 1,
+      "subject": "High School US History",
+      "aiCorrect": true
+    },
+    {
+      "question": "As of 2019, about what percentage of the world population lives in extreme poverty (less than $1.90 a day)?",
+      "options": [
+        "5%",
+        "10%",
+        "15%",
+        "25%"
+      ],
+      "correct": 1,
+      "subject": "Global Facts",
+      "aiCorrect": true
+    },
+    {
+      "question": "The Law of Diminishing Marginal Returns is responsible for",
+      "options": [
+        "AVC that first rises, but eventually falls, as output increases.",
+        "AFC that first rises, but eventually falls, as output increases.",
+        "MP that first falls, but eventually rises, as output increases.",
+        "MC that first falls, but eventually rises, as output increases."
+      ],
+      "correct": 3,
+      "subject": "High School Microeconomics",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which statement is false?",
+      "options": [
+        "3 < 5",
+        "5 > 3",
+        "−5 > −3",
+        "−3 > −5"
+      ],
+      "correct": 2,
+      "subject": "Elementary Mathematics",
+      "aiCorrect": true
+    },
+    {
+      "question": "Cat food costs $.47/lb. How much does a 6-lb bag cost?",
+      "options": [
+        "$2.82 ",
+        "$2.97 ",
+        "$6.47 ",
+        "$12.77 "
+      ],
+      "correct": 0,
+      "subject": "Elementary Mathematics",
+      "aiCorrect": true
+    },
+    {
+      "question": "A coach rounded the number of runners at a track meet to the nearest 10. The rounded number of runners is 400. Which number could be the actual number of runners at the track meet?",
+      "options": [
+        "382",
+        "397",
+        "406",
+        "447"
+      ],
+      "correct": 1,
+      "subject": "Elementary Mathematics",
+      "aiCorrect": true
+    }
+  ],
+  "medium": [
+    {
+      "question": "Women have been excluded from the public sphere because:",
+      "options": [
+        "industrial capitalism separated the middle class home from the workplace",
+        "those who enter paid employment have been 'sidelined' into particular fields",
+        "it is difficult to succeed in 'malestream' politics without compromising their femininity",
+        "all of the above"
+      ],
+      "correct": 3,
+      "subject": "Sociology",
+      "aiCorrect": true
+    },
+    {
+      "question": "________ is the use of language of to mask or expose the ethical nature of decisions, actions and behaviours.",
+      "options": [
+        "Ethical splicing",
+        "Moral framing",
+        "Ethical window dressing",
+        "Moral splicing"
+      ],
+      "correct": 1,
+      "subject": "Business Ethics",
+      "aiCorrect": true
+    },
+    {
+      "question": " Nysveen and Pedersen (2014) added in key dimensions of customer experience. The ______________ refers to how strongly a brand engages consumers in physical activities.",
+      "options": [
+        "Affective dimension.",
+        "Intellectual dimension.",
+        "Behavioural dimension.",
+        "Sensory dimension."
+      ],
+      "correct": 2,
+      "subject": "Marketing",
+      "aiCorrect": true
+    },
+    {
+      "question": "For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I did not clear my laundry out of the washer, and dryer, and my roommate could not do laundry. Scenario 2 | I dug up a hole at the graveyard to bury her toes.",
+      "options": [
+        "Wrong, Wrong",
+        "Wrong, Not wrong",
+        "Not wrong, Wrong",
+        "Not wrong, Not wrong"
+      ],
+      "correct": 0,
+      "subject": "Moral Scenarios",
+      "aiCorrect": true
+    },
+    {
+      "question": "For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | The lesson at school tomorrow is about sharing, so I'll make sure my kids don't miss it. Scenario 2 | I called a foul because I didn't like the player.",
+      "options": [
+        "Wrong, Wrong",
+        "Wrong, Not wrong",
+        "Not wrong, Wrong",
+        "Not wrong, Not wrong"
+      ],
+      "correct": 2,
+      "subject": "Moral Scenarios",
+      "aiCorrect": true
+    },
+    {
+      "question": "The Dean was showing a visitor around the campus. The visitor asked, \"About how many students do you have here?\" After a moment of reflection the Dean replied, \"Oh, I'd guess about one in a hundred.\"",
+      "options": [
+        "Equivocation",
+        "Fallacy of Division",
+        "Appeal to Authority",
+        "Denying the Antecedent"
+      ],
+      "correct": 0,
+      "subject": "Logical Fallacies",
+      "aiCorrect": true
+    },
+    {
+      "question": "'Eyeballing' is a technique that involves:",
+      "options": [
+        "reading a textual document quickly to understand the gist of it",
+        "gathering a sample from whoever you can see in a public place",
+        "scanning a table to identify general patterns and significant figures",
+        "keeping your eyes on research participants at all times"
+      ],
+      "correct": 2,
+      "subject": "Sociology",
+      "aiCorrect": true
+    },
+    {
+      "question": " Critics of speech codes adopted in the 1980s and early 1990s argued that these codes violated which of the following principles?",
+      "options": [
+        "freedom of speech",
+        "freedom of the press",
+        "right to bear arms",
+        "right to privacy"
+      ],
+      "correct": 1,
+      "subject": "Moral Disputes",
+      "aiCorrect": true
+    },
+    {
+      "question": "Some research has found that later cognitive decline is predicted by earlier",
+      "options": [
+        "Cardiovascular problems",
+        "Loss of muscle strength",
+        "Immune system decline",
+        "Graying of hair"
+      ],
+      "correct": 1,
+      "subject": "Human Aging",
+      "aiCorrect": true
+    },
+    {
+      "question": "Why is Mahavira a significant person in the Jaina traditions?",
+      "options": [
+        "He is the last of the ascetic prophets.",
+        "He is the first of the ascetic prophets",
+        "He is the most learned of the ascetic prophets",
+        "He is the most holy of the ascetic prophets"
+      ],
+      "correct": 0,
+      "subject": "World Religions",
+      "aiCorrect": true
+    },
+    {
+      "question": "_______ is the term used to describe the ongoing approval and acceptance of a company's activities by society, especially among local communities and civil societies.",
+      "options": [
+        "Enlightened self interest",
+        "Social licence to operate",
+        "Community approval",
+        "Supply chain responsibility"
+      ],
+      "correct": 1,
+      "subject": "Business Ethics",
+      "aiCorrect": true
+    },
+    {
+      "question": "What are the port states determined by Nmap?",
+      "options": [
+        "Active, inactive, standby",
+        "Open, half-open, closed ",
+        "Open, filtered, unfiltered",
+        "Active, closed, unused"
+      ],
+      "correct": 2,
+      "subject": "Computer Security",
+      "aiCorrect": true
+    },
+    {
+      "question": "One example of bad constitutive moral luck would be:",
+      "options": [
+        "a person who is by nature envious and ungenerous.",
+        "a person who lived in Nazi Germany in 1940.",
+        "a person who drives drunk and hits a child.",
+        "all of the above."
+      ],
+      "correct": 0,
+      "subject": "Philosophy",
+      "aiCorrect": true
+    },
+    {
+      "question": "\"Magic memory\"' has two operations: Read and Clear. Both are indivisible and mutually exclusive. Clear sets the magic memory to zero. Read returns a value that represents the number of Read operations since the last Clear operation. Which of the following is (are) true of \"Magic memory\"?\nI. It can provide the functionality of an atomic Test-and-Set.\nII. It can be used to coordinate processes running on a shared-memory multiprocessor.\nIII. It is only useful on a multiprocessor.",
+      "options": [
+        "I only",
+        "II only",
+        "III only",
+        "I and II"
+      ],
+      "correct": 3,
+      "subject": "College Computer Science",
+      "aiCorrect": true
+    },
+    {
+      "question": "For Kernel Regression, which one of these structural assumptions is the one that most affects the trade-off between underfitting and overfitting:",
+      "options": [
+        "Whether kernel function is Gaussian versus triangular versus box-shaped",
+        "Whether we use Euclidian versus L1 versus L∞ metrics",
+        "The kernel width",
+        "The maximum height of the kernel function"
+      ],
+      "correct": 2,
+      "subject": "Machine Learning",
+      "aiCorrect": true
+    },
+    {
+      "question": "What is the communal meal offered at the place of worship called in Sikhism?",
+      "options": [
+        "Sangat",
+        "Langar",
+        "Gurdwara",
+        "Panth"
+      ],
+      "correct": 1,
+      "subject": "World Religions",
+      "aiCorrect": true
+    },
+    {
+      "question": "What distinguishes the trade patterns of the Mesolithic from those of the Upper Paleolithic?",
+      "options": [
+        "in the Mesolithic, goods traveled farther and more goods were exchanged",
+        "in the Mesolithic, goods traveled farther but fewer goods were exchanged",
+        "in the Mesolithic, goods traveled less far but more goods were exchanged",
+        "in the Mesolithic, goods traveled less far and fewer goods were exchanged"
+      ],
+      "correct": 2,
+      "subject": "Prehistory",
+      "aiCorrect": true
+    },
+    {
+      "question": "Calculate the equilibrium polarization of 13C nuclei in a 20.0 T magnetic field at 300 K.",
+      "options": [
+        "10.8 x 10^-5",
+        "4.11 x 10^-5",
+        "3.43 x 10^-5",
+        "1.71 x 10^-5"
+      ],
+      "correct": 3,
+      "subject": "College Chemistry",
+      "aiCorrect": true
+    },
+    {
+      "question": "The Theory of _________ posits that 3 three levels of moral reasoning exist which an individual can engage in to assess ethical issues, dependant on their cognitive capacity.",
+      "options": [
+        "Egoism",
+        "Cognitive moral development",
+        "Power distance",
+        "Uncertainty avoidance"
+      ],
+      "correct": 1,
+      "subject": "Business Ethics",
+      "aiCorrect": true
+    },
+    {
+      "question": "An organ pipe, closed at one end and open at the other, is designed to have a fundamental frequency of C (131 Hz). What is the frequency of the next higher harmonic for this pipe?",
+      "options": [
+        "44 Hz",
+        "196 Hz",
+        "262 Hz",
+        "393 Hz"
+      ],
+      "correct": 3,
+      "subject": "College Physics",
+      "aiCorrect": true
+    },
+    {
+      "question": "Intestinal failiure:\n",
+      "options": [
+        "Always requires parenteral nutritional suport",
+        "May follow colectomy",
+        "Is always permanent",
+        "May benefit from sodium supplementation of >=90mmol/l"
+      ],
+      "correct": 3,
+      "subject": "Nutrition",
+      "aiCorrect": true
+    },
+    {
+      "question": "For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I dropped the baby after I was done feeding it. Scenario 2 | I drove through the red light",
+      "options": [
+        "Wrong, Wrong",
+        "Wrong, Not wrong",
+        "Not wrong, Wrong",
+        "Not wrong, Not wrong"
+      ],
+      "correct": 0,
+      "subject": "Moral Scenarios",
+      "aiCorrect": true
+    },
+    {
+      "question": "For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I use my medical training to develop protections against bioweapons. Scenario 2 | I parked right in front of an ambulance.",
+      "options": [
+        "Wrong, Wrong",
+        "Wrong, Not wrong",
+        "Not wrong, Wrong",
+        "Not wrong, Not wrong"
+      ],
+      "correct": 2,
+      "subject": "Moral Scenarios",
+      "aiCorrect": true
+    },
+    {
+      "question": "Observational epidemiology studies have produced useful in identifying health effects of many food contaminants, but not for assessing risk, because:\n",
+      "options": [
+        "It is never possible to know whether observed effects are caused by the contaminant",
+        "Human exposure though food is usually much less than exposures that have been studied",
+        "Controlled animal studies provide more reliable information",
+        "Reliable dose-response data are difficult to acquire and often unavailable"
+      ],
+      "correct": 3,
+      "subject": "Nutrition",
+      "aiCorrect": true
+    },
+    {
+      "question": "The false analogy fallacy is",
+      "options": [
+        "a specific type of false cause fallacy that argues that since two event happened at the same time one event must have caused the other",
+        "arguing that an event that preceded another event necessarily is the cause of the second event",
+        "arguing that since something is new it is necessarily good",
+        "drawing a conclusion based on a comparison when the items being compared are not similar enough to support the conclusion."
+      ],
+      "correct": 3,
+      "subject": "Logical Fallacies",
+      "aiCorrect": true
+    },
+    {
+      "question": "What might the pragmatic implications of biology be on post-conflict gender security?",
+      "options": [
+        "Recent inquiry into the way in which women have been treated both in and after war has revealed a degree of ambiguity in the relationship between armed forces and civilian women. While women have often been the targets of violence by the enemy in conflict, it is also the case that they may suffer at the hands of their \"protectors\". This strengthens the argument for female soldiers to be engaged in certain types of peacekeeping work, particularly in post-conflict situations.",
+        "Perpetuation of violence against women in post-conflict society has devalued the claim that violence is more prevalent in militarized societies. Women were as protected by men in pre-war society as they were in post-war society.",
+        "Case studies revealed that in certain military families, levels of violence were dependent on the degree of psychological damage inflicted during fighting, however this was variable and dependent on the individual not on gender basis.",
+        "Recent inquiry into the way in which women have been treated both in and after war has revealed a degree of ambiguity in the relationship between armed forces and civilian women. While women have often been the targets of violence by the enemy in conflict, it is also the case that they may suffer at the hands of their \"protectors\" which may actually undermine liberal feminists' case of the \"right to fight\"."
+      ],
+      "correct": 0,
+      "subject": "Security Studies",
+      "aiCorrect": true
+    },
+    {
+      "question": "According to the Ethnocultural Communities Facing AIDS study, single _________ men are more likely than single _________ to report having had more than one sexual partner in the previous year.",
+      "options": [
+        "Chinese; North African Muslim",
+        "South Asian; English-speaking Caribbean",
+        "South Asian; Chinese",
+        "North African Muslim; Latin American"
+      ],
+      "correct": 1,
+      "subject": "Human Sexuality",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which one of these characteristics is most commonly associated with the 'rational goal' model of management?",
+      "options": [
+        "Worker welfare",
+        "Health and safety",
+        "Interpersonal relationships",
+        "Productivity"
+      ],
+      "correct": 3,
+      "subject": "Management",
+      "aiCorrect": true
+    },
+    {
+      "question": " What is the name of the ten day New Year festival that celebrated Babylon's culture?",
+      "options": [
+        "Akitu",
+        "Wag and Thoth",
+        "Bast",
+        "Nehebkau"
+      ],
+      "correct": 0,
+      "subject": "World Religions",
+      "aiCorrect": true
+    },
+    {
+      "question": " What is wrong with a conservation system based wholly on economic motives according to Leopold?",
+      "options": [
+        "It assumes that the economic parts of the biotic system will function without the uneconomic parts.",
+        "It assumes that economic motives are morally relevant.",
+        "It implies that nonhuman creatures are necessarily without any moral standing.",
+        "none of the above"
+      ],
+      "correct": 0,
+      "subject": "Moral Disputes",
+      "aiCorrect": true
+    },
+    {
+      "question": "A burial site where the body is allowed to decompose naturally without a casket is called a _____ cemetery",
+      "options": [
+        "Naturalistic",
+        "Green",
+        "Rapid decay",
+        "Sunshine"
+      ],
+      "correct": 1,
+      "subject": "Human Aging",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which of the following statements about bosons and/or fermions is true?",
+      "options": [
+        "Bosons have symmetric wave functions and obey the Pauli exclusion principle.",
+        "Bosons have antisymmetric wave functions and do not obey the Pauli exclusion principle.",
+        "Fermions have symmetric wave functions and obey the Pauli exclusion principle.",
+        "Fermions have antisymmetric wave functions and obey the Pauli exclusion principle."
+      ],
+      "correct": 3,
+      "subject": "College Physics",
+      "aiCorrect": true
+    },
+    {
+      "question": "A researcher who is interested in the differences between two or more groups of people is most likely to use which of the following approaches?",
+      "options": [
+        "Quasi-experimental",
+        "Longitudinal",
+        "Correlational",
+        "Cross-sequential"
+      ],
+      "correct": 0,
+      "subject": "Human Aging",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which of the following did Thatcher's government not strive to achieve:",
+      "options": [
+        "marketization and privatization",
+        "individual freedom, choice and responsibility",
+        "generous financial benefits for single parents, students and the unemployed",
+        "the rolling back of the welfare state"
+      ],
+      "correct": 2,
+      "subject": "Sociology",
+      "aiCorrect": true
+    },
+    {
+      "question": "Statement 1| The training error of 1-nearest neighbor classifier is 0. Statement 2| As the number of data points grows to infinity, the MAP estimate approaches the MLE estimate for all possible priors. In other words, given enough data, the choice of prior is irrelevant.",
+      "options": [
+        "True, True",
+        "False, False",
+        "True, False",
+        "False, True"
+      ],
+      "correct": 2,
+      "subject": "Machine Learning",
+      "aiCorrect": true
+    },
+    {
+      "question": "For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | My neighbor finds a letter containing my paycheck in their mailbox and tries to cash it at the local bank. Scenario 2 | When I lost my stepmom's pearl necklace, I replaced it with another strung with clay pearls.",
+      "options": [
+        "Wrong, Wrong",
+        "Wrong, Not wrong",
+        "Not wrong, Wrong",
+        "Not wrong, Not wrong"
+      ],
+      "correct": 2,
+      "subject": "Moral Scenarios",
+      "aiCorrect": true
+    },
+    {
+      "question": " In addition to Jainism, which other tradition began as a world-renouncing movement?",
+      "options": [
+        "Buddhism",
+        "Hinduism",
+        "Judaism",
+        "Islam"
+      ],
+      "correct": 0,
+      "subject": "World Religions",
+      "aiCorrect": true
+    },
+    {
+      "question": "The main reason given by men and women for their long lasting marriage is that",
+      "options": [
+        "They are best friends",
+        "They must fulfill their vows",
+        "They agree on almost everything",
+        "They owe it to their children"
+      ],
+      "correct": 0,
+      "subject": "Human Aging",
+      "aiCorrect": true
+    },
+    {
+      "question": "What is a paradigm?",
+      "options": [
+        "A theoretical assumption",
+        "An illustration",
+        "A theoretical model",
+        "An example serving as a model"
+      ],
+      "correct": 3,
+      "subject": "Management",
+      "aiCorrect": true
+    },
+    {
+      "question": " Callahan cites the Oregon Death with Dignity Legal Defense and the Education Center's finding that \"after four full years .. there have been no missteps, abuses or coercive tendencies\" regarding laws permitting euthanasia. In response he argues that",
+      "options": [
+        "they can't know this to be true without an anonymous survey.",
+        "other studies have found contrary results.",
+        "even if the finding is true, it is irrelevant to the moral status of euthanasia.",
+        "the findings are suspect because the study was performed by advocates of euthanasia."
+      ],
+      "correct": 0,
+      "subject": "Moral Disputes",
+      "aiCorrect": true
+    },
+    {
+      "question": "For which of these two scenarios does the main character (who uses I/me/my) do something clearly morally wrong, according to ordinary moral standards in the US as of 2020? Scenario 1 | I was constantly taking time off of work because I was hungover. Scenario 2 | I told the bartender I was 24 although I was only 17.",
+      "options": [
+        "Wrong, Wrong",
+        "Wrong, Not wrong",
+        "Not wrong, Wrong",
+        "Not wrong, Not wrong"
+      ],
+      "correct": 0,
+      "subject": "Moral Scenarios",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which of the following is true of a convolution kernel?",
+      "options": [
+        "Convolving an image with $\\begin{bmatrix}1 & 0 & 0\\\\ 0 & 1 & 0 \\\\ 0 & 0 & 1 \\end{bmatrix}$ would not change the image",
+        "Convolving an image with $\\begin{bmatrix}0 & 0 & 0\\\\ 0 & 1 & 0 \\\\ 0 & 0 & 0 \\end{bmatrix}$ would not change the image",
+        "Convolving an image with $\\begin{bmatrix}1 & 1 & 1\\\\ 1 & 1 & 1 \\\\ 1 & 1 & 1 \\end{bmatrix}$ would not change the image",
+        "Convolving an image with $\\begin{bmatrix}0 & 0 & 0\\\\ 0 & 0 & 0 \\\\ 0 & 0 & 0 \\end{bmatrix}$ would not change the image"
+      ],
+      "correct": 1,
+      "subject": "Machine Learning",
+      "aiCorrect": true
+    },
+    {
+      "question": "What do the Hassunan and Samarran sites in Mesopotamia have in common?",
+      "options": [
+        "Both relied heavily on agriculture.",
+        "Both have an abundance of rare luxury items.",
+        "Both have high-status burials.",
+        "Both have sophisticated monumental architecture."
+      ],
+      "correct": 0,
+      "subject": "Prehistory",
+      "aiCorrect": true
+    },
+    {
+      "question": " One suggestion that Lukianoff and Haidt make to challenge vindictive protectiveness is",
+      "options": [
+        "have colleges and universities officially and strongly discourage trigger warnings.",
+        "to defund the Department of Education.",
+        "to promote greater understanding of historical and contemporary oppression.",
+        "none of the above."
+      ],
+      "correct": 1,
+      "subject": "Moral Disputes",
+      "aiCorrect": true
+    },
+    {
+      "question": "Select the best translation into predicate logic. Alexis is greeted by Ben. (a: Alexis; b: Ben; Gxy: x greets y)",
+      "options": [
+        "Gab",
+        "~Gba",
+        "aGb",
+        "Gba"
+      ],
+      "correct": 3,
+      "subject": "Formal Logic",
+      "aiCorrect": true
+    },
+    {
+      "question": "On the basis of oxidation-reduction potential, which of the following is most likely to occur?",
+      "options": [
+        "Al(s) + 3 NaNO3(aq) 3 Na(s) + Al(NO3)3(aq)",
+        "Zn(s) + 2 Ag(NO3)(aq) → 2 Ag(s) + Zn(NO3)2(aq)",
+        "Pb(s) + Ca(NO3)2(aq) → Ca(s) + Pb(NO3)2(aq)",
+        "Pb(s) + 2 LiNO3(aq) → 2 Li(s) + Pb(NO3)2(aq)"
+      ],
+      "correct": 1,
+      "subject": "College Chemistry",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which of the following best describes what discriminative approaches try to model? (w are the parameters in the model)",
+      "options": [
+        "p(y|x, w)",
+        "p(y, x)",
+        "p(w|x, w)",
+        "None of the above"
+      ],
+      "correct": 0,
+      "subject": "Machine Learning",
+      "aiCorrect": true
+    },
+    {
+      "question": "The pharaoh ruled a population of ________, of which _________ were farmers.",
+      "options": [
+        "100,000; 25%",
+        "1,000,000; 50%",
+        "3,000,000; 75%",
+        "5,000,000; 100%"
+      ],
+      "correct": 2,
+      "subject": "Prehistory",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which communication model describes the encoding and decoding of messages?",
+      "options": [
+        "Shannon and Weaver model",
+        "Osgood and Schramm model",
+        "Westley and MacLean model",
+        "Maletzke model"
+      ],
+      "correct": 1,
+      "subject": "Public Relations",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which vitamins are important in lowering circulating homocysteine levels\n",
+      "options": [
+        "Vitamin D",
+        "Vitamin C",
+        "Vitamin A",
+        "Folate, vitamins B6 and B12"
+      ],
+      "correct": 3,
+      "subject": "Nutrition",
+      "aiCorrect": true
+    }
+  ],
+  "hard": [
+    {
+      "question": "A patient was in the hospital to be treated for an illness. The patient's doctor prescribed a mild anesthetic drug, to be given to the patient intravenously, to reduce the pain being experienced by the patient. The patient was supposed to receive a saline solution containing 18. 5 milligrams of the drug. A nurse arranged to have a pharmacy technician prepare the solution and drug, and then the nurse administered the solution and drug to the patient. The solution that was administered to the patient contained 185 milligrams of the drug, rather than just 18. 5. Shortly after receiving the drug, the patient had a heart attack and died. The doctor, nurse, and pharmacy technician were all employed by the hospital. If the patient's family brings a wrongful death claim against the hospital, which of the following must the family prove in order to recover damages?",
+      "options": [
+        "The family must identif' which of the three hospital employees involved the doctor, nurse, and pharmacy technician was actually responsible for the mistake in the dosage of the drug.",
+        "The family must prove the specific negligent act that resulted in the wrong dose of the drug being administered.",
+        "The family must show that hospital administrators were negligent in hiring or supervising one or more of the employees involved.",
+        "The family must prove that the patient would not have died if given 18. 5 milligrams of the drug."
+      ],
+      "correct": 3,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "What is the meaning of implied authorisation?",
+      "options": [
+        "Presumption of Security Council approval of armed force when a State has been forewarned",
+        "Implicit authorisation on the basis of a specific number of votes by UNSC members",
+        "Presumption that all unlawful attacks will be subject to armed force by a resolution of the UNSC",
+        "In cases of repeated unlawful attacks the UNSC shall authorise neighbouring States to take whatever measures they deem necessary to rectify the situation"
+      ],
+      "correct": 0,
+      "subject": "International Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "A 25-year-old man is brought to the emergency department because of a 6-day history of fever, severe muscle pain, and diffuse, painful swelling of his neck, underarms, and groin area. The symptoms began after returning from a camping trip in New Mexico. He appears ill and lethargic and can barely answer questions. His temperature is 39.2°C (102.5°F), pulse is 120/min, respirations are 22/min, and blood pressure is 110/70 mm Hg. Physical examination shows generalized scattered black maculae. Examination of the right upper extremity shows an erythematous, solid, tender mass on the underside of the upper extremity just above the elbow; the mass is draining blood and necrotic material. The most effective antibiotic for this patient’s disorder will interfere with which of the following cellular processes or enzymes?",
+      "options": [
+        "DNA helicase",
+        "Glucuronosyltransferase",
+        "Proteasomal degradation",
+        "Ribosomal assembly"
+      ],
+      "correct": 3,
+      "subject": "Professional Medicine",
+      "aiCorrect": true
+    },
+    {
+      "question": "A wife is the beneficiary of a policy issued by an insurance company, insuring the life of her husband, now deceased. The policy contained a clause providing that double indemnity is payable in the event that death of the insured \"results directly, and independently of all other causes, from bodily injury effected solely through external violent and unexpected means. \"The husband was found dead in the chicken shed of his farm. His death resulted from wounds caused by a shotgun blast. The wife filed the necessary papers with the insurance company concerning proof of her husband's death. The insurance company admitted liability for the face amount of the policy but rejected the wife's claim for double indemnity. The wife then instituted suit against the insurance company demanding judgment according to the double indemnity provisions of the husband's insurance policy. At trial, the wife was called to testify about the events on the day of her husband's death. The wife said that she was in the kitchen when she heard a gunshot in the shed. As she rushed out of the house, she saw their neighbor running from the shed. The neighbor is present in court. As a witness, the wife was",
+      "options": [
+        "competent, because she had personal knowledge of the matter.",
+        "competent, because the neighbor is available to testify.",
+        "incompetent, because she had a personal interest in the outcome of the lawsuit.",
+        "incompetent, because she was testifying to facts occurring after her husband's death."
+      ],
+      "correct": 0,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "The body’s stress response system:",
+      "options": [
+        "Is vulnerable to influence during childhood, but not before birth",
+        "Cannot be affected by outside influences",
+        "Can mainly be regulated through prescribed selective serotonin reuptake inhibitors (SSRIs)",
+        "Can impact genetic predispositions to developmental disorders"
+      ],
+      "correct": 3,
+      "subject": "Professional Psychology",
+      "aiCorrect": true
+    },
+    {
+      "question": "Calcium, potassium, and sodium are classified as which of the following?",
+      "options": [
+        "Androgens",
+        "Catecholamines",
+        "Electrolytes",
+        "Estrogens"
+      ],
+      "correct": 2,
+      "subject": "Anatomy",
+      "aiCorrect": true
+    },
+    {
+      "question": "In 1985, a widow, the undisputed owner of a cottage, leased it to a tenant for a term of seven years. Rent was to be paid in installments due on the first day of each month. One year later, in 1986, the widow died leaving no heirs. In her will, the widow left her entire estate to the Boy Scouts of America. The cottage was not specifically mentioned in the will. One month after the widow died, the tenant, having learned of her death, decided to remain on the property, but stopped paying rent. The Boy Scouts of America organization was unaware that the widow made a gift to the organization until 2009, when attorneys for the organization conducted an inventory of testamentary gifts to the Boy Scouts of America, which revealed that they had a claim to ownership of the cottage. The statutory period for adverse possession in this jurisdiction is 20 years. The tenant's statutory period for adverse possession began to run when",
+      "options": [
+        "the widow died.",
+        "the tenant discontinued paying rent.",
+        "the tenant's lease with the widow expired.",
+        "the tenant subjectively believed that he no longer had permission to possess the cottage."
+      ],
+      "correct": 3,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "The resolution of a telescope is a measure of its:",
+      "options": [
+        "Ability to magnify distant objects",
+        "Ability to measure the angular separation of objects",
+        "Ability to measure the distance between objects",
+        "Light-collecting efficiency"
+      ],
+      "correct": 1,
+      "subject": "Astronomy",
+      "aiCorrect": true
+    },
+    {
+      "question": "A 26-year-old woman with HIV infection comes to the office because of a 4-day history of pain and redness of her left lower leg. She says the symptoms began after she tripped over a tree branch in her yard and scraped her left leg. Current medications include antiretroviral therapy and ibuprofen as needed. Vital signs are temperature 38.3°C (100.9°F), pulse 86/min, respirations 14/min, and blood pressure 138/70 mm Hg. There is a 5×8-cm area on the anterior surface of her left lower extremity that is swollen, erythematous, and tender. She previously has developed a rash after taking erythromycin, and she has had an anaphylactic response to penicillin. Which of the following antibiotic therapies is most appropriate for this patient?",
+      "options": [
+        "Amoxicillin",
+        "Ciprofloxacin",
+        "Clarithromycin",
+        "Clindamycin"
+      ],
+      "correct": 3,
+      "subject": "Professional Medicine",
+      "aiCorrect": true
+    },
+    {
+      "question": "Transformed scores increase the interpretability of raw scores and allow comparison to the rest of the distribution. From your knowledge about Transformed Scores, which statement is not about the Z SCOREs?",
+      "options": [
+        "raw scores stated in SD terms",
+        "score minus the mean divided by the SD",
+        "permits comparisons across different measures and tests",
+        "tells you how many SDs away from the mean a score is"
+      ],
+      "correct": 3,
+      "subject": "Professional Psychology",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which of the following apparent correlatives contradicts Hohfeld's scheme of 'jural relations'?",
+      "options": [
+        "Right and duty.",
+        "Privilege and no-right.",
+        "Power and liability.",
+        "Immunity and disability."
+      ],
+      "correct": 2,
+      "subject": "Jurisprudence",
+      "aiCorrect": true
+    },
+    {
+      "question": "A statute in the state makes it a misdemeanor for any motor vehicle to travel to the left of the center line of any two-way highway, road, or street. Late for a business appointment, a businesswoman was driving north on a highway when she decided to pass the car in front of her. As she swung across the center line into the southbound lane, her vehicle collided with a fire engine. As a result of the accident, the fire engine was delayed in reaching an owner's house, which was entirely destroyed by fire. The owner's home was located approximately one mile from the accident scene. If the owner asserts a claim against thebusinesswoman, he will most likely",
+      "options": [
+        "recover the fair market value of his house before the fire.",
+        "recover that part of his loss that would have been prevented if the businesswoman had not hit the fire truck.",
+        "recover nothing, because the businesswoman was not responsible for causing the fire.",
+        "recover nothing, because the traffic statute was not designed to protect against the type of harm that the owner suffered."
+      ],
+      "correct": 1,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "\"The basic premise of the “Zeigarnik effect\"\" is that:\"",
+      "options": [
+        "we tend to remember unfinished tasks better than finished ones.",
+        "we tend to remember ﬁnished tasks better than unfinished ones.",
+        "we tend to remember difﬁcult tasks better than easy ones.",
+        "we tend to remember easy tasks better than difﬁcult ones."
+      ],
+      "correct": 0,
+      "subject": "Professional Psychology",
+      "aiCorrect": true
+    },
+    {
+      "question": "Palmyra Co. has net income of $11,000, a positive $1,000 net cumulative effect of a change in accounting principle, a $3,000 unrealized loss on available-for-sale securities, a positive $2,000 foreign currency translation adjustment, and a $6,000 increase in its common stock. What amount is Palmyra’s comprehensive income?",
+      "options": [
+        "$4,000",
+        "$10,000",
+        "$11,000",
+        "$17,000"
+      ],
+      "correct": 1,
+      "subject": "Professional Accounting",
+      "aiCorrect": true
+    },
+    {
+      "question": "Pluto's extremely cold (~40 K) surface is composed of:",
+      "options": [
+        "mainly water ice which always remains frozen",
+        "nitrogen methane and carbon monoxide ices which sublimate into an atmosphere near perihelion",
+        "nitrogen methane and carbon monoxide ices which always remain frozen",
+        "roughly half ices and half rocky materials"
+      ],
+      "correct": 1,
+      "subject": "Astronomy",
+      "aiCorrect": true
+    },
+    {
+      "question": "Research in the workplace has shown that a subordinate’s participation in goal setting leads to the selection of goals that, when compared to goals set for subordinates unilaterally by their supervisors, are",
+      "options": [
+        "more challenging",
+        "Of about the same level of difficulty",
+        "never accomplished",
+        "less challenging"
+      ],
+      "correct": 0,
+      "subject": "Professional Psychology",
+      "aiCorrect": true
+    },
+    {
+      "question": "A sexually active 20-year-old woman has had fever, chills, malaise, and pain of the vulva for 2 days. Examination shows a vulvar pustule that has ulcerated and formed multiple satellite lesions. Nodes are palpated in the inguinal and femoral areas. A smear of fluid from the lesions establishes the diagnosis. Which of the following is the most likely causal organism?",
+      "options": [
+        "Chlamydia trachomatis",
+        "Haemophilus ducreyi",
+        "Neisseria gonorrhoeae",
+        "Streptococcus pyogenes (group A)"
+      ],
+      "correct": 1,
+      "subject": "Professional Medicine",
+      "aiCorrect": true
+    },
+    {
+      "question": "A previously healthy 40-year-old man is brought to the emergency department because of constant substernal chest pain for 12 hours that is exacerbated by coughing and inspiration. The pain is relieved with sitting up and leaning forward. There is no family history of heart disease. His temperature is 38°C (100.4°F), pulse is 120/min, and blood pressure is 110/60 mm Hg. The lungs are clear to auscultation. Cardiac examination shows distant heart sounds. An ECG shows diffuse ST-segment elevation in all leads. An x-ray of the chest shows normal findings. The most likely cause of his condition is injury to which of the following tissues?",
+      "options": [
+        "Aortic intima",
+        "Esophageal sphincter",
+        "Myocardium",
+        "Pericardium"
+      ],
+      "correct": 3,
+      "subject": "Professional Medicine",
+      "aiCorrect": true
+    },
+    {
+      "question": "You have been hired to assist with a research project on process variables in group psychotherapy. The psychologist who is the principal investigator tells you to discourage participants from leaving the group prior to the end of the study because, if too many participants drop out, the study's potential usefulness will be seriously compromised. As an ethical psychologist, you should:",
+      "options": [
+        "refuse to assist with the research project.",
+        "immediately file a complaint against the psychologist with the psychology licensing board or ethics committee.",
+        "write a letter to the psychologist, indicating the relevant ethical standards and offering to discuss the matter with him.",
+        "\"follow the psychologist''s instructions since, by \"\"discouraging\"\" participants from leaving the group, you are not actually coercing them to participate.\""
+      ],
+      "correct": 2,
+      "subject": "Professional Psychology",
+      "aiCorrect": true
+    },
+    {
+      "question": "A man owned real estate in fee simple. He transferred a life estate in it over to a friend for the friend's lifetime. When the fee simple owner died, the life estate owner conveyed his interest to his children. The deceased fee simple owner's son sued the children on the basis that the life estate was now broken and he owned the property absolutely. Do the children of the life estate owner have an enforceable interest in the property?",
+      "options": [
+        "No, the life estate was broken when the owner of the fee simple interest died.",
+        "No, the life estate owner is not allowed to convey his interest to other persons.",
+        "Yes, the life estate owner became the owner in fee simple when the original fee simple owner predeceased him.",
+        "Yes, the life estate owner could convey his life estate to third persons."
+      ],
+      "correct": 3,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "The walls of the maxillary sinus are sinus is related to",
+      "options": [
+        "the floor of the orbit.",
+        "the floor of the orbit and the upper posterior teeth.",
+        "the floor of the orbit, the upper posterior teeth and the infratemporal fossa.",
+        "the floor of the orbit, the upper posterior teeth, the infratemporal fossa and the hard palate."
+      ],
+      "correct": 2,
+      "subject": "Anatomy",
+      "aiCorrect": true
+    },
+    {
+      "question": "A wedding planner owned a summer cottage on the lake. In order to facilitate the access to the cottage, which is located on a knoll above the lake, the wedding planner entered into an agreement with a neighbor, an adjoining land owner, whereby the neighbor, in writing, granted the wedding planner a right-of-way over a strip of land 30 feet in width and a quarter of a mile in length along the eastern margin of the neighbor's property. Without notif'ing the neighbor, the wedding planner proceeded with his plan to improve the roadbed by having the road asphalted in order to make it more accessible for motor vehicle traffic. Several years later, the neighbor started a sand business, which required him to do heavy hauling that subsequently destroyed the asphalted surface on the road. Ten years after the neighbor started his sand business, the wedding planner sold his lakefront property to an artist. Shortly after the artist took possession of the cottage and property, the neighbor erected wooden barriers across the roadway, thus obstructing the access to the artist's property. The interest that the wedding planner acquired in the access road may best be described as",
+      "options": [
+        "an easement in gross.",
+        "an easement implied by prior use.",
+        "an easement by necessity.",
+        "an express easement."
+      ],
+      "correct": 3,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which of the following can act as an intracellular buffer to limit pH changes when the rate of glycolysis is high?",
+      "options": [
+        "Glutamine",
+        "Glucose",
+        "Carnosine",
+        "Amylase"
+      ],
+      "correct": 2,
+      "subject": "Clinical Knowledge",
+      "aiCorrect": true
+    },
+    {
+      "question": "The smallest change in measured variable to which instrument will respond is",
+      "options": [
+        "resolution.",
+        "accuracy.",
+        "precision.",
+        "sensitivity."
+      ],
+      "correct": 0,
+      "subject": "Electrical Engineering",
+      "aiCorrect": true
+    },
+    {
+      "question": "The genome is:",
+      "options": [
+        "the number of chromosomes found in the somatic cells of an organism.",
+        "the entire DNA sequence of an organism.",
+        "the entire list of proteins that an organism is capable of producing.",
+        "the DNA sequence of an entire chromosome."
+      ],
+      "correct": 1,
+      "subject": "Clinical Knowledge",
+      "aiCorrect": true
+    },
+    {
+      "question": "A producer of widgets contacted a manufacturer of boxes about the possibility of purcIiasing specially designed boxes for shipping the widgets to customers. The producer sent the manufacturer a sheet containing the dimensions of the boxes' needs, as well as the logo to be placed on each box. After negotiations, the parties entered into a written contract whereby the manufacturer agreed to supply the producer with as many of the boxes as the producer may require up to a maximum of 10,000 per month. Later that day, the producer telephoned the manufacturer and said that they were running a one-time promotion and expected to sell an unusually large number of widgets. Therefore, for the first month only, they would need 15,000 boxes. The manufacturer agreed to this request. The manufacturer's oral agreement to supply the producer with the 15,000 boxes for the first month would most likely be held",
+      "options": [
+        "enforceable.",
+        "unenforceable, because their written contract on the same date was the final integration of the terms of their agreement.",
+        "unenforceable, because the agreement was violative of the parol evidence rule.",
+        "unenforceable, because there was inadequate consideration to support the manufacturer's unilateral promise."
+      ],
+      "correct": 0,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "In a jurisdiction using the grantor grantee indices, the following events have occurred in the order listed below:(1) In 1962, a grantor conveyed to a man a tract of land by a deed that was immediately recorded. (2) In 1982, the man died a widower and devised the tract of land to his assistant by a will that was duly admitted to probate. (3) In 1993, the assistant mortgaged the tract of land to a mortgage company to secure a note for $25,000, due on December 31, 1993, with 9Â½ percent interest per annum. (4) In 1996, the mortgage company recorded the mortgage. (5) In 2003, in a signed writing, which the assistant delivered to his daughter, the assistant promised to convey the tract of land to the daughter by a quitclaim deed and pay the mortgage debt when it came due. If the assistant refused to convey the tract of land to the daughter and the daughter brings suit against the assistant to compel a conveyance of the property, the daughter will most likely",
+      "options": [
+        "prevail, because there was an effective gift.",
+        "prevail, because there was an effective assignment.",
+        "not prevail, because there was no consideration to support the assistant's promise to convey the property.",
+        "not prevail, because specific performance will not be granted where there is an adequate remedy at law."
+      ],
+      "correct": 2,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "Assuming the circulatory system in humans obeys Bernoulli’s principle of fluid dynamics, which of the statements most accurately compares the blood pressure in a capillary of the neck to a capillary with an equal crosssectional area in the right knee?",
+      "options": [
+        "The pressure in the neck is greater than the pressure in the knee because of the increase in pressure head",
+        "The pressure in the neck is equal to the pressure in the knee because of the equal dynamic pressure according to the continuity equation",
+        "The pressure in the knee is greater than the pressure in the neck because of the increase in pressure head",
+        "An accurate comparison cannot be given without knowledge of the fluid’s density and viscosity"
+      ],
+      "correct": 2,
+      "subject": "College Medicine",
+      "aiCorrect": true
+    },
+    {
+      "question": "A driver had a new car and, as he was carefully driving within the posted speed limit, a girl, aged 11, suddenly darted into the street in front of his car. Although\\he driver immediately applied his brakes and swerved to avoid the girl, the cat hit the girl, fracturing her legs. As the girl was lying in the street awaiting an ambulance, the driver rushed over to her and said: \"Im terribly sorry. This is the first time I ever drove this car. I don't know what happened, but it must have been my fault. Send me all your hospital bills. I'fl pay for everything. \"When the girl was later released from the hospital, her parents contacted the driver who refused to pay anything. The driver told the girl's mother, \"Since your daughter ran into the street, it was her fault. I have witnesses who saw what she did. If I weren't such a nice guy, I'd sue you for the damage to my new car. \"If the girl's parents, on her behalf, sue the driver in tort, which of the following is the most accurate statement regarding the driver's post-accident statements?",
+      "options": [
+        "The driver's statement regarding his operation of the car, as well as his statement concerning payment of the hospital bills, are both admissible on the issue of negligence.",
+        "The driver's statement regarding payment of the hospital bills is admissible, but his statement concerning his operation of the car is not admissible.",
+        "The driver's statement regarding his operation of the car is admissible on the issue of negligence, but his statement concerning payment of the hospital bills is not admissible in accordance with public policy considerations.",
+        "Neither the driver's statement regarding his operation of the car nor his statement concerning payment of the hospital bills is admissible on the issue of negligence."
+      ],
+      "correct": 2,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "Identify the most commonly used diagnostic technique in the virus laboratory:",
+      "options": [
+        "Virus isolation in cell culture",
+        "Deep sequencing (NGS)",
+        "Reverse transcriptase (RT) PCR",
+        "Immuno-serology"
+      ],
+      "correct": 1,
+      "subject": "Virology",
+      "aiCorrect": true
+    },
+    {
+      "question": "The defendant was an off-duty police officer who frequently worked security at concerts on his free time. One night, he was working backstage security for one of his favorite bands when he noticed a groupie sneak in the back door, pick up a guitar, and begin to walk out with it. He drew his service revolver and exclaimed, \"Stop or I'll shoot!\" The groupie looked at him and then fled. The defendant fired at the fleeing groupie, fatally wounding her. Use of force was not authorized by the concert promotion company that employed him. On these facts, if the defendant is charged with murder, he should be found",
+      "options": [
+        "guilty.",
+        "not guilty, because the killing constituted justifiable homicide.",
+        "not guilty, because the killing constituted excusable homicide.",
+        "not guilty, because the defendant warned the groupie before he fired his gun."
+      ],
+      "correct": 0,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "A land-development company was the owner of a400-acre tract of land in the Southwest. Over the course of time, the land-development company developed two residential subdivisions of the land, an eastern tract and a western tract, each of which contained 150 acres. These subdivisions were created by separate plats that made no reference to each other. The restrictions in the plats were, however, substantially identical. The plats and each deed provided that \"the use of the land herein conveyed is restricted to single-family dwellings only, and this covenant is intended to apply to each and every lot in the subdivision and runs with the land, binding every lot owner, his heirs, and assigns. \"After all but four lots in each subdivision had been sold by the land-development company, it sold 50 acres of the remaining 100 acres of land to a country club by a deed containing the following provisions:\"This deed is executed and accepted with the understanding that the property above described is hereby restricted so that(1) said property may be used as a country club, with a golf course, pool, tennis courts, club house, eating facilities, and other improvements appropriate to a country club. (2) said property may also be subdivided and platted as a residential subdivision similar to the eastern tract and the property shall thereafter be used in accordance with and conveyed subject to residential restrictions that shall conform with those restrictions in force against the eastern tract. (3) the restrictions herein contained shall be deemed covenants running with the land, and for breach of any covenant herein, the land-development company, its successors and assigns may, at its option, re-enter and terminate the estate conveyed hereby. \"At the time of this conveyance, the land- development company retained title to the remaining 50 acres in the original 400-acre tract. Thereafter, the land-development company developed an exclusive shopping center on 25 acres of the retained land. In February 2001, the land-development company sold the remaining eight residential lots in the eastern tract and the western tract. The next month, the land-development company executed the following instrument to the country club:\"The land-development company, for itself, its successors, and assigns, does hereby release,surrender and quitclaim all rights, title, or other property interest in that certain acres owned by the country club. \"At the time this instrument was executed, the country club had built a club house, golf course, and tennis courts on a portion of its land, and it had 25 acres of vacant land remaining. The country club wishes to commence construction of a new high- rise complex (containing a hotel, shopping mall, apartments, etc. ) on the 25 acres of vacant land it possesses. In an action by one of the homeowners in the western tract to enjoin construction of the complex, plaintiff will most likely",
+      "options": [
+        "succeed, because the homeowner (or any other landowner in the eastern tract or the western tract) as assignee of the land development company could re-enter the land upon breach of condition subsequent.",
+        "succeed, because a common development scheme had been established for the entire 400-acre tract, and the country club's proposed complex would constitute a non-conforming use.",
+        "not succeed, because the land development company's instrument of March 2001 effectuated an abrogation of the deed restrictions on the country club's use of its property.",
+        "not succeed, because in accordance with deed restriction (b), only a homeowner in the eastern tract would have standing to challenge the country club's proposed construction plan."
+      ],
+      "correct": 2,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "American Psychological Association?",
+      "options": [
+        "non-White research participants",
+        "the elderly",
+        "clients with a physical disability",
+        "people afﬂicted with a chronic disease"
+      ],
+      "correct": 2,
+      "subject": "Professional Psychology",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which of the following bones has a process that joins with the zygomatic bone to form the zygomatic arch?",
+      "options": [
+        "The maxillary bone",
+        "The temporal bone",
+        "The sphenoid bone",
+        "The frontal bone"
+      ],
+      "correct": 1,
+      "subject": "Anatomy",
+      "aiCorrect": true
+    },
+    {
+      "question": "A property owner who owner her property in fee simple leased a three-story house and the 21 -acre tract upon which it stood to a friend for a term of 10 years. By the terms of the lease, the friend expressly covenanted to pay a monthly rental of $300 and to pay the taxes on the premises during the term of the lease. The lease also stipulated that the friend, as lessee, may not assign or sublease the said premises. The friend and his family lived in the house for two years. Then the friend assigned his leasehold interest in the property to a cousin, who was unaware of the prohibition against assignments. This written assignment expressly provided that the cousin would pay the owner the monthly rental of $300, but was silent concerning the payment of taxes. The owner never objected to this assignment. Six months after the assignment, the owner conveyed her property interest in the premises to a developer. During the cousin's tenancy, the State Highway Authority filed proceedings to condemn two acres of the tract for the purpose of highway construction. As a result, the cousin contacted the developer and informed him that he should be entitled to an apportioned reduction in the rental. After the developer refused to reduce the rent, the cousin brings an action to have his rent apportioned pro tanto. Judgment should be for",
+      "options": [
+        "the developer, although the cousin would be entitled to terminate the lease.",
+        "the developer, because the cousin would be held to the original leasehold contract.",
+        "the cousin, because the value of his leasehold interest was reduced pro tanto.",
+        "the cousin, because eminent domain operates as an apportionment of rent."
+      ],
+      "correct": 1,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "The classic aging pattern is defined as 2 decline on which subtest(s) of the Wechsler Adult Intelligence Scale-Revised",
+      "options": [
+        "All Verbal subtests",
+        "All Performance subtests",
+        "Vocabulary subtest only",
+        "Block Design subtest only"
+      ],
+      "correct": 1,
+      "subject": "Professional Psychology",
+      "aiCorrect": true
+    },
+    {
+      "question": "A woman is the fee simple owner of a 1,000-acre tract of land. Half of the tract is swampland totally unfit for cultivation, though it is heavily covered with valuable hardwood timber. The other half is also covered with valuable timber, but it would be land fit for the raising of crops if it were cleared of the timber. The latter section of land is more valuable for cultivation than it is for the growing of timber and has clearings where someone could build a home and live. The woman conveyed the tract to her brother for life. At the time of the conveyance, the swampland had never been used for the production of timber. The brother took possession and cleared 40 acres of the timber on the section that was suitable for cultivation. In addition, the brother cut 60 acres of timber in the swampland, thus becoming the first person to exploit this area. The brother then proceeded to clear some timber on the tract and used it in repairing fences, buildings, equipment, and the like on the property. In an action by the woman to permanently enjoin the brother from cutting any more timber on the swampland section of the tract and to account for profits received in the sale of the timber, the woman will most likely",
+      "options": [
+        "succeed, because a life tenant must account for permissive waste to the reversioner or remainderman.",
+        "succeed, because a life tenant may not exploit natural resources where no such prior use had been made.",
+        "not succeed, because a life tenant is not liable for permissive waste.",
+        "not succeed, because a life tenant has a right to make reasonable use of the land."
+      ],
+      "correct": 1,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "In 1998, a farmer, advancing in age, realizes that he is no longer able to farm his 1,000 acres and therefore decides to sell some of the farmland in parcels of 250 acres. The president of a development company is interested in purchasing three of the four parcels. The president buys the three parcels from the farmer and begins formulating plans for constructing single-family dwelling units on the land. The original deed between the farmer and the development company contains a provision expressly binding \"upon all subsequent grantees, their heirs, and assigns,\" stipulating that any further subdivisions by any such persons shall be restricted to minimum two-acre lots to be used for single- family dwelling units only. The development company immediately subdivided two of the parcels into lots of three, four, and five acres, and began construction of homes thereon. The original deed restrictions were enumerated within the special warranty deeds and were given to the purchasers of the homes in the new development, called phase 1. Two years later, the president sold the remaining parcel, which had not been included in the phase 1 subdivision plan, to a contractor. The contractor, in turn, drafted a subdivision plan for the last 250-acre parcel, dividing it into one-acre lots. The contractor then commenced construction of single-family dwelling units in the new development, to be known as phase 2. There was no mention of the restriction for two-acre minimum lots in the deeds to the purchasers of the new homes in phase 2. Meanwhile, after the farmer's death, his estate isrequired to sell the remaining 250-acre parcel of his farmland. The buyer is an investor, who proposes to construct a two-level shopping center and parking lot on the property. The area surrounding phase 1 and phase 2 was rezoned for commercial and industrial uses in 2010. The investor's shopping center has grown to include 150 stores. Now, one of the lot owners in phase 1 contracts to sell his property to two physicians who plan to start a suburban medical practice. In an action by the homeowners in phase 1 to prevent such commercial use by the physicians, the court will most likely hold that",
+      "options": [
+        "the restrictions are still enforceable, thus preventing such commercial use.",
+        "the restrictions would no longer be enforceable, because the offering of personal services (i. e. , medical) would be a conforming use.",
+        "the restrictions would no longer be enforceable, because of the change in the character of the neighborhood.",
+        "the restrictions would no longer be enforceable, because the opening of a physician's office in a private home would not be construed as a commercial enterprise."
+      ],
+      "correct": 0,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "A woman and her neighbor had often talked about the need for a fence between their properties. Finally, the woman hired a handyman to build a wooden stake fence between her property and her neighbor's property for $10,000. The handyman built the fence as agreed, and the woman paid him the sum of $10,000. Two weeks later, the neighbor was operating his lawn mower near the property line between his and the woman's property when a section of the fence suddenly fell on top of him, seriously injuring him. A subsequent investigation revealed that the handyman did not properly reinforce the fence. Which of the following is the handyman's best defense in a contract action brought against him by the neighbor, in which the only damages alleged are those for the neighbor's personal injuries?",
+      "options": [
+        "Damages for personal injuries cannot be recovered in a contract action.",
+        "Damages for personal injuries to the neighbor were not within the contemplation of the woman and the handyman at the time they entered into their agreement.",
+        "The neighbor is only an incidental beneficiary of the agreement between the woman and the handyman.",
+        "The neighbor has no standing to assert such an action, since he was not a party to the agreement between the woman and the handyman."
+      ],
+      "correct": 1,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "A man was charged with first-degree murder. Two lawyers were appointed to represent him because the prosecution planned to seek the death penalty. On the first day of trial, the air-conditioning malfunctioned in the courtroom, so the judge directed that the selection of the jurors take place in his chambers. Because of the large number of potential jurors, the judge directed that only one lawyer for the prosecution and one for the defense participate in the jury selection process. The defendant remained in the courtroom during the questioning of the jurors. Once the jury was selected, the trial was postponed until the next day, when the air-conditioning was again working. Did the court's jury selection process violate the defendant's federal constitutional rights?",
+      "options": [
+        "No, because a defendant's confrontation rights are limited to witnesses rather than jurors.",
+        "No, because there was good cause to conduct jury selection outside the defendant's presence.",
+        "Yes, because excluding the defendant undercut the presumption of innocence.",
+        "Yes, because jury selection is a critical stage at which a defendant is entitled to be present."
+      ],
+      "correct": 3,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "A man claims to have inherited property from a wealthy businessman. The man's birth certificate shows that he was born out of wedlock. The record of a proceeding for a support order shows that the businessman was adjudged to be father of the man. However, the man can establish his status as heir of the businessman only if he was legitimated by the marriage of his mother and the businessman subsequent to his birth. Thus, the man must prove that this marriage occurred. The man's attorney has not been able to discover any marriage license or certificate. However, the attorney does have a photograph that shows a couple dressed in wedding clothes. The scene is the front of a church. Bystanders are seen to be throwing rice at the couple and they seem to be responding by smiling and bowing down. The attorney was given the photograph by the man. He found it in his mother's effects following her death. The man believes that the bride in the picture is his mother. He cannot identify the groom. The attorney was informed by a former acquaintance of the businessman who has seen the snapshot that he thinks the groom is the businessman. If the attorney seeks to introduce the photograph as proof that the mother and the businessman were married, the trial judge should rule the photograph",
+      "options": [
+        "admissible, only if the photographer is available to testify concerning the circumstances under which the photograph was taken.",
+        "admissible, only if a witness verifies that it is a correct and accurate representation of the relevant facts.",
+        "inadmissible as non-verbal hearsay not within any recognized exception.",
+        "inadmissible as not the best evidence."
+      ],
+      "correct": 1,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "The ________ School believes that promoting market efficiency should be the central goal of legal decision-making.",
+      "options": [
+        "Law and Economics",
+        "Critical Legal Studies",
+        "Historical",
+        "Natural Law"
+      ],
+      "correct": 0,
+      "subject": "Jurisprudence",
+      "aiCorrect": true
+    },
+    {
+      "question": "Which of the following statements is the most significant characteristic in determining the classification of an enterprise fund?",
+      "options": [
+        "The predominant customer is the primary government.",
+        "The pricing policies of the activity establish fees and charges designed to recover its cost.",
+        "The activity is financed by debt that is secured partially by a pledge of the net revenues from fees and charges of the activity.",
+        "Laws or regulations require that the activity’s costs of providing services including capital costs be recovered with taxes or similar revenues."
+      ],
+      "correct": 1,
+      "subject": "Professional Accounting",
+      "aiCorrect": true
+    },
+    {
+      "question": "Metabolism is determined by the:",
+      "options": [
+        "size of proteins in the cell.",
+        "availability of amino acids.",
+        "proteins formed as dictated by the genetic material.",
+        "amino acid composition of the ribonucleic acids."
+      ],
+      "correct": 2,
+      "subject": "Clinical Knowledge",
+      "aiCorrect": true
+    },
+    {
+      "question": "According to empirical research, which of the following is the best psychological treatment for obsessive—compulsive and agoraphobic disorders",
+      "options": [
+        "Cognitive restructuring",
+        "Systematic desensitization",
+        "Cue-controlled relaxation training",
+        "In vivo exposure and response prevention"
+      ],
+      "correct": 3,
+      "subject": "Professional Psychology",
+      "aiCorrect": true
+    },
+    {
+      "question": "A housing corporation owned farmland and prepared a development plan to divide the land into 100 lots and create a residential community on the farmland tract. The Declaration of Covenants created the community association, as an administrative entity, to which the residential community lot owners would pay dues, and which would administer and enforce the regulations and restrictions recited among the covenants. One of the restrictions set forth in the Declaration of Covenants provides that the lots be used only for single-family residences, and that no trade, commerce, or business may be conducted in any single-family residence. The Declaration of Covenants gives the community association the right to assign all of its rights, powers, titles, easements, and estates granted to it under the Declaration of Covenants. The community association assigned \"all the rights, powers, titles, easements, and estates granted to or conferred upon it by the Declaration of Covenants\" to a municipal corporation, the city. The community association was then terminated. A chef, the owner of lot 18 in the residential development, proposes to convert his single-family dwelling into a massage parlor. The city asserts an action against the chef to recover money damages. Which of the following is the best argument for the chef?",
+      "options": [
+        "The restraint on alienation of his land is invalid.",
+        "The city is not in privity of estate with community association.",
+        "The benefit is in gross; hence, the burden cannot run.",
+        "The burden is in gross; hence, the benefit cannot run."
+      ],
+      "correct": 1,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "A company offered to sell several loads of landscaping stones at a specified price and itemized terms. The offeree sent a notification to the offeror stating, \"We have received your offer to sell landscaping stone per specified terms this date.\" The offeror shipped the goods upon receiving that notification. On the date of shipment, the offeree posted an acceptance form with slight modifications to the terms. After the goods arrived, the offeree called the offeror's manager and told him that the company was unable to accept the offer at this time, he was shipping the goods back, and to \"ignore any paperwork we sent.\" The offeror sued the offeree for breach of contract. Who will prevail?",
+      "options": [
+        "The offeror will prevail because the posting of the acceptance finalized a contract between the parties.",
+        "The offeree will prevail because it never accepted the offer on the same terms specified.",
+        "The offeror will prevail because it shipped the goods when it received the first acceptance.",
+        "The offeree will prevail because it rejected the offer when it called the offeror's manager."
+      ],
+      "correct": 0,
+      "subject": "Professional Law",
+      "aiCorrect": true
+    },
+    {
+      "question": "A psychologist places an ad in a local newspaper claiming a guaranteed cure for anxiety.",
+      "options": [
+        "The ad is not ethical because psychologists are not allowed to advertise",
+        "The ad is ethical because the psychologist is an excellent psychologist",
+        "The ad is unethical because it makes misleading claims of effectiveness",
+        "The ad is ethical because even psychologists are protected by the First Amendment protecting one’s freedom of speech"
+      ],
+      "correct": 2,
+      "subject": "Professional Psychology",
+      "aiCorrect": true
+    },
+    {
+      "question": "One of the following is the primary function of an oscillator",
+      "options": [
+        "produces sinusoidal oscillations",
+        "generates non sinusoidal waveforms",
+        "generates sustained oscillations at a constant amplitude and specific frequency",
+        "none of the above"
+      ],
+      "correct": 2,
+      "subject": "Electrical Engineering",
+      "aiCorrect": true
+    },
+    {
+      "question": "When an emergency opening into the airway is required, the cricothyroid membrane should be pierced immediately",
+      "options": [
+        "superior to the thyroid cartilage.",
+        "inferior to the thyroid cartilage.",
+        "inferior to the cricoid cartilage.",
+        "superior to the thyroid isthmus."
+      ],
+      "correct": 1,
+      "subject": "Anatomy",
+      "aiCorrect": true
+    }
+  ]
+}
