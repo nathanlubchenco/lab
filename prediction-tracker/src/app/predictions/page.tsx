@@ -1,6 +1,7 @@
 "use client";
 
 import React, { useState } from 'react';
+import Link from 'next/link';
 import { Prediction } from '../../types/prediction';
 import predictionsData from '../../data/predictions.json';
 import { filterPredictions, sortPredictionsByDate, Filters } from '../../utils/filtering';
@@ -23,12 +24,12 @@ export default function Home() {
       <div className="container mx-auto p-4 sm:p-8">
         <header className="mb-6">
           <div className="mb-4">
-            <a
-              href="/index"
+            <Link
+              href="/"
               className="text-blue-400 hover:text-blue-300 transition-colors text-sm flex items-center gap-1 w-fit"
             >
               ← Back to Lab Index
-            </a>
+            </Link>
           </div>
           <h1 className="text-4xl font-extrabold text-white mb-4">
             AI Prediction Tracker

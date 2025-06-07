@@ -158,7 +158,7 @@ export default function QuizPage() {
       clearInterval(timerRef.current);
     }
     // Navigate back to lab index
-    window.location.href = '/index';
+    window.location.href = '/';
   };
 
 

@@ -1,10 +1,20 @@
 import React from 'react';
+import Image from 'next/image';
 
 export default function Home() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
       <div className="container mx-auto p-6 sm:p-8">
         <header className="text-center mb-12">
+          <div className="mb-6">
+            <Image 
+              src="/the_future_was_yesterday.jpg" 
+              alt="The Future Was Yesterday" 
+              width={128}
+              height={128}
+              className="mx-auto rounded-full object-cover shadow-lg border-4 border-white"
+            />
+          </div>
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             AI Research & Analysis Lab
           </h1>
