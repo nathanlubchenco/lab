@@ -1,0 +1,49 @@
+DEBUGGING GPQA/MATH QUIZ LOADING ISSUE
+
+Problem: GPQA and MATH benchmarks show "Error Loading Questions" but MMLU works fine.
+
+What I know:
+✅ Data exists correctly in benchmark_questions.json (verified with Node.js)
+✅ Error handling is working (showing error screens instead of black screens)
+✅ MMLU questions load fine from mmlu_questions.json
+❌ GPQA and MATH arrays end up empty in React component
+
+Assumptions I've made (need to verify):
+1. JSON imports work the same way in Next.js as in Node.js
+2. The file structure/paths are correct
+3. All JSON files are being imported successfully
+4. The issue is with data access, not data existence
+
+Debugging steps to try:
+1. ✅ Verify each import individually in the component
+2. ✅ TESTED: Hardcoded data approach 
+3. 🔄 TESTING: Direct JSON imports instead of nested structure  
+3. Check if there are Next.js-specific JSON import limitations
+4. Try alternative import methods (dynamic imports, require in useEffect)
+5. Test with smaller/simpler data structures
+6. Check browser network tab for failed loads
+7. Examine the actual bundle contents
+
+BREAKTHROUGH! Console logs revealed the actual issue:
+
+OBSERVED BEHAVIOR:
+1. ✅ Direct imports work: gpqaQuestionsDirect: Array(3), mathQuestionsDirect: Array(3)
+2. ❌ Wrong data being used: When selecting MATH, it tries MMLU questions first
+3. ❌ State confusion: selectedBenchmark seems to be wrong when startQuiz is called
+
+ACTUAL ISSUE: The selectedBenchmark state is not being set correctly before startQuiz is called.
+- MATH quiz shows "Starting quiz for: mmlu difficulty: questions" 
+- GPQA quiz later shows "Starting quiz for: gpqa difficulty: questions"
+
+ROOT CAUSE: State timing issue in selectBenchmark function!
+
+SOLUTION IMPLEMENTED:
+1. ✅ Modified selectBenchmark() to pass benchmark directly to startQuiz()
+2. ✅ Updated startQuiz() to accept overrideBenchmark parameter
+3. ✅ Created separate JSON files for GPQA and MATH (simplified structure)
+4. ✅ Fixed React state timing issue
+
+TECHNICAL DETAILS:
+- setSelectedBenchmark() is async, but startQuiz() was called immediately
+- selectedBenchmark was still the old value when startQuiz() executed
+- Solution: Pass benchmark explicitly to avoid dependency on state timing

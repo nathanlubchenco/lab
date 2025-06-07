@@ -12,16 +12,28 @@ interface Question {
   aiCorrect: boolean;
 }
 
-interface QuestionSet {
-  [key: string]: Question[];
+interface MMluQuestions {
+  [difficulty: string]: Question[];
 }
 
-// Import real MMLU questions
+
+// Import benchmark questions - try direct imports instead of nested structure
 import mmluQuestions from '../../data/mmlu_questions.json';
+import gpqaQuestionsDirect from '../../data/gpqa_questions.json';
+import mathQuestionsDirect from '../../data/math_questions.json';
+import benchmarkData from '../../data/benchmark_questions.json';
 
-const questions: QuestionSet = mmluQuestions;
 
-type Difficulty = 'easy' | 'medium' | 'hard';
+// Combine all benchmark questions
+const allBenchmarks = {
+  mmlu: mmluQuestions,
+  gpqa: gpqaQuestionsDirect,
+  math: mathQuestionsDirect
+};
+
+
+type Benchmark = 'mmlu' | 'gpqa' | 'math';
+type Difficulty = 'easy' | 'medium' | 'hard' | 'questions';
 
 // Component to render text with LaTeX math expressions
 const MathText: React.FC<{ children: string }> = ({ children }) => {
@@ -47,7 +59,8 @@ const MathText: React.FC<{ children: string }> = ({ children }) => {
 };
 
 export default function QuizPage() {
-  const [currentScreen, setCurrentScreen] = useState<'start' | 'quiz' | 'results'>('start');
+  const [currentScreen, setCurrentScreen] = useState<'benchmark' | 'difficulty' | 'quiz' | 'results'>('benchmark');
+  const [selectedBenchmark, setSelectedBenchmark] = useState<Benchmark>('mmlu');
   const [difficulty, setDifficulty] = useState<Difficulty>('easy');
   const [currentQuestions, setCurrentQuestions] = useState<Question[]>([]);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -57,9 +70,35 @@ export default function QuizPage() {
   const [selectedAnswer, setSelectedAnswer] = useState<number | null>(null);
   const timerRef = useRef<NodeJS.Timeout | null>(null);
 
-  const startQuiz = (selectedDifficulty: Difficulty) => {
+  const selectBenchmark = (benchmark: Benchmark) => {
+    setSelectedBenchmark(benchmark);
+    
+    // For MMLU, show difficulty selection. For others, start quiz directly
+    if (benchmark === 'mmlu') {
+      setCurrentScreen('difficulty');
+    } else {
+      // Start quiz directly with 'questions' difficulty, passing benchmark explicitly
+      startQuiz('questions', benchmark);
+    }
+  };
+
+  const startQuiz = (selectedDifficulty: Difficulty, overrideBenchmark?: Benchmark) => {
     setDifficulty(selectedDifficulty);
-    const shuffled = [...questions[selectedDifficulty]].sort(() => Math.random() - 0.5);
+    
+    // Use override benchmark if provided (for direct calls), otherwise use state
+    const currentBenchmark = overrideBenchmark || selectedBenchmark;
+    const benchmarkQuestions = allBenchmarks[currentBenchmark];
+    
+    // For MMLU, questions are organized by difficulty. For GPQA/MATH, they're now direct arrays
+    let difficultyQuestions: Question[];
+    if (currentBenchmark === 'mmlu') {
+      difficultyQuestions = (benchmarkQuestions as MMluQuestions)[selectedDifficulty] || [];
+    } else {
+      // GPQA and MATH are now direct arrays
+      difficultyQuestions = benchmarkQuestions as Question[];
+    }
+    
+    const shuffled = [...difficultyQuestions].sort(() => Math.random() - 0.5);
     setCurrentQuestions(shuffled);
     setCurrentIndex(0);
     setScore(0);
@@ -112,16 +151,7 @@ export default function QuizPage() {
     }
   };
 
-  const restart = () => {
-    setCurrentScreen('start');
-    setCurrentIndex(0);
-    setScore(0);
-    setAnswered(false);
-    setSelectedAnswer(null);
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
-  };
+
 
   const goToMainMenu = () => {
     if (timerRef.current) {
@@ -131,12 +161,6 @@ export default function QuizPage() {
     window.location.href = '/index';
   };
 
-  const goToQuizStart = () => {
-    if (timerRef.current) {
-      clearInterval(timerRef.current);
-    }
-    restart(); // This will go back to quiz start screen
-  };
 
   useEffect(() => {
     if (currentScreen === 'quiz' && !answered) {
@@ -151,65 +175,89 @@ export default function QuizPage() {
   }, [currentIndex, currentScreen, answered, startTimer]);
 
   const getAIScore = (diff: Difficulty) => {
-    // Based on actual GPT-4 performance across different subject categories
-    // Easy = high school level, Medium = college level, Hard = graduate/professional level
-    const scores = { easy: 89, medium: 86, hard: 83 };
+    // Based on 2025 state-of-the-art AI model performance
+    // Source: benchmark_data.txt (Q2 2025 public releases)
+    const scores: Record<Difficulty, number> = { 
+      easy: 89, 
+      medium: 86, 
+      hard: 83, 
+      questions: selectedBenchmark === 'gpqa' ? 86 : selectedBenchmark === 'math' ? 95 : 86 
+    };
     return scores[diff];
   };
 
   const currentQuestion = currentQuestions[currentIndex];
 
-  if (currentScreen === 'start') {
+  // Benchmark selection screen
+  if (currentScreen === 'benchmark') {
     return (
       <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center p-4">
-        <div className="bg-white rounded-xl p-8 max-w-2xl w-full shadow-lg border border-gray-100 relative">
+        <div className="bg-white rounded-xl p-8 max-w-4xl w-full shadow-lg border border-gray-100 relative">
           <button
             onClick={goToMainMenu}
             className="absolute top-4 left-4 text-gray-600 hover:text-gray-800 transition-colors text-sm flex items-center gap-1"
           >
             ← Back to Lab Index
           </button>
+          
           <div className="text-center mt-6">
-            <h1 className="text-3xl font-semibold text-gray-900 mb-3">🧠 Human vs AI: The MMLU Challenge</h1>
-            <p className="text-lg text-gray-700 mb-6 font-medium">Think you&apos;re smarter than AI? Let&apos;s find out!</p>
+            <h1 className="text-3xl font-semibold text-gray-900 mb-3">🧠 AI Benchmark Quiz</h1>
+            <p className="text-lg text-gray-700 mb-8 font-medium">Test yourself against AI across multiple benchmark datasets</p>
             
-            <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 mb-5 text-left">
-              <p className="font-medium text-emerald-800 text-sm">✅ Authentic MMLU Questions</p>
-              <p className="text-sm text-emerald-700 mt-1">This quiz uses real questions from the official Massive Multitask Language Understanding (MMLU) benchmark dataset.</p>
-            </div>
+            <div className="grid md:grid-cols-3 gap-6">
+              {/* MMLU */}
+              <div className="bg-slate-50 border border-slate-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                <div className="text-4xl mb-4">📚</div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">{benchmarkData.mmlu.name}</h3>
+                <p className="text-sm text-gray-700 mb-4 leading-relaxed">{benchmarkData.mmlu.description}</p>
+                <div className="text-xs text-gray-600 mb-4">
+                  <div>• 57 academic subjects</div>
+                  <div>• High school to graduate level</div>
+                  <div>• AI Score: ~92% (widely considered saturated)</div>
+                </div>
+                <button
+                  onClick={() => selectBenchmark('mmlu')}
+                  className="w-full bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-lg font-medium transition-colors"
+                >
+                  Choose MMLU
+                </button>
+              </div>
 
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 text-left">
-              <p className="font-medium text-blue-800 text-sm">📊 Benchmark Context</p>
-              <p className="text-sm text-blue-700 mt-1">The MMLU benchmark tests knowledge across 57 subjects. AI models like GPT-4 score around 86% overall, while human experts average around 89.8%.</p>
-            </div>
+              {/* GPQA */}
+              <div className="bg-emerald-50 border border-emerald-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                <div className="text-4xl mb-4">🔬</div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">{benchmarkData.gpqa.name}</h3>
+                <p className="text-sm text-gray-700 mb-4 leading-relaxed">{benchmarkData.gpqa.description}</p>
+                <div className="text-xs text-gray-600 mb-4">
+                  <div>• Graduate-level science</div>
+                  <div>• Google-proof questions</div>
+                  <div>• AI Score: ~86% (Diamond subset)</div>
+                </div>
+                <button
+                  onClick={() => selectBenchmark('gpqa')}
+                  className="w-full bg-emerald-600 hover:bg-emerald-700 text-white py-3 rounded-lg font-medium transition-colors"
+                >
+                  Choose GPQA
+                </button>
+              </div>
 
-            <p className="mb-7 text-base text-gray-700">
-              Choose your difficulty level. You&apos;ll have <span className="font-semibold">90 seconds</span> per question.
-              AI typically answers in <span className="font-semibold">0.3 seconds</span>.
-            </p>
-
-            <div className="flex flex-col sm:flex-row gap-3 justify-center">
-              <button
-                onClick={() => startQuiz('easy')}
-                className="bg-emerald-500 hover:bg-emerald-600 text-white px-6 py-4 rounded-lg text-base font-medium transition-all hover:shadow-md"
-              >
-                🌱 Easy
-                <div className="text-sm opacity-90 mt-1">High School Level</div>
-              </button>
-              <button
-                onClick={() => startQuiz('medium')}
-                className="bg-amber-500 hover:bg-amber-600 text-white px-6 py-4 rounded-lg text-base font-medium transition-all hover:shadow-md"
-              >
-                🔥 Medium
-                <div className="text-sm opacity-90 mt-1">College Level</div>
-              </button>
-              <button
-                onClick={() => startQuiz('hard')}
-                className="bg-rose-500 hover:bg-rose-600 text-white px-6 py-4 rounded-lg text-base font-medium transition-all hover:shadow-md"
-              >
-                💀 Hard
-                <div className="text-sm opacity-90 mt-1">Graduate Level</div>
-              </button>
+              {/* MATH */}
+              <div className="bg-amber-50 border border-amber-200 rounded-xl p-6 hover:shadow-md transition-shadow">
+                <div className="text-4xl mb-4">🧮</div>
+                <h3 className="text-xl font-semibold text-gray-900 mb-3">{benchmarkData.math.name}</h3>
+                <p className="text-sm text-gray-700 mb-4 leading-relaxed">{benchmarkData.math.description}</p>
+                <div className="text-xs text-gray-600 mb-4">
+                  <div>• Competition mathematics</div>
+                  <div>• Multi-step reasoning</div>
+                  <div>• AI Score: ~95% (500 subset)</div>
+                </div>
+                <button
+                  onClick={() => selectBenchmark('math')}
+                  className="w-full bg-amber-600 hover:bg-amber-700 text-white py-3 rounded-lg font-medium transition-colors"
+                >
+                  Choose MATH
+                </button>
+              </div>
             </div>
           </div>
         </div>
@@ -217,7 +265,104 @@ export default function QuizPage() {
     );
   }
 
-  if (currentScreen === 'quiz' && currentQuestion) {
+  // Difficulty selection screen
+  if (currentScreen === 'difficulty') {
+    const currentBenchmarkData = benchmarkData[selectedBenchmark];
+    const availableDifficulties = currentBenchmarkData.difficulties;
+    
+    const getDifficultyConfig = (diff: string) => {
+      const configs = {
+        easy: { label: '🌱 Easy', subtitle: 'High School Level', color: 'emerald' },
+        medium: { label: '🔥 Medium', subtitle: 'College Level', color: 'amber' },
+        hard: { label: '💀 Hard', subtitle: 'Graduate Level', color: 'rose' }
+      };
+      return configs[diff as keyof typeof configs] || { label: diff, subtitle: '', color: 'gray' };
+    };
+
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center p-4">
+        <div className="bg-white rounded-xl p-8 max-w-2xl w-full shadow-lg border border-gray-100 relative">
+          <div className="flex justify-between items-center mb-6">
+            <button
+              onClick={() => setCurrentScreen('benchmark')}
+              className="text-gray-600 hover:text-gray-800 transition-colors text-sm flex items-center gap-1"
+            >
+              ← Choose Different Benchmark
+            </button>
+            <button
+              onClick={goToMainMenu}
+              className="text-gray-600 hover:text-gray-800 transition-colors text-sm flex items-center gap-1"
+            >
+              ← Lab Index
+            </button>
+          </div>
+          
+          <div className="text-center">
+            <h1 className="text-3xl font-semibold text-gray-900 mb-3">
+              {currentBenchmarkData.name}
+            </h1>
+            <p className="text-lg text-gray-700 mb-6 font-medium">Choose your difficulty level</p>
+            
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 text-left">
+              <p className="font-medium text-blue-800 text-sm">📊 About This Benchmark</p>
+              <p className="text-sm text-blue-700 mt-1">{currentBenchmarkData.description}</p>
+            </div>
+
+            <p className="mb-7 text-base text-gray-700">
+              You&apos;ll have <span className="font-semibold">90 seconds</span> per question.
+              AI typically answers in <span className="font-semibold">0.3 seconds</span>.
+            </p>
+
+            <div className="flex flex-col gap-3 justify-center max-w-md mx-auto">
+              {availableDifficulties.map((diff) => {
+                const config = getDifficultyConfig(diff);
+                return (
+                  <button
+                    key={diff}
+                    onClick={() => startQuiz(diff as Difficulty)}
+                    className={`bg-${config.color}-500 hover:bg-${config.color}-600 text-white px-6 py-4 rounded-lg text-base font-medium transition-all hover:shadow-md`}
+                  >
+                    {config.label}
+                    {config.subtitle && <div className="text-sm opacity-90 mt-1">{config.subtitle}</div>}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (currentScreen === 'quiz') {
+    // If no questions loaded, show error
+    if (currentQuestions.length === 0) {
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl p-8 max-w-2xl w-full shadow-lg border border-gray-100 text-center">
+            <h1 className="text-2xl font-semibold text-gray-900 mb-4">Error Loading Questions</h1>
+            <p className="text-gray-700 mb-6">Unable to load questions for {selectedBenchmark.toUpperCase()} benchmark.</p>
+            <button
+              onClick={() => setCurrentScreen('benchmark')}
+              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium"
+            >
+              Back to Benchmark Selection
+            </button>
+          </div>
+        </div>
+      );
+    }
+
+    if (!currentQuestion) {
+      return (
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center p-4">
+          <div className="bg-white rounded-xl p-8 max-w-2xl w-full shadow-lg border border-gray-100 text-center">
+            <div className="text-4xl mb-4">⏳</div>
+            <h1 className="text-2xl font-semibold text-gray-900 mb-4">Loading Question...</h1>
+          </div>
+        </div>
+      );
+    }
     const progress = (currentIndex / currentQuestions.length) * 100;
     
     return (
@@ -225,11 +370,22 @@ export default function QuizPage() {
         <div className="bg-white rounded-xl p-6 max-w-4xl w-full shadow-lg border border-gray-100 relative">
           <div className="flex justify-between items-center mb-6">
             <div className="flex items-center gap-4">
+              {selectedBenchmark === 'mmlu' && (
+                <>
+                  <button
+                    onClick={() => setCurrentScreen('difficulty')}
+                    className="text-gray-600 hover:text-gray-800 transition-colors text-sm flex items-center gap-1"
+                  >
+                    ← Difficulty
+                  </button>
+                  <span className="text-gray-400">|</span>
+                </>
+              )}
               <button
-                onClick={goToQuizStart}
+                onClick={() => setCurrentScreen('benchmark')}
                 className="text-gray-600 hover:text-gray-800 transition-colors text-sm flex items-center gap-1"
               >
-                ← Quiz Start
+                ← Benchmark
               </button>
               <span className="text-gray-400">|</span>
               <button
@@ -304,10 +460,10 @@ export default function QuizPage() {
           {answered && (
             <div className="flex gap-3 justify-between">
               <button
-                onClick={goToQuizStart}
+                onClick={() => setCurrentScreen(selectedBenchmark === 'mmlu' ? 'difficulty' : 'benchmark')}
                 className="bg-gray-500 hover:bg-gray-600 text-white px-4 py-2 rounded-lg text-sm font-medium transition-all"
               >
-                Exit to Quiz Start
+                {selectedBenchmark === 'mmlu' ? 'Exit to Difficulty' : 'Exit to Benchmark'}
               </button>
               <button
                 onClick={nextQuestion}
@@ -328,18 +484,19 @@ export default function QuizPage() {
     const aiScore = Math.round((aiPercentage / 100) * currentQuestions.length);
 
     let emoji, message;
+    const benchmarkName = selectedBenchmark.toUpperCase();
     if (percentage >= aiPercentage) {
       emoji = '🏆';
-      message = `Incredible! You matched or beat typical AI performance on ${difficulty} questions.`;
+      message = `Incredible! You matched or beat typical AI performance on ${benchmarkName}.`;
     } else if (percentage >= 80) {
       emoji = '⭐';
-      message = 'Impressive! You&apos;re performing at expert level.';
+      message = `Impressive! You're performing at expert level on ${benchmarkName}.`;
     } else if (percentage >= 60) {
       emoji = '👍';
-      message = 'Good job! You&apos;re above average.';
+      message = `Good job! You're above average on these ${benchmarkName} questions.`;
     } else {
       emoji = '🤔';
-      message = 'Not bad! These questions are tough.';
+      message = `Not bad! These ${benchmarkName} questions are really challenging.`;
     }
 
     return (
@@ -351,7 +508,8 @@ export default function QuizPage() {
           >
             ← Back to Lab Index
           </button>
-          <h1 className="text-2xl font-semibold text-gray-900 mb-4 mt-6">🏁 Quiz Complete!</h1>
+          <h1 className="text-2xl font-semibold text-gray-900 mb-2 mt-6">🏁 Quiz Complete!</h1>
+          <p className="text-sm text-gray-600 mb-4">{benchmarkData[selectedBenchmark].name} - {difficulty}</p>
           <div className="text-5xl mb-6">{emoji}</div>
           
           <div className="flex justify-around mb-8">
@@ -361,7 +519,7 @@ export default function QuizPage() {
               <div className="text-base text-gray-600">({percentage.toFixed(0)}%)</div>
             </div>
             <div>
-              <h3 className="text-lg font-medium mb-2 text-gray-700">AI Score (GPT-4)</h3>
+              <h3 className="text-lg font-medium mb-2 text-gray-700">AI Score (State-of-Art)</h3>
               <div className="text-3xl font-semibold text-emerald-600">~{aiScore}/{currentQuestions.length}</div>
               <div className="text-base text-gray-600">({aiPercentage}%)</div>
             </div>
@@ -371,15 +529,29 @@ export default function QuizPage() {
 
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6 text-left">
             <p className="font-medium text-blue-800 text-sm">💡 Context</p>
-            <p className="text-sm text-blue-700 mt-1">Remember, AI maintains this performance across ALL 57 subjects simultaneously!</p>
+            <p className="text-sm text-blue-700 mt-1">
+              {selectedBenchmark === 'mmlu' 
+                ? 'MMLU is now widely considered saturated by modern AI - achieving ~92% across all 57 subjects!' 
+                : selectedBenchmark === 'gpqa'
+                ? 'GPQA Diamond questions are still challenging for AI, especially in biology. Tool-augmented runs can push >90%.'
+                : 'MATH scores >90% suggest heavy pre-training exposure. Labs now use private datasets for cleaner evaluation.'}
+            </p>
           </div>
 
-          <div className="flex gap-3 justify-center">
+          <div className="flex gap-3 justify-center flex-wrap">
+            {selectedBenchmark === 'mmlu' && (
+              <button
+                onClick={() => setCurrentScreen('difficulty')}
+                className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-base font-medium transition-all"
+              >
+                Try Different Difficulty
+              </button>
+            )}
             <button
-              onClick={restart}
-              className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg text-base font-medium transition-all"
+              onClick={() => setCurrentScreen('benchmark')}
+              className="bg-emerald-600 hover:bg-emerald-700 text-white px-6 py-3 rounded-lg text-base font-medium transition-all"
             >
-              Try Again
+              Try Different Benchmark
             </button>
             <button
               onClick={goToMainMenu}
@@ -393,5 +565,27 @@ export default function QuizPage() {
     );
   }
 
-  return null;
+  // Fallback: should never reach here, but just in case
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 flex items-center justify-center p-4">
+      <div className="bg-white rounded-xl p-8 max-w-2xl w-full shadow-lg border border-gray-100 text-center">
+        <h1 className="text-2xl font-semibold text-gray-900 mb-4">Unexpected State</h1>
+        <p className="text-gray-700 mb-6">
+          Current screen: {currentScreen}<br/>
+          Selected benchmark: {selectedBenchmark}<br/>
+          Questions loaded: {currentQuestions.length}
+        </p>
+        <button
+          onClick={() => {
+            setCurrentScreen('benchmark');
+            setCurrentQuestions([]);
+            setCurrentIndex(0);
+          }}
+          className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-medium"
+        >
+          Reset to Benchmark Selection
+        </button>
+      </div>
+    </div>
+  );
 }

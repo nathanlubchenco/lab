@@ -1,0 +1,353 @@
+{
+  "mmlu": {
+    "name": "MMLU (Massive Multitask Language Understanding)",
+    "description": "Academic knowledge across 57 subjects from high school to graduate level. Widely considered saturated by modern AI.",
+    "source": "hendrycks/mmlu",
+    "difficulties": ["easy", "medium", "hard"],
+    "questions": "src/data/mmlu_questions.json"
+  },
+  "gpqa": {
+    "name": "GPQA (Graduate-Level Google-Proof Q&A)",
+    "description": "Graduate-level science questions designed to be unsearchable. Biology questions remain the most challenging for AI.",
+    "source": "idavidrein/gpqa", 
+    "difficulties": ["questions"],
+    "questions": {
+      "questions": [
+        {
+          "question": "In protein structure, which of the following best describes the relationship between primary and quaternary structure?",
+          "options": [
+            "Primary structure directly determines quaternary structure through covalent bonds",
+            "Primary structure influences quaternary structure through non-covalent interactions between folded subunits", 
+            "Quaternary structure is independent of primary structure",
+            "Primary and quaternary structures are synonymous terms"
+          ],
+          "correct": 1,
+          "subject": "Biology",
+          "aiCorrect": true
+        },
+        {
+          "question": "A particle of mass m moves in a one-dimensional harmonic oscillator potential V(x) = ½kx². If the particle's energy is E = (n + ½)ℏω where ω = √(k/m), what is the probability of finding the particle in the classically forbidden region for the ground state (n = 0)?",
+          "options": [
+            "0",
+            "Approximately 0.16", 
+            "Approximately 0.32",
+            "0.5"
+          ],
+          "correct": 1,
+          "subject": "Physics",
+          "aiCorrect": true
+        },
+        {
+          "question": "Which of the following best explains why tertiary alcohols undergo substitution reactions via an SN1 mechanism rather than SN2?",
+          "options": [
+            "Tertiary carbons form more stable carbocations due to hyperconjugation and inductive effects",
+            "Tertiary alcohols have higher electronegativity",
+            "The SN2 mechanism is sterically hindered at tertiary centers",
+            "Both A and C are correct"
+          ],
+          "correct": 3,
+          "subject": "Chemistry", 
+          "aiCorrect": true
+        },
+        {
+          "question": "In quantum field theory, the vacuum expectation value of the Higgs field is approximately 246 GeV. This value is crucial because it:",
+          "options": [
+            "Determines the mass of the Higgs boson directly",
+            "Sets the scale for electroweak symmetry breaking and gives mass to W and Z bosons",
+            "Defines the cosmological constant",
+            "Establishes the Planck scale"
+          ],
+          "correct": 1,
+          "subject": "Physics",
+          "aiCorrect": true
+        },
+        {
+          "question": "The enzyme carbonic anhydrase catalyzes the reversible hydration of CO₂. In its catalytic mechanism, a zinc ion coordinates with:",
+          "options": [
+            "Four histidine residues in a tetrahedral geometry",
+            "Three histidine residues and one water molecule in a tetrahedral geometry", 
+            "Two histidine residues and two water molecules",
+            "Three cysteine residues and one histidine residue"
+          ],
+          "correct": 1,
+          "subject": "Chemistry",
+          "aiCorrect": true
+        },
+        {
+          "question": "In molecular orbital theory, which statement about the bonding in benzene (C₆H₆) is most accurate?",
+          "options": [
+            "The π system consists of three localized double bonds that rapidly exchange positions",
+            "Six p orbitals combine to form six molecular orbitals, with the lowest energy orbital being non-degenerate",
+            "The aromatic stabilization energy is approximately equal to the energy difference between cyclohexatriene and benzene",
+            "All carbon-carbon bonds have identical bond orders due to complete delocalization"
+          ],
+          "correct": 1,
+          "subject": "Chemistry",
+          "aiCorrect": true
+        },
+        {
+          "question": "A researcher observes that a particular enzyme's activity increases exponentially with temperature up to 45°C, then decreases rapidly. The Km remains constant up to 45°C but increases dramatically above this temperature. This pattern is most likely explained by:",
+          "options": [
+            "Competitive inhibition by temperature-dependent cofactor binding",
+            "Allosteric regulation where temperature affects the allosteric site",
+            "Protein denaturation beginning around 45°C while the active site remains intact initially",
+            "Temperature-dependent substrate solubility changes"
+          ],
+          "correct": 2,
+          "subject": "Biology",
+          "aiCorrect": true
+        },
+        {
+          "question": "In general relativity, the event horizon of a black hole with mass M has a radius given by the Schwarzschild radius rs = 2GM/c². For a stellar-mass black hole of 10 solar masses, approximately how does the tidal force at the event horizon compare to that experienced by an astronaut in free fall near Earth?",
+          "options": [
+            "Approximately equal",
+            "About 100 times stronger",
+            "About 10,000 times stronger", 
+            "About 1 million times stronger"
+          ],
+          "correct": 2,
+          "subject": "Physics",
+          "aiCorrect": true
+        },
+        {
+          "question": "The lac operon in E. coli is regulated by both glucose and lactose availability. When glucose is absent but lactose is present, which combination of regulatory proteins and their states allows for maximum transcription?",
+          "options": [
+            "CAP-cAMP complex bound to CAP site, lac repressor bound to operator",
+            "CAP-cAMP complex bound to CAP site, lac repressor not bound to operator",
+            "CAP-cAMP complex not bound, lac repressor not bound to operator",
+            "CAP-cAMP complex not bound, lac repressor bound to operator"
+          ],
+          "correct": 1,
+          "subject": "Biology",
+          "aiCorrect": true
+        },
+        {
+          "question": "In superconductors, the Cooper pair formation mechanism involves:",
+          "options": [
+            "Direct Coulomb attraction between electrons in the same energy state",
+            "Phonon-mediated attractive interaction between electrons with opposite momentum and spin",
+            "Magnetic dipole interactions creating bound electron pairs",
+            "Virtual photon exchange between electrons in different bands"
+          ],
+          "correct": 1,
+          "subject": "Physics",
+          "aiCorrect": true
+        },
+        {
+          "question": "The citric acid cycle (Krebs cycle) regulation involves multiple allosteric effectors. Which enzyme is most significantly inhibited by ATP and activated by ADP, making it a key control point for the cycle?",
+          "options": [
+            "Citrate synthase",
+            "Isocitrate dehydrogenase",
+            "α-ketoglutarate dehydrogenase",
+            "Succinate dehydrogenase"
+          ],
+          "correct": 1,
+          "subject": "Biology",
+          "aiCorrect": true
+        },
+        {
+          "question": "In organometallic chemistry, the 18-electron rule is particularly useful for predicting stability. For the complex [Cr(CO)₆], which statement is correct?",
+          "options": [
+            "It violates the 18-electron rule and is therefore unstable",
+            "It follows the 18-electron rule exactly and is highly stable",
+            "It has 20 electrons and exhibits fluxional behavior",
+            "The electron count depends on the oxidation state of chromium"
+          ],
+          "correct": 1,
+          "subject": "Chemistry",
+          "aiCorrect": true
+        }
+      ]
+    }
+  },
+  "math": {
+    "name": "MATH (Mathematical Reasoning)",
+    "description": "Competition mathematics with heavy pre-training exposure. Many labs now use private datasets for cleaner signals.",
+    "source": "hendrycks/competition_math",
+    "difficulties": ["questions"],
+    "questions": {
+      "questions": [
+        {
+          "question": "Find the number of ordered pairs (a,b) of integers such that |a + bi| = 5.",
+          "options": [
+            "12",
+            "16", 
+            "20",
+            "24"
+          ],
+          "correct": 0,
+          "subject": "Complex Numbers",
+          "aiCorrect": true
+        },
+        {
+          "question": "A regular hexagon has vertices at (±2, 0), (±1, ±√3). What is its area?",
+          "options": [
+            "6√3",
+            "8√3",
+            "12√3", 
+            "16√3"
+          ],
+          "correct": 0,
+          "subject": "Geometry",
+          "aiCorrect": true
+        },
+        {
+          "question": "Let f(x) = x³ - 6x² + 11x - 6. Find the sum of the squares of the roots of f(x) = 0.",
+          "options": [
+            "14",
+            "16",
+            "18",
+            "20"
+          ],
+          "correct": 0,
+          "subject": "Algebra", 
+          "aiCorrect": true
+        },
+        {
+          "question": "In triangle ABC, if sin A + sin B + sin C = (3√3)/2, what is the maximum possible value of the area of triangle ABC given that AB = 2?",
+          "options": [
+            "√3/2",
+            "√3",
+            "3√3/4",
+            "3√3/2"
+          ],
+          "correct": 1,
+          "subject": "Trigonometry",
+          "aiCorrect": true
+        },
+        {
+          "question": "How many positive integers n ≤ 1000 are there such that gcd(n, 1000) = 1 and n ≡ 1 (mod 4)?",
+          "options": [
+            "100",
+            "150", 
+            "200",
+            "250"
+          ],
+          "correct": 0,
+          "subject": "Number Theory",
+          "aiCorrect": true
+        },
+        {
+          "question": "Let P(x) be a polynomial with integer coefficients such that P(1) = P(3) = P(5) = P(7) = a and P(2) = P(4) = P(6) = P(8) = -a for some integer a ≠ 0. What is the smallest possible degree of P(x)?",
+          "options": [
+            "6",
+            "7",
+            "8", 
+            "9"
+          ],
+          "correct": 1,
+          "subject": "Polynomials",
+          "aiCorrect": true
+        },
+        {
+          "question": "If $\\cos \\theta + \\cos 2\\theta + \\cos 3\\theta = 0$, find all possible values of $\\cos \\theta$.",
+          "options": [
+            "0, ±1/2",
+            "±1/2, ±√3/2",
+            "0, ±√2/2",
+            "±1/2"
+          ],
+          "correct": 0,
+          "subject": "Trigonometry",
+          "aiCorrect": true
+        },
+        {
+          "question": "Let S be the set of all positive integers that can be written as $2^a \\cdot 3^b \\cdot 5^c$ where a, b, c are non-negative integers. How many elements of S are less than or equal to 100?",
+          "options": [
+            "18",
+            "20",
+            "22",
+            "24"
+          ],
+          "correct": 1,
+          "subject": "Number Theory",
+          "aiCorrect": true
+        },
+        {
+          "question": "In the coordinate plane, let A = (0, 0), B = (1, 1), and C = (2, 0). If P is a point such that triangle APC has the same area as triangle ABC, what is the equation of the locus of all such points P?",
+          "options": [
+            "x + y = 1",
+            "x - y = 1 or x + y = 1",
+            "y = x - 1 or y = -x + 1", 
+            "x = 1"
+          ],
+          "correct": 1,
+          "subject": "Coordinate Geometry",
+          "aiCorrect": true
+        },
+        {
+          "question": "Find the coefficient of x⁴ in the expansion of $(1 + x + x² + x³)^4$.",
+          "options": [
+            "20",
+            "35",
+            "56",
+            "70"
+          ],
+          "correct": 1,
+          "subject": "Combinatorics",
+          "aiCorrect": true
+        },
+        {
+          "question": "Let $f(x) = \\frac{x}{x+1}$. If we define $f_1(x) = f(x)$, $f_2(x) = f(f(x))$, $f_3(x) = f(f(f(x)))$, etc., what is $f_{100}(x)$?",
+          "options": [
+            "$\\frac{x}{x+1}$",
+            "$\\frac{x}{100x+1}$",
+            "$\\frac{x}{99x+1}$",
+            "$\\frac{x}{101x+1}$"
+          ],
+          "correct": 1,
+          "subject": "Functions",
+          "aiCorrect": true
+        },
+        {
+          "question": "In how many ways can we arrange the digits 1, 1, 2, 2, 3, 3 so that no two identical digits are adjacent?",
+          "options": [
+            "30",
+            "60",
+            "90",
+            "120"
+          ],
+          "correct": 0,
+          "subject": "Combinatorics",
+          "aiCorrect": true
+        },
+        {
+          "question": "Let $z_1, z_2, z_3$ be the three cube roots of unity. What is the value of $(z_1 + 2)(z_2 + 2)(z_3 + 2)$?",
+          "options": [
+            "3",
+            "6",
+            "9",
+            "12"
+          ],
+          "correct": 2,
+          "subject": "Complex Numbers",
+          "aiCorrect": true
+        },
+        {
+          "question": "A sequence is defined by $a_1 = 1$, $a_2 = 1$, and $a_n = a_{n-1} + a_{n-2}$ for $n \\geq 3$. What is $a_{10} \\bmod 7$?",
+          "options": [
+            "0",
+            "1",
+            "3",
+            "4"
+          ],
+          "correct": 3,
+          "subject": "Sequences",
+          "aiCorrect": true
+        },
+        {
+          "question": "If $\\log_2 x + \\log_4 x + \\log_8 x = 11$, find the value of x.",
+          "options": [
+            "16",
+            "32",
+            "64",
+            "128"
+          ],
+          "correct": 2,
+          "subject": "Logarithms",
+          "aiCorrect": true
+        }
+      ]
+    }
+  }
+}

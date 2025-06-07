@@ -1,6 +1,8 @@
 "use client";
 
 import React from 'react';
+
+export const dynamic = 'force-dynamic';
 // import Link from 'next/link'; // Not needed for now
 
 export default function MainIndexPage() {
@@ -41,7 +43,7 @@ export default function MainIndexPage() {
             <div className="space-y-3">
               <div className="flex items-center text-xs text-gray-600">
                 <span className="w-2 h-2 bg-green-400 rounded-full mr-2"></span>
-                Real-time prediction tracking
+                Prediction tracking
               </div>
               <div className="flex items-center text-xs text-gray-600">
                 <span className="w-2 h-2 bg-blue-400 rounded-full mr-2"></span>
@@ -69,21 +71,21 @@ export default function MainIndexPage() {
               </h2>
             </div>
             <p className="text-gray-700 text-sm mb-6 leading-relaxed">
-              Test yourself against AI using real MMLU benchmark questions. 
-              Compare your performance to GPT-4 across academic subjects.
+              Test yourself against AI using questions from MMLU, GPQA, and MATH benchmark datasets. 
+              Compare your performance across academic subjects and advanced reasoning.
             </p>
             <div className="space-y-3">
               <div className="flex items-center text-xs text-gray-600">
                 <span className="w-2 h-2 bg-emerald-400 rounded-full mr-2"></span>
-                Authentic MMLU questions
+                Multiple benchmark datasets
               </div>
               <div className="flex items-center text-xs text-gray-600">
                 <span className="w-2 h-2 bg-amber-400 rounded-full mr-2"></span>
-                Multiple difficulty levels
+                Graduate-level challenges
               </div>
               <div className="flex items-center text-xs text-gray-600">
                 <span className="w-2 h-2 bg-rose-400 rounded-full mr-2"></span>
-                Real-time AI comparison
+                AI performance comparison
               </div>
             </div>
             <a 

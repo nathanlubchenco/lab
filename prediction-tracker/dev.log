@@ -1,0 +1,11 @@
+
+> prediction-tracker@0.1.0 dev
+> next dev --turbopack
+
+   ▲ Next.js 15.3.2 (Turbopack)
+   - Local:        http://localhost:3000
+   - Network:      http://192.168.10.75:3000
+
+ ✓ Starting...
+ ✓ Ready in 739ms
+[?25h

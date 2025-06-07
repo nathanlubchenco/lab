@@ -1,0 +1,146 @@
+[
+  {
+    "question": "In protein structure, which of the following best describes the relationship between primary and quaternary structure?",
+    "options": [
+      "Primary structure directly determines quaternary structure through covalent bonds",
+      "Primary structure influences quaternary structure through non-covalent interactions between folded subunits", 
+      "Quaternary structure is independent of primary structure",
+      "Primary and quaternary structures are synonymous terms"
+    ],
+    "correct": 1,
+    "subject": "Biology",
+    "aiCorrect": true
+  },
+  {
+    "question": "A particle of mass m moves in a one-dimensional harmonic oscillator potential V(x) = ½kx². If the particle's energy is E = (n + ½)ℏω where ω = √(k/m), what is the probability of finding the particle in the classically forbidden region for the ground state (n = 0)?",
+    "options": [
+      "0",
+      "Approximately 0.16", 
+      "Approximately 0.32",
+      "0.5"
+    ],
+    "correct": 1,
+    "subject": "Physics",
+    "aiCorrect": true
+  },
+  {
+    "question": "Which of the following best explains why tertiary alcohols undergo substitution reactions via an SN1 mechanism rather than SN2?",
+    "options": [
+      "Tertiary carbons form more stable carbocations due to hyperconjugation and inductive effects",
+      "Tertiary alcohols have higher electronegativity",
+      "The SN2 mechanism is sterically hindered at tertiary centers",
+      "Both A and C are correct"
+    ],
+    "correct": 3,
+    "subject": "Chemistry", 
+    "aiCorrect": true
+  },
+  {
+    "question": "In quantum field theory, the vacuum expectation value of the Higgs field is approximately 246 GeV. This value is crucial because it:",
+    "options": [
+      "Determines the mass of the Higgs boson directly",
+      "Sets the scale for electroweak symmetry breaking and gives mass to W and Z bosons",
+      "Defines the cosmological constant",
+      "Establishes the Planck scale"
+    ],
+    "correct": 1,
+    "subject": "Physics",
+    "aiCorrect": true
+  },
+  {
+    "question": "The enzyme carbonic anhydrase catalyzes the reversible hydration of CO₂. In its catalytic mechanism, a zinc ion coordinates with:",
+    "options": [
+      "Four histidine residues in a tetrahedral geometry",
+      "Three histidine residues and one water molecule in a tetrahedral geometry", 
+      "Two histidine residues and two water molecules",
+      "Three cysteine residues and one histidine residue"
+    ],
+    "correct": 1,
+    "subject": "Chemistry",
+    "aiCorrect": true
+  },
+  {
+    "question": "In molecular orbital theory, which statement about the bonding in benzene (C₆H₆) is most accurate?",
+    "options": [
+      "The π system consists of three localized double bonds that rapidly exchange positions",
+      "Six p orbitals combine to form six molecular orbitals, with the lowest energy orbital being non-degenerate",
+      "The aromatic stabilization energy is approximately equal to the energy difference between cyclohexatriene and benzene",
+      "All carbon-carbon bonds have identical bond orders due to complete delocalization"
+    ],
+    "correct": 1,
+    "subject": "Chemistry",
+    "aiCorrect": true
+  },
+  {
+    "question": "A researcher observes that a particular enzyme's activity increases exponentially with temperature up to 45°C, then decreases rapidly. The Km remains constant up to 45°C but increases dramatically above this temperature. This pattern is most likely explained by:",
+    "options": [
+      "Competitive inhibition by temperature-dependent cofactor binding",
+      "Allosteric regulation where temperature affects the allosteric site",
+      "Protein denaturation beginning around 45°C while the active site remains intact initially",
+      "Temperature-dependent substrate solubility changes"
+    ],
+    "correct": 2,
+    "subject": "Biology",
+    "aiCorrect": true
+  },
+  {
+    "question": "In general relativity, the event horizon of a black hole with mass M has a radius given by the Schwarzschild radius rs = 2GM/c². For a stellar-mass black hole of 10 solar masses, approximately how does the tidal force at the event horizon compare to that experienced by an astronaut in free fall near Earth?",
+    "options": [
+      "Approximately equal",
+      "About 100 times stronger",
+      "About 10,000 times stronger", 
+      "About 1 million times stronger"
+    ],
+    "correct": 2,
+    "subject": "Physics",
+    "aiCorrect": true
+  },
+  {
+    "question": "The lac operon in E. coli is regulated by both glucose and lactose availability. When glucose is absent but lactose is present, which combination of regulatory proteins and their states allows for maximum transcription?",
+    "options": [
+      "CAP-cAMP complex bound to CAP site, lac repressor bound to operator",
+      "CAP-cAMP complex bound to CAP site, lac repressor not bound to operator",
+      "CAP-cAMP complex not bound, lac repressor not bound to operator",
+      "CAP-cAMP complex not bound, lac repressor bound to operator"
+    ],
+    "correct": 1,
+    "subject": "Biology",
+    "aiCorrect": true
+  },
+  {
+    "question": "In superconductors, the Cooper pair formation mechanism involves:",
+    "options": [
+      "Direct Coulomb attraction between electrons in the same energy state",
+      "Phonon-mediated attractive interaction between electrons with opposite momentum and spin",
+      "Magnetic dipole interactions creating bound electron pairs",
+      "Virtual photon exchange between electrons in different bands"
+    ],
+    "correct": 1,
+    "subject": "Physics",
+    "aiCorrect": true
+  },
+  {
+    "question": "The citric acid cycle (Krebs cycle) regulation involves multiple allosteric effectors. Which enzyme is most significantly inhibited by ATP and activated by ADP, making it a key control point for the cycle?",
+    "options": [
+      "Citrate synthase",
+      "Isocitrate dehydrogenase",
+      "α-ketoglutarate dehydrogenase",
+      "Succinate dehydrogenase"
+    ],
+    "correct": 1,
+    "subject": "Biology",
+    "aiCorrect": true
+  },
+  {
+    "question": "In organometallic chemistry, the 18-electron rule is particularly useful for predicting stability. For the complex [Cr(CO)₆], which statement is correct?",
+    "options": [
+      "It violates the 18-electron rule and is therefore unstable",
+      "It follows the 18-electron rule exactly and is highly stable",
+      "It has 20 electrons and exhibits fluxional behavior",
+      "The electron count depends on the oxidation state of chromium"
+    ],
+    "correct": 1,
+    "subject": "Chemistry",
+    "aiCorrect": true
+  }
+]
