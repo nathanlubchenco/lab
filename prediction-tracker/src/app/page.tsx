@@ -32,7 +32,7 @@ export default function Home() {
           </p>
         </header>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid md:grid-cols-2 lg:grid-cols-2 xl:grid-cols-4 gap-8 max-w-7xl mx-auto">
           {/* Prediction Tracker */}
           <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
             <div className="text-center mb-4">
@@ -134,6 +134,40 @@ export default function Home() {
               className="mt-6 block w-full bg-orange-600 hover:bg-orange-700 text-white text-center py-3 rounded-lg font-medium transition-colors"
             >
               View Analysis →
+            </a>
+          </div>
+
+          {/* Economics Forecasting */}
+          <div className="bg-white rounded-xl p-6 shadow-lg border border-gray-100 hover:shadow-xl transition-shadow">
+            <div className="text-center mb-4">
+              <div className="text-4xl mb-3">📈</div>
+              <h2 className="text-xl font-semibold text-gray-900 mb-2">
+                Economics Forecasting
+              </h2>
+            </div>
+            <p className="text-gray-700 text-sm mb-6 leading-relaxed">
+              Advanced economic modeling of AI's impact on software engineering employment 
+              and wages. Interactive parameter controls with 10-year projections.
+            </p>
+            <div className="space-y-3">
+              <div className="flex items-center text-xs text-gray-600">
+                <span className="w-2 h-2 bg-cyan-400 rounded-full mr-2"></span>
+                Labor market modeling
+              </div>
+              <div className="flex items-center text-xs text-gray-600">
+                <span className="w-2 h-2 bg-violet-400 rounded-full mr-2"></span>
+                AI impact scenarios
+              </div>
+              <div className="flex items-center text-xs text-gray-600">
+                <span className="w-2 h-2 bg-lime-400 rounded-full mr-2"></span>
+                Interactive parameters
+              </div>
+            </div>
+            <a 
+              href="/economics"
+              className="mt-6 block w-full bg-cyan-600 hover:bg-cyan-700 text-white text-center py-3 rounded-lg font-medium transition-colors"
+            >
+              Explore Model →
             </a>
           </div>
         </div>

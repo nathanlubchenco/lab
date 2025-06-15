@@ -1,0 +1,42 @@
+{
+  "name": "econ-forecasting",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "@tailwindcss/postcss": "^4.1.10",
+    "@tanstack/react-query": "^5.80.7",
+    "@types/d3": "^7.4.3",
+    "@types/node": "^24.0.1",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "autoprefixer": "^10.4.21",
+    "d3": "^7.9.0",
+    "framer-motion": "^12.18.1",
+    "ml-matrix": "^6.12.1",
+    "next": "^15.3.3",
+    "plotly.js": "^3.0.1",
+    "postcss": "^8.5.5",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0",
+    "react-plotly.js": "^2.6.0",
+    "regression": "^2.0.1",
+    "simple-statistics": "^7.8.8",
+    "tailwindcss": "^4.1.10",
+    "typescript": "^5.8.3",
+    "zustand": "^5.0.5"
+  },
+  "devDependencies": {
+    "@types/react-plotly.js": "^2.6.3"
+  }
+}
