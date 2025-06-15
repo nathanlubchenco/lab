@@ -50,3 +50,8 @@ body {
 .slider-input::-moz-range-thumb {
   @apply w-4 h-4 bg-blue-600 rounded-full cursor-pointer border-none;
 }
+
+/* Ensure tooltips appear above other elements */
+.relative .absolute {
+  z-index: 50;
+}
