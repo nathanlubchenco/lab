@@ -1,11 +1,14 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { EconomicParams } from '@/types/economics/economic';
 import { AICapabilityModel } from '@/types/economics/ai';
 import ParameterSliders from '@/components/economics/controls/ParameterSliders';
-import SimpleChart from '@/components/economics/visualizations/SimpleChart';
+import ScenarioPresets, { SCENARIOS } from '@/components/economics/controls/ScenarioPresets';
+import EmploymentFocusedChart from '@/components/economics/visualizations/EmploymentFocusedChart';
+import MonteCarloAnalysis from '@/components/economics/visualizations/MonteCarloAnalysis';
+import ScenarioComparison from '@/components/economics/visualizations/ScenarioComparison';
 
 const defaultParams: EconomicParams = {
   aiProductivityGain: 25,
@@ -100,17 +103,50 @@ const defaultAICapabilities: AICapabilityModel = {
 export default function EconomicsPage() {
   const [parameters, setParameters] = useState<EconomicParams>(defaultParams);
   const [aiCapabilities] = useState<AICapabilityModel>(defaultAICapabilities);
+  const [selectedView, setSelectedView] = useState<'interactive' | 'scenarios' | 'uncertainty'>('scenarios');
+
+  // Determine current scenario
+  const currentScenario = useMemo(() => {
+    return Object.keys(SCENARIOS).find(key => {
+      const scenario = SCENARIOS[key as keyof typeof SCENARIOS];
+      // Simple matching - could be more sophisticated
+      return Math.abs(scenario.params.aiProductivityGain - parameters.aiProductivityGain) < 5;
+    }) || 'custom';
+  }, [parameters]);
+
+  const handleScenarioSelect = (scenarioParams: EconomicParams) => {
+    setParameters(scenarioParams);
+    setSelectedView('interactive');
+  };
 
   return (
     <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        {/* Work in Progress Banner */}
+        <div className="mb-6 bg-yellow-50 border-l-4 border-yellow-400 p-4 rounded-r-lg">
+          <div className="flex items-center">
+            <div className="flex-shrink-0">
+              <div className="text-yellow-400 text-xl">🚧</div>
+            </div>
+            <div className="ml-3">
+              <p className="text-sm text-yellow-800">
+                <strong>Work in Progress:</strong> This economic forecasting model is still under development. 
+                Results should be considered experimental and may not reflect actual future outcomes.
+              </p>
+            </div>
+          </div>
+        </div>
+
         <div className="text-center mb-8">
           <h1 className="text-4xl font-bold text-gray-900 mb-4">
             Software Engineer Demand Forecasting
+            <span className="ml-3 inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
+              DRAFT
+            </span>
           </h1>
           <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Explore how AI capabilities, economic conditions, and policy changes affect 
-            software engineering employment and wages over time.
+            Explore dramatically different AI impact scenarios and see how small changes in assumptions 
+            create vastly different outcomes for software engineering careers.
           </p>
           <div className="mt-4">
             <Link 
@@ -122,21 +158,101 @@ export default function EconomicsPage() {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          <div className="lg:col-span-1">
-            <ParameterSliders 
-              parameters={parameters}
-              onChange={setParameters}
-            />
+        {/* View Selector */}
+        <div className="mb-8">
+          <div className="flex justify-center">
+            <div className="bg-white rounded-lg p-1 shadow-sm border border-gray-200">
+              <button
+                onClick={() => setSelectedView('scenarios')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                  selectedView === 'scenarios' 
+                    ? 'bg-blue-600 text-white shadow-sm' 
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Compare Scenarios
+              </button>
+              <button
+                onClick={() => setSelectedView('interactive')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                  selectedView === 'interactive' 
+                    ? 'bg-blue-600 text-white shadow-sm' 
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Interactive Model
+              </button>
+              <button
+                onClick={() => setSelectedView('uncertainty')}
+                className={`px-4 py-2 rounded-md text-sm font-medium transition-all ${
+                  selectedView === 'uncertainty' 
+                    ? 'bg-blue-600 text-white shadow-sm' 
+                    : 'text-gray-600 hover:text-gray-900'
+                }`}
+              >
+                Uncertainty Analysis
+              </button>
+            </div>
           </div>
-          
-          <div className="lg:col-span-2">
-            <SimpleChart 
+        </div>
+
+        {/* Content based on selected view */}
+        {selectedView === 'scenarios' && (
+          <div className="space-y-8">
+            <ScenarioComparison aiCapabilities={aiCapabilities} />
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">
+                Choose a Scenario to Explore Further
+              </h3>
+              <ScenarioPresets 
+                onScenarioSelect={handleScenarioSelect}
+                currentScenario={currentScenario}
+              />
+            </div>
+          </div>
+        )}
+
+        {selectedView === 'interactive' && (
+          <div>
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="lg:col-span-1">
+                <ScenarioPresets 
+                  onScenarioSelect={setParameters}
+                  currentScenario={currentScenario}
+                />
+                <ParameterSliders 
+                  parameters={parameters}
+                  onChange={setParameters}
+                />
+              </div>
+              
+              <div className="lg:col-span-2">
+                <EmploymentFocusedChart 
+                  parameters={parameters}
+                  aiCapabilities={aiCapabilities}
+                />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {selectedView === 'uncertainty' && (
+          <div className="space-y-8">
+            <div className="bg-white rounded-lg shadow-md p-6">
+              <h3 className="text-xl font-semibold text-gray-800 mb-4 text-center">
+                Current Scenario Uncertainty
+              </h3>
+              <ScenarioPresets 
+                onScenarioSelect={setParameters}
+                currentScenario={currentScenario}
+              />
+            </div>
+            <MonteCarloAnalysis 
               parameters={parameters}
               aiCapabilities={aiCapabilities}
             />
           </div>
-        </div>
+        )}
 
         {/* Methodology Section */}
         <div className="mt-8 bg-gradient-to-br from-blue-50 to-indigo-50 rounded-xl p-8 border border-blue-200">

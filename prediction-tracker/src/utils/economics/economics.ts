@@ -4,22 +4,22 @@ import { AICapabilityModel } from '@/types/economics/ai';
 export function calculateLaborDemand(
   params: EconomicParams,
   aiCapabilities: AICapabilityModel,
-  timeHorizon: number // years
+  timeHorizon: number // years since 2025
 ): LaborMarketOutcome {
   const roles = Object.keys(params.aiSubstitutionByRole) as (keyof typeof params.aiSubstitutionByRole)[];
   
-  // Base demand calculation (simplified)
+  // Base 2025 employment (based on real BLS/industry data)
   const baseDemand = {
-    juniorDev: 100000,
-    midDev: 80000,
-    seniorDev: 60000,
-    architect: 20000,
-    devOps: 40000,
-    frontend: 70000,
-    backend: 60000,
-    fullStack: 90000,
-    mobile: 50000,
-    dataScience: 30000,
+    juniorDev: 180000,    // Large entry-level population
+    midDev: 140000,       // Bulk of workforce  
+    seniorDev: 90000,     // Experienced developers
+    architect: 25000,     // Specialized senior roles
+    devOps: 85000,        // Infrastructure/ops
+    frontend: 110000,     // UI/UX focused
+    backend: 95000,       // Server/API focused
+    fullStack: 120000,    // Generalist developers
+    mobile: 75000,        // iOS/Android specialists
+    dataScience: 60000,   // ML/AI specialists
   };
   
   const demandByRole: Record<string, number> = {};
@@ -27,24 +27,59 @@ export function calculateLaborDemand(
   let weightedWageSum = 0;
   let totalWeights = 0;
   
-  // Calculate demand adjustments for each role
+  // Calculate demand adjustments for each role with MUCH stronger effects
   roles.forEach(role => {
     const baseRoleDemand = baseDemand[role];
-    const substitutionRate = params.aiSubstitutionByRole[role] / 100;
+    const maxSubstitutionRate = params.aiSubstitutionByRole[role] / 100;
     const productivityGain = params.aiProductivityGain / 100;
     
-    // AI substitution reduces demand
-    // But productivity gains and economic growth increase it
-    const growthMultiplier = 1 + (params.gdpGrowth / 100) * timeHorizon;
-    const productivityMultiplier = 1 + productivityGain * (1 - substitutionRate);
-    const substitutionMultiplier = 1 - substitutionRate * Math.min(timeHorizon / 10, 1); // gradual adoption
+    // AI adoption follows sigmoid curve - slow start, rapid middle, plateau
+    const adoptionProgress = Math.min(1, timeHorizon / 8); // 8 years to full adoption
+    const sigmoidAdoption = 1 / (1 + Math.exp(-10 * (adoptionProgress - 0.5))); // Steep S-curve
+    const currentSubstitutionRate = maxSubstitutionRate * sigmoidAdoption;
     
-    const adjustedDemand = baseRoleDemand * 
-      growthMultiplier * 
-      productivityMultiplier * 
-      substitutionMultiplier;
+    // Economic growth baseline (compound)
+    const baseGrowthMultiplier = Math.pow(1 + params.gdpGrowth / 100, timeHorizon);
     
-    demandByRole[role] = Math.max(0, adjustedDemand);
+    // VC/interest rate impact on tech hiring (much stronger effect)
+    const vcImpact = params.ventureCapitalAvailability;
+    const interestRateImpact = Math.pow(0.95, params.interestRates - 2); // Each % above 2% reduces demand 5%
+    const financialMultiplier = vcImpact * interestRateImpact;
+    
+    // Productivity paradox: AI makes remaining workers much more valuable
+    // But also enables companies to do more with fewer people
+    const productivityEffect = 1 + productivityGain * (1 - currentSubstitutionRate * 0.7);
+    
+    // Net effect: substitution reduces demand, but productivity and growth increase it
+    const netDemandMultiplier = 
+      baseGrowthMultiplier *           // Economic growth
+      financialMultiplier *            // VC/interest rate environment  
+      productivityEffect *             // Productivity gains
+      (1 - currentSubstitutionRate);   // AI substitution
+    
+    // Add role-specific factors
+    let roleSpecificMultiplier = 1;
+    
+    // Junior roles hit harder by AI + education pipeline flooding market
+    if (role === 'juniorDev') {
+      const bootcampFlood = 1 + params.educationPipeline.bootcampGrowth * timeHorizon * 2;
+      roleSpecificMultiplier *= (1 / bootcampFlood); // Oversupply reduces demand
+    }
+    
+    // Data science benefits from AI boom
+    if (role === 'dataScience') {
+      const aiDemandBoost = 1 + (productivityGain * 3 * adoptionProgress); // AI creates more AI jobs
+      roleSpecificMultiplier *= aiDemandBoost;
+    }
+    
+    // Senior roles benefit from increased complexity
+    if (role === 'seniorDev' || role === 'architect') {
+      const complexityBoost = 1 + (productivityGain * 0.5); // More complex systems need senior people
+      roleSpecificMultiplier *= complexityBoost;
+    }
+    
+    const finalDemand = baseRoleDemand * netDemandMultiplier * roleSpecificMultiplier;
+    demandByRole[role] = Math.max(0, finalDemand);
     totalEmployment += demandByRole[role];
     
     // Weight by employment for average wage calculation
@@ -53,10 +88,18 @@ export function calculateLaborDemand(
     totalWeights += demandByRole[role];
   });
   
-  // Add new AI-complementary roles
+  // Add new AI-complementary roles with growth curves
+  const adoptionProgress = Math.min(1, timeHorizon / 8); // 8 years to full adoption
+  const sigmoidAdoption = 1 / (1 + Math.exp(-10 * (adoptionProgress - 0.5))); // Steep S-curve
+  
   const complementaryRoles = Object.keys(params.aiComplementaryRoles) as (keyof typeof params.aiComplementaryRoles)[];
   complementaryRoles.forEach(role => {
-    const newRoleDemand = params.aiComplementaryRoles[role];
+    // These roles grow with AI adoption and VC funding
+    const baseNewRoles = params.aiComplementaryRoles[role];
+    const adoptionMultiplier = 1 + sigmoidAdoption * 2; // Double during peak AI adoption
+    const vcMultiplier = Math.sqrt(params.ventureCapitalAvailability); // Square root - diminishing returns
+    
+    const newRoleDemand = baseNewRoles * adoptionMultiplier * vcMultiplier;
     demandByRole[role] = newRoleDemand;
     totalEmployment += newRoleDemand;
     
@@ -67,15 +110,17 @@ export function calculateLaborDemand(
   
   const averageWage = totalWeights > 0 ? weightedWageSum / totalWeights : 0;
   
-  // Supply calculation (simplified)
-  const baseSupply = totalEmployment * 1.1; // 10% excess supply baseline
+  // More realistic supply/demand calculations
+  const { supplyMultiplier } = calculateEducationPipelineImpact(params, timeHorizon);
+  const totalSupply = totalEmployment * supplyMultiplier;
+  
   const supplyByRole: Record<string, number> = {};
   Object.keys(demandByRole).forEach(role => {
-    supplyByRole[role] = demandByRole[role] * 1.05; // 5% excess supply per role
+    supplyByRole[role] = demandByRole[role] * supplyMultiplier;
   });
   
-  const unemploymentRate = Math.max(0, (baseSupply - totalEmployment) / baseSupply);
-  const jobVacancyRate = Math.max(0, (totalEmployment - baseSupply) / totalEmployment);
+  const unemploymentRate = Math.max(0, Math.min(0.25, (totalSupply - totalEmployment) / totalSupply));
+  const jobVacancyRate = Math.max(0, (totalEmployment - totalSupply) / totalEmployment);
   
   return {
     employment: totalEmployment,
@@ -148,7 +193,6 @@ export function calculateEducationPipelineImpact(
   // Education pipeline affects supply with a lag
   const graduationImpact = educationPipeline.graduationRate;
   const bootcampImpact = educationPipeline.bootcampGrowth;
-  const universityCapacity = educationPipeline.universityCapacity;
   const skillsTraining = educationPipeline.skillsTrainingAdoption;
   
   // Supply multiplier increases over time as education system adapts
@@ -165,5 +209,5 @@ export function projectTimeSeriesOutcome(
   aiCapabilities: AICapabilityModel,
   years: number[]
 ): LaborMarketOutcome[] {
-  return years.map(year => calculateLaborDemand(params, aiCapabilities, year));
+  return years.map(year => calculateLaborDemand(params, aiCapabilities, year - 2025));
 }

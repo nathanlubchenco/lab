@@ -13,10 +13,10 @@ export default function ParameterSliders({ parameters, onChange }: ParameterSlid
     const keys = path.split('.');
     const newParams = { ...parameters };
     
-    let current: Record<string, any> = newParams;
+    let current: Record<string, unknown> = newParams as Record<string, unknown>;
     for (let i = 0; i < keys.length - 1; i++) {
       if (!(keys[i] in current)) current[keys[i]] = {};
-      current = current[keys[i]];
+      current = current[keys[i]] as Record<string, unknown>;
     }
     current[keys[keys.length - 1]] = value;
     
