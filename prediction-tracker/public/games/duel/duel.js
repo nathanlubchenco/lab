@@ -5,6 +5,7 @@ import { angle, sub, angleDiff, fromAngle, dist } from '../engine/vec.js';
 import { COLORS, drawCRT, drawFrame } from '../engine/theme.js';
 import { createFX, createStarfield } from '../engine/fx.js';
 import { sfx, resumeAudio } from '../engine/audio.js';
+import { makeButton, buttonPressed, drawButton, inButton } from '../engine/touchui.js';
 import { createShip, setDesiredHeading, boost, stepShip } from './ship.js';
 import { hitZone, inRange } from './combat.js';
 import { decideHeading } from './ai.js';
@@ -19,6 +20,7 @@ const stars = createStarfield(W, H, 90);
 
 const BEAM_RANGE = 250, CONE = 0.42;
 const ZONE_DPS = { rear: 150, flank: 72, front: 26 }; // damage per second by exposed face
+const boostBtn = makeButton(W - 84, H - 92, 64, 64);
 
 let player, enemy, round, pWins, eWins;
 let state, stateT, msg, slow, pointerMoved = false, tclock = 0;
@@ -32,6 +34,7 @@ function mkShip(x, y, heading, color) {
 function reset(full) {
   player = mkShip(W * 0.28, H * 0.72, -Math.PI / 2, COLORS.blue);
   enemy = mkShip(W * 0.72, H * 0.28, Math.PI / 2, COLORS.red);
+  enemy.turnRate = 2.35; // slower than the player (3.0) so juking can out-turn it
   if (full) { round = 1; pWins = 0; eWins = 0; }
   state = 'intro'; stateT = 0; slow = 0; msg = '';
 }
@@ -67,6 +70,12 @@ function die(s, killer) {
 }
 
 function steerPlayer() {
+  if (input.isTouch) {
+    // aim toward a touch that isn't on the boost button; if none, keep current heading
+    const t = input.touches.find(p => !inButton(boostBtn, p));
+    if (t) setDesiredHeading(player, angle(sub(t, player.pos)));
+    return;
+  }
   // aim at pointer once the user has moved it; before that, face the enemy (clean default)
   const aim = pointerMoved
     ? angle({ x: input.pointer.x - player.pos.x, y: input.pointer.y - player.pos.y })
@@ -114,11 +123,20 @@ function update(dt) {
 
   // PLAY
   steerPlayer();
-  if (input.wasPressed('Space') && boost(player)) { sfx.boost(); fx.ring(player.pos.x, player.pos.y, COLORS.blue, 26, 0.3, 2); }
+  const btnBoost = buttonPressed(boostBtn, input); // evaluate every frame to track edge state
+  if ((input.wasPressed('Space') || btnBoost) && boost(player)) { sfx.boost(); fx.ring(player.pos.x, player.pos.y, COLORS.blue, 26, 0.3, 2); }
 
-  // AI: aggressive, over-commits (charges straight + boosts) — exploitable during its lock
+  // AI: aggressive, over-commits — it charges and, when it has the player roughly ahead
+  // at mid range, slams a boost it can't recover from. That commit window is your opening.
   setDesiredHeading(enemy, decideHeading(enemy, player));
-  if (enemy.lockTimer <= 0 && Math.random() < 0.018 * (dt * 60)) { if (boost(enemy)) { sfx.boost(); fx.ring(enemy.pos.x, enemy.pos.y, COLORS.red, 24, 0.3, 2); } }
+  if (enemy.lockTimer <= 0) {
+    const toP = angle(sub(player.pos, enemy.pos));
+    const facing = Math.abs(angleDiff(enemy.heading, toP)) < 0.5;
+    const d = dist(enemy.pos, player.pos);
+    if (facing && d > 90 && d < 300 && Math.random() < 0.05 * (dt * 60)) {
+      if (boost(enemy)) { sfx.boost(); fx.ring(enemy.pos.x, enemy.pos.y, COLORS.red, 24, 0.3, 2); }
+    }
+  }
 
   stepShip(player, sdt); stepShip(enemy, sdt);
   wrapEdges(player); wrapEdges(enemy);
@@ -264,6 +282,8 @@ function render() {
   shieldBar(W - 172, H - 24, enemy.dead ? 0 : enemy.hp, COLORS.red, true);
 
   drawCRT(ctx, W, H, tclock);
+
+  if (input.isTouch && state === 'play') drawButton(r, boostBtn, 'BOOST', COLORS.amber, boostBtn._held);
 
   // overlays
   if (state === 'intro') {

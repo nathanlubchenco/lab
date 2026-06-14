@@ -5,6 +5,7 @@ import { norm, sub, len, dist, fromAngle, angle } from '../engine/vec.js';
 import { COLORS, drawCRT, drawFrame } from '../engine/theme.js';
 import { createFX, createStarfield } from '../engine/fx.js';
 import { sfx, resumeAudio } from '../engine/audio.js';
+import { makeButton, buttonHeld, drawButton, readJoystick, drawJoystick, inButton } from '../engine/touchui.js';
 import { integrate, applyThrust, bounceWalls } from './physics.js';
 import { createSoldier, applyFreezeHit, projectileHits } from './freeze.js';
 
@@ -28,6 +29,8 @@ const stars = [
   { x: W * 0.70, y: H * 0.70, s: 44 },
 ];
 let player, enemies, projs, state, msg, frost = 0, tclock = 0;
+const jbX = 80, jbY = H - 80, jbR = 50;
+const brakeBtn = makeButton(W - 80, H - 80, 60, 60);
 
 function mk(pos, team) { const s = createSoldier({ pos, team }); s.fireCd = Math.random() * 0.6; s.trail = []; s.flash = 0; return s; }
 function reset() {
@@ -82,27 +85,37 @@ function update(dt) {
   if (state !== 'play') { if (input.wasPressed('Space')) { resumeAudio(); reset(); } input.endFrame(); return; }
   if (input.pointer.down || input.keys.size) resumeAudio();
 
-  // player thrust (zero-G)
-  const t = { x: 0, y: 0 };
-  if (input.keys.has('KeyW') || input.keys.has('ArrowUp')) t.y -= 1;
-  if (input.keys.has('KeyS') || input.keys.has('ArrowDown')) t.y += 1;
-  if (input.keys.has('KeyA') || input.keys.has('ArrowLeft')) t.x -= 1;
-  if (input.keys.has('KeyD') || input.keys.has('ArrowRight')) t.x += 1;
-  if ((t.x || t.y) && player.control > 0) {
-    applyThrust(player, norm(t), THRUST * player.control, dt);
-    const back = norm({ x: -t.x, y: -t.y });
+  // ----- player thrust (zero-G): touch joystick or WASD -----
+  let thrustDir = null, thrustMag = 1;
+  if (input.isTouch) {
+    const js = readJoystick(input, jbX, jbY, jbR, p => p.x < W * 0.42);
+    if (js.active) { thrustDir = { x: js.x, y: js.y }; thrustMag = 1; }
+    if (buttonHeld(brakeBtn, input) && len(player.vel) > 4) applyThrust(player, norm({ x: -player.vel.x, y: -player.vel.y }), BRAKE * 100, dt);
+  } else {
+    const t = { x: 0, y: 0 };
+    if (input.keys.has('KeyW') || input.keys.has('ArrowUp')) t.y -= 1;
+    if (input.keys.has('KeyS') || input.keys.has('ArrowDown')) t.y += 1;
+    if (input.keys.has('KeyA') || input.keys.has('ArrowLeft')) t.x -= 1;
+    if (input.keys.has('KeyD') || input.keys.has('ArrowRight')) t.x += 1;
+    if (t.x || t.y) thrustDir = norm(t);
+    if (input.keys.has('Space') && len(player.vel) > 4) applyThrust(player, norm({ x: -player.vel.x, y: -player.vel.y }), BRAKE * 100, dt);
+  }
+  if (thrustDir && player.control > 0) {
+    applyThrust(player, thrustDir, THRUST * thrustMag * player.control, dt);
+    const back = norm({ x: -thrustDir.x || 0.0001, y: -thrustDir.y || 0 });
     fx.trail(player.pos.x + back.x * 9, player.pos.y + back.y * 9, COLORS.blue, back.x * 80, back.y * 80, 2);
     if (Math.random() < 0.4) sfx.thrust();
-  }
-  if (input.keys.has('Space') && len(player.vel) > 4) { // brake
-    applyThrust(player, norm({ x: -player.vel.x, y: -player.vel.y }), BRAKE * 100, dt);
   }
   integrate(player, dt); clampV(player); bounceWalls(player, bounds, 0.6); collideStars(player);
   pushTrail(player);
 
+  // ----- player fire: touch right-side aim or mouse -----
   player.fireCd = Math.max(0, player.fireCd - dt);
-  if (input.pointer.down && player.fireCd <= 0 && player.control > 0) {
-    shoot(player.pos, norm(sub(input.pointer, player.pos)), 'blue', player); player.fireCd = 0.22; sfx.beam();
+  let fireAt = null;
+  if (input.isTouch) { const ft = input.touches.find(t => t.x >= W * 0.42 && !inButton(brakeBtn, t)); if (ft) fireAt = ft; }
+  else if (input.pointer.down) fireAt = input.pointer;
+  if (fireAt && player.fireCd <= 0 && player.control > 0) {
+    shoot(player.pos, norm(sub(fireAt, player.pos)), 'blue', player); player.fireCd = 0.22; sfx.beam();
   }
 
   // enemies: use cover, peek, fire with line of sight
@@ -116,9 +129,9 @@ function update(dt) {
     integrate(e, dt); clampV(e); bounceWalls(e, bounds, 0.6); collideStars(e);
     pushTrail(e);
     e.fireCd = Math.max(0, e.fireCd - dt);
-    if (e.fireCd <= 0 && !losBlocked(e.pos, player.pos) && d < 360) {
-      const lead = { x: player.pos.x + player.vel.x * 0.18, y: player.pos.y + player.vel.y * 0.18 };
-      shoot(e.pos, norm(sub(lead, e.pos)), 'red', e); e.fireCd = 1.0 + Math.random() * 0.5;
+    if (e.fireCd <= 0 && !losBlocked(e.pos, player.pos) && d < 320 && player.grace <= 0) {
+      const lead = { x: player.pos.x + player.vel.x * 0.12, y: player.pos.y + player.vel.y * 0.12 };
+      shoot(e.pos, norm(sub(lead, e.pos)), 'red', e); e.fireCd = 1.5 + Math.random() * 0.7;
     }
   }
 
@@ -216,6 +229,13 @@ function render() {
   r.text('HOSTILES', W / 2 - 78, 30, COLORS.text, '11px monospace');
   enemies.forEach((e, i) => r.circle({ x: W / 2 + 4 + i * 16, y: 26 }, 5, e.frozen ? COLORS.ice : COLORS.red, e.frozen ? { fill: false, w: 1.5 } : { glow: 6 }));
   r.text("objective: freeze all hostiles  ·  or  ·  the enemy's gate is DOWN", 22, H - 16, COLORS.textDim, '11px monospace');
+
+  if (input.isTouch && state === 'play') {
+    const js = readJoystick(input, jbX, jbY, jbR, p => p.x < W * 0.42);
+    drawJoystick(r, jbX, jbY, jbR, js, COLORS.blue);
+    drawButton(r, brakeBtn, 'BRAKE', COLORS.amber, buttonHeld(brakeBtn, input));
+    r.text('aim + fire', W * 0.72, H - 88, COLORS.textDim, '11px monospace', { align: 'center' });
+  }
 
   drawCRT(ctx, W, H, tclock);
 
