@@ -35,13 +35,13 @@ export function generateMonteCarloSamples(
     // Sample each parameter from its uncertainty range
     Object.entries(uncertainty).forEach(([param, [min, max]]) => {
       if (param in sampledParams) {
-        (sampledParams as any)[param] = Math.random() * (max - min) + min;
+        (sampledParams as unknown as Record<string, number>)[param] = Math.random() * (max - min) + min;
       }
     });
     
     results.push({
       scenarioId: `scenario_${i}`,
-      parameters: sampledParams as any,
+      parameters: sampledParams as unknown as Record<string, number>,
       outcomes: {}, // Will be filled by economic model
       probability: 1 / numSamples
     });

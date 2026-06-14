@@ -37,7 +37,7 @@ export default function SimpleChart({ parameters, aiCapabilities }: SimpleChartP
           <div>
             <h4 className="text-lg font-medium text-gray-700 mb-3">Employment Trend</h4>
             <div className="space-y-2">
-              {projections.map((p, i) => (
+              {projections.map((p) => (
                 <div key={p.year} className="flex justify-between items-center py-1">
                   <span className="text-sm text-gray-600">{p.year}</span>
                   <div className="flex items-center space-x-2">
@@ -59,7 +59,7 @@ export default function SimpleChart({ parameters, aiCapabilities }: SimpleChartP
           <div>
             <h4 className="text-lg font-medium text-gray-700 mb-3">Salary Trend</h4>
             <div className="space-y-2">
-              {projections.map((p, i) => (
+              {projections.map((p) => (
                 <div key={p.year} className="flex justify-between items-center py-1">
                   <span className="text-sm text-gray-600">{p.year}</span>
                   <div className="flex items-center space-x-2">

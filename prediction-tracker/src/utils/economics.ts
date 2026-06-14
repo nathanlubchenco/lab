@@ -148,7 +148,6 @@ export function calculateEducationPipelineImpact(
   // Education pipeline affects supply with a lag
   const graduationImpact = educationPipeline.graduationRate;
   const bootcampImpact = educationPipeline.bootcampGrowth;
-  const universityCapacity = educationPipeline.universityCapacity;
   const skillsTraining = educationPipeline.skillsTrainingAdoption;
   
   // Supply multiplier increases over time as education system adapts

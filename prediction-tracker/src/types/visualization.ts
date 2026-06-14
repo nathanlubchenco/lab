@@ -11,7 +11,7 @@ export interface ChartData {
   z?: number[];
   labels?: string[];
   colors?: string[];
-  metadata?: Record<string, any>;
+  metadata?: Record<string, unknown>;
 }
 
 export interface VisualizationConfig {
