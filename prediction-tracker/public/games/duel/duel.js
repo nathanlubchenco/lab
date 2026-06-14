@@ -1,74 +1,287 @@
 import { createLoop } from '../engine/loop.js';
 import { createInput } from '../engine/input.js';
 import { createRenderer } from '../engine/renderer.js';
-import { angle, sub, angleDiff } from '../engine/vec.js';
+import { angle, sub, angleDiff, fromAngle, dist } from '../engine/vec.js';
+import { COLORS, drawCRT, drawFrame } from '../engine/theme.js';
+import { createFX, createStarfield } from '../engine/fx.js';
+import { sfx, resumeAudio } from '../engine/audio.js';
 import { createShip, setDesiredHeading, boost, stepShip } from './ship.js';
-import { hitZone, damageFor, inRange } from './combat.js';
+import { hitZone, inRange } from './combat.js';
 import { decideHeading } from './ai.js';
 
-const W = 720, H = 480;
+const W = 760, H = 520;
 const canvas = document.getElementById('game');
 const r = createRenderer(canvas, W, H);
+const ctx = r.ctx;
 const input = createInput(window, canvas);
+const fx = createFX();
+const stars = createStarfield(W, H, 90);
 
-let player, enemy, pHP, eHP, round, pWins, eWins, state, msg;
+const BEAM_RANGE = 250, CONE = 0.42;
+const ZONE_DPS = { rear: 150, flank: 72, front: 26 }; // damage per second by exposed face
+
+let player, enemy, round, pWins, eWins;
+let state, stateT, msg, slow, pointerMoved = false, tclock = 0;
+
+function mkShip(x, y, heading, color) {
+  const s = createShip({ pos: { x, y }, heading, color, speed: 165, turnRate: 3.0 });
+  s.trail = []; s.hp = 100; s.flash = 0; s.beamZone = null;
+  return s;
+}
 
 function reset(full) {
-  player = createShip({ pos: { x: W * 0.3, y: H * 0.7 }, heading: -Math.PI / 2, color: '#36e0ff' });
-  enemy = createShip({ pos: { x: W * 0.7, y: H * 0.3 }, heading: Math.PI / 2, color: '#ff5b5b' });
-  pHP = eHP = 100;
+  player = mkShip(W * 0.28, H * 0.72, -Math.PI / 2, COLORS.blue);
+  enemy = mkShip(W * 0.72, H * 0.28, Math.PI / 2, COLORS.red);
   if (full) { round = 1; pWins = 0; eWins = 0; }
-  state = 'play'; msg = `Round ${round}`;
+  state = 'intro'; stateT = 0; slow = 0; msg = '';
 }
 reset(true);
 
-function fire(shooter, target, applyDamage) {
-  if (!inRange(shooter.pos, target.pos, 240)) return;
-  const toTarget = angle(sub(target.pos, shooter.pos));
-  if (Math.abs(angleDiff(shooter.heading, toTarget)) > 0.5) return; // must be aiming at target
-  applyDamage(damageFor(hitZone(shooter.pos, target.pos, target.heading)) * 0.05);
+function beamZone(shooter, target) {
+  if (!inRange(shooter.pos, target.pos, BEAM_RANGE)) return null;
+  const toT = angle(sub(target.pos, shooter.pos));
+  if (Math.abs(angleDiff(shooter.heading, toT)) > CONE) return null;
+  return hitZone(shooter.pos, target.pos, target.heading);
+}
+
+function applyBeam(shooter, target, dt) {
+  const zone = beamZone(shooter, target);
+  shooter.beamZone = zone;
+  if (!zone) return;
+  target.hp -= ZONE_DPS[zone] * dt;
+  target.flash = 0.12;
+  // impact sparks at the target hull
+  const col = zone === 'rear' ? '#ffffff' : shooter.color;
+  fx.trail(target.pos.x, target.pos.y, col, 0, 0, zone === 'rear' ? 2.4 : 1.6);
+  if (zone === 'rear' && Math.random() < 0.18) { fx.shake(2); }
+}
+
+function die(s, killer) {
+  s.dead = true;
+  fx.burst(s.pos.x, s.pos.y, s.color, 30, 320);
+  fx.burst(s.pos.x, s.pos.y, '#ffffff', 16, 200);
+  fx.ring(s.pos.x, s.pos.y, killer.color, 70, 0.6, 3);
+  fx.shake(9, 0.4);
+  sfx.kill();
+  slow = 0.75; // cinematic slow-mo
+}
+
+function steerPlayer() {
+  // aim at pointer once the user has moved it; before that, face the enemy (clean default)
+  const aim = pointerMoved
+    ? angle({ x: input.pointer.x - player.pos.x, y: input.pointer.y - player.pos.y })
+    : angle(sub(enemy.pos, player.pos));
+  setDesiredHeading(player, aim);
+}
+
+function endRound(playerWon) {
+  if (playerWon) pWins++; else eWins++;
+  if (pWins === 2 || eWins === 2) { state = 'matchover'; msg = pWins === 2 ? 'SIMULATION PASSED' : 'SIMULATION FAILED'; if (pWins === 2) sfx.win(); else sfx.lose(); }
+  else { round++; state = 'roundover'; msg = playerWon ? 'ROUND WON' : 'ROUND LOST'; }
 }
 
 function update(dt) {
-  if (state !== 'play') {
-    if (input.wasPressed('Space')) reset(state === 'matchover');
+  tclock += dt;
+  stars.update(dt);
+  if (input.pointer.x || input.pointer.y) pointerMoved = true;
+  if (input.wasPressed('Space') || input.pointer.down) resumeAudio();
+
+  // slow-mo decay
+  if (slow > 0) slow = Math.max(0, slow - dt);
+  const sdt = dt * (slow > 0 ? 0.28 : 1);
+
+  fx.update(dt);
+  player.flash = Math.max(0, player.flash - dt);
+  enemy.flash = Math.max(0, enemy.flash - dt);
+
+  if (state === 'intro') {
+    stateT += dt;
+    steerPlayer();
+    // hold ships facing each other during countdown
+    if (stateT > 1.6) { state = 'play'; stateT = 0; sfx.blip(); }
+    pushTrails();
     input.endFrame();
     return;
   }
-  setDesiredHeading(player, angle({ x: input.pointer.x - player.pos.x, y: input.pointer.y - player.pos.y }));
-  if (input.wasPressed('Space')) boost(player);
+
+  if (state === 'roundover' || state === 'matchover') {
+    stateT += dt;
+    fx.update(0); // already updated above
+    if ((input.wasPressed('Space')) && stateT > 0.4) reset(state === 'matchover');
+    input.endFrame();
+    return;
+  }
+
+  // PLAY
+  steerPlayer();
+  if (input.wasPressed('Space') && boost(player)) { sfx.boost(); fx.ring(player.pos.x, player.pos.y, COLORS.blue, 26, 0.3, 2); }
+
+  // AI: aggressive, over-commits (charges straight + boosts) — exploitable during its lock
   setDesiredHeading(enemy, decideHeading(enemy, player));
-  if (Math.random() < 0.012) boost(enemy);
-  stepShip(player, dt); stepShip(enemy, dt);
-  fire(player, enemy, (d) => { eHP -= d; });
-  fire(enemy, player, (d) => { pHP -= d; });
-  if (pHP <= 0 || eHP <= 0) {
-    if (eHP <= 0) pWins++; else eWins++;
-    if (pWins === 2 || eWins === 2) { state = 'matchover'; msg = (pWins === 2 ? 'YOU WIN THE MATCH' : 'YOU LOSE') + ' — Space to rematch'; }
-    else { round++; const won = eHP <= 0; state = 'roundover'; msg = (won ? 'Round won' : 'Round lost') + ' — Space to continue'; }
+  if (enemy.lockTimer <= 0 && Math.random() < 0.018 * (dt * 60)) { if (boost(enemy)) { sfx.boost(); fx.ring(enemy.pos.x, enemy.pos.y, COLORS.red, 24, 0.3, 2); } }
+
+  stepShip(player, sdt); stepShip(enemy, sdt);
+  wrapEdges(player); wrapEdges(enemy);
+  pushTrails();
+  emitEngine(player); emitEngine(enemy);
+
+  if (!player.dead && !enemy.dead) {
+    applyBeam(player, enemy, sdt);
+    applyBeam(enemy, player, sdt);
+  }
+
+  if (enemy.hp <= 0 && !enemy.dead) die(enemy, player);
+  if (player.hp <= 0 && !player.dead) die(player, enemy);
+
+  if (player.dead || enemy.dead) {
+    state = 'death'; stateT = 0;
   }
   input.endFrame();
 }
 
+function updateDeath(dt) {
+  // let the explosion + slow-mo play before resolving the round
+  stateT += dt;
+  if (slow > 0) slow = Math.max(0, slow - dt);
+  stars.update(dt); fx.update(dt); pushTrails();
+  if (stateT > 0.9) endRound(enemy.dead);
+  input.endFrame();
+}
+
+// route 'death' through update via a wrapper
+const baseUpdate = update;
+function masterUpdate(dt) {
+  if (state === 'death') return updateDeath(dt);
+  return baseUpdate(dt);
+}
+
+function wrapEdges(s) {
+  const m = 14;
+  if (s.pos.x < m) s.pos.x = m; if (s.pos.x > W - m) s.pos.x = W - m;
+  if (s.pos.y < m) s.pos.y = m; if (s.pos.y > H - m) s.pos.y = H - m;
+}
+function pushTrails() {
+  for (const s of [player, enemy]) {
+    if (s.dead) continue;
+    s.trail.push({ x: s.pos.x, y: s.pos.y });
+    if (s.trail.length > 18) s.trail.shift();
+  }
+}
+function emitEngine(s) {
+  if (s.dead) return;
+  const back = fromAngle(s.heading + Math.PI, 12);
+  const boosting = s.boosting > 0;
+  fx.trail(s.pos.x + back.x, s.pos.y + back.y, boosting ? '#ffffff' : s.color, -fromAngle(s.heading, 60).x, -fromAngle(s.heading, 60).y, boosting ? 2.6 : 1.6);
+}
+
+// ---------- render ----------
 function drawShip(s) {
+  if (s.dead) return;
   const a = s.heading;
+  // trail
+  for (let i = 0; i < s.trail.length; i++) {
+    const p = s.trail[i], al = i / s.trail.length;
+    ctx.globalAlpha = al * 0.5; ctx.fillStyle = s.color;
+    ctx.beginPath(); ctx.arc(p.x, p.y, al * 2.4, 0, 7); ctx.fill();
+  }
+  ctx.globalAlpha = 1;
+
+  // committed (locked) indicator — pulsing amber ring + forward commit vector
+  if (s.lockTimer > 0) {
+    const pulse = 16 + Math.sin(tclock * 22) * 2;
+    r.circle(s.pos, pulse, COLORS.amber, { fill: false, w: 1.5, glow: 10 });
+    const tip = fromAngle(s.heading, 34);
+    r.line(s.pos, { x: s.pos.x + tip.x, y: s.pos.y + tip.y }, COLORS.amber, 1, 6);
+    // vulnerability bracket so the player learns to punish
+    r.text('LOCKED', s.pos.x, s.pos.y - 24, COLORS.amber, 'bold 9px monospace', { glow: 6, align: 'center' });
+  }
+
+  // hull
+  const col = s.flash > 0 ? '#ffffff' : s.color;
   r.poly([
-    { x: s.pos.x + Math.cos(a) * 14, y: s.pos.y + Math.sin(a) * 14 },
-    { x: s.pos.x + Math.cos(a + 2.5) * 10, y: s.pos.y + Math.sin(a + 2.5) * 10 },
-    { x: s.pos.x + Math.cos(a - 2.5) * 10, y: s.pos.y + Math.sin(a - 2.5) * 10 }
-  ], s.color, { fill: false, w: 2 });
-  if (s.lockTimer > 0) r.circle(s.pos, 18, '#ffd166', { fill: false, w: 1 }); // committed indicator
+    { x: s.pos.x + Math.cos(a) * 15, y: s.pos.y + Math.sin(a) * 15 },
+    { x: s.pos.x + Math.cos(a + 2.5) * 11, y: s.pos.y + Math.sin(a + 2.5) * 11 },
+    { x: s.pos.x + Math.cos(a + Math.PI) * 5, y: s.pos.y + Math.sin(a + Math.PI) * 5 },
+    { x: s.pos.x + Math.cos(a - 2.5) * 11, y: s.pos.y + Math.sin(a - 2.5) * 11 },
+  ], col, { fill: false, w: 2, glow: 12 });
+  // core
+  r.circle(s.pos, 2.2, '#ffffff', { glow: 8 });
+}
+
+function drawBeam(shooter, target) {
+  if (!shooter.beamZone || shooter.dead || target.dead) return;
+  const hot = shooter.beamZone === 'rear';
+  const nose = fromAngle(shooter.heading, 15);
+  const a = { x: shooter.pos.x + nose.x, y: shooter.pos.y + nose.y };
+  r.line(a, target.pos, hot ? '#ffffff' : shooter.color, hot ? 3 : 1.6, 12);
+  r.circle(target.pos, hot ? 7 : 4, hot ? '#ffffff' : shooter.color, { fill: false, w: 1.5, glow: 10 });
+}
+
+function shieldBar(x, y, hp, color, right) {
+  const w = 150, h = 9, p = Math.max(0, hp) / 100;
+  ctx.globalAlpha = 0.25; ctx.fillStyle = color; ctx.fillRect(x, y, w, h); ctx.globalAlpha = 1;
+  ctx.save(); ctx.shadowBlur = 8; ctx.shadowColor = color; ctx.fillStyle = color;
+  ctx.fillRect(right ? x + w - w * p : x, y, w * p, h); ctx.restore();
+  ctx.strokeStyle = color; ctx.globalAlpha = 0.5; ctx.strokeRect(x + 0.5, y + 0.5, w, h); ctx.globalAlpha = 1;
+}
+
+function pip(x, y, on, color) {
+  r.circle({ x, y }, 5, color, on ? { glow: 8 } : { fill: false, w: 1.2 });
 }
 
 function render() {
-  r.clear('#03070d');
-  for (let x = 0; x < W; x += 40) r.line({ x, y: 0 }, { x, y: H }, '#0c2230', 1);
-  for (let y = 0; y < H; y += 40) r.line({ x: 0, y }, { x: W, y }, '#0c2230', 1);
-  drawShip(player); drawShip(enemy);
-  r.text(`You ${pWins} — ${eWins} AI   (Round ${round})`, 16, 24, '#9fb6d6', '16px monospace');
-  r.text(`HP ${Math.max(0, pHP | 0)}`, 16, H - 16, '#36e0ff');
-  r.text(`HP ${Math.max(0, eHP | 0)}`, W - 90, H - 16, '#ff5b5b');
-  if (state !== 'play') r.text(msg, W / 2 - 160, H / 2, '#fff', '20px monospace');
+  r.clear(COLORS.bg);
+  stars.draw(ctx);
+  // subtle grid
+  ctx.globalAlpha = 1;
+  for (let x = 40; x < W; x += 48) r.line({ x, y: 12 }, { x, y: H - 12 }, COLORS.grid, 1);
+  for (let y = 40; y < H; y += 48) r.line({ x: 12, y }, { x: W - 12, y }, COLORS.grid, 1);
+
+  ctx.save();
+  fx.applyShake(ctx);
+  drawBeam(player, enemy); drawBeam(enemy, player);
+  drawShip(enemy); drawShip(player);
+  fx.draw(ctx);
+  ctx.restore();
+
+  drawFrame(ctx, W, H);
+
+  // HUD: status bar
+  r.text('SIM-A · NULL-G DUEL', 22, 30, COLORS.text, '12px monospace', { glow: 4 });
+  // observers flavor (pulsing)
+  ctx.globalAlpha = 0.4 + 0.3 * Math.abs(Math.sin(tclock * 1.4));
+  r.text('● OBSERVED', W - 104, 30, COLORS.amber, '11px monospace');
+  ctx.globalAlpha = 1;
+  // round pips
+  r.text('ROUND ' + round + ' / 3', W / 2, 28, COLORS.text, '12px monospace', { align: 'center', glow: 4 });
+  pip(W / 2 - 30, 42, pWins >= 1, COLORS.blue); pip(W / 2 - 14, 42, pWins >= 2, COLORS.blue);
+  pip(W / 2 + 14, 42, eWins >= 1, COLORS.red); pip(W / 2 + 30, 42, eWins >= 2, COLORS.red);
+
+  // shields
+  r.text('YOU', 22, H - 30, COLORS.blue, '11px monospace');
+  shieldBar(22, H - 24, player.dead ? 0 : player.hp, COLORS.blue, false);
+  r.text('CADET-X', W - 172, H - 30, COLORS.red, '11px monospace');
+  shieldBar(W - 172, H - 24, enemy.dead ? 0 : enemy.hp, COLORS.red, true);
+
+  drawCRT(ctx, W, H, tclock);
+
+  // overlays
+  if (state === 'intro') {
+    const n = Math.max(1, Math.ceil(1.6 - stateT));
+    bigText(stateT < 0.4 ? 'ROUND ' + round : (stateT > 1.4 ? 'ENGAGE' : String(n)));
+  } else if (state === 'roundover' || state === 'matchover') {
+    bigText(msg, state === 'matchover' ? (pWins === 2 ? COLORS.blue : COLORS.red) : COLORS.white);
+    r.text('press SPACE', W / 2, H / 2 + 34, COLORS.text, '13px monospace', { align: 'center' });
+  }
 }
 
-createLoop({ update, render }).start();
+function bigText(s, color = COLORS.white) {
+  ctx.save();
+  ctx.globalAlpha = 0.55; ctx.fillStyle = '#02040a'; ctx.fillRect(W / 2 - 210, H / 2 - 42, 420, 68);
+  ctx.globalAlpha = 0.5; ctx.strokeStyle = color; ctx.lineWidth = 1; ctx.shadowBlur = 12; ctx.shadowColor = color;
+  ctx.strokeRect(W / 2 - 210, H / 2 - 42, 420, 68);
+  ctx.restore();
+  r.text(s, W / 2, H / 2 + 6, color, 'bold 30px monospace', { align: 'center', glow: 16 });
+}
+
+createLoop({ update: masterUpdate, render }).start();

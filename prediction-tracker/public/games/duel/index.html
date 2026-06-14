@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Light Duel — Ender Games</title>
-<style>body{margin:0;background:#03070d;color:#9fb6d6;font-family:monospace;display:flex;flex-direction:column;align-items:center;gap:12px;padding:20px}canvas{border:1px solid #123;max-width:100%}a{color:#36e0ff}</style>
+<title>Light Duel — Battle School</title>
+<link rel="stylesheet" href="../shell.css">
 </head><body>
-<h1>Light Duel</h1>
-<canvas id="game"></canvas>
-<p>Aim with the mouse · Space to boost · best 2 of 3. Bait the AI into committing, then juke. · <a href="/games/">back</a></p>
+<div class="crumb"><a href="../index.html">‹ battle school</a><span>sim-a · combat aptitude</span></div>
+<h1>LIGHT&nbsp;DUEL</h1>
+<p class="sub">Ch. 5 — the older cadets' holo game</p>
+<div class="screen"><canvas id="game"></canvas></div>
+<p class="controls">
+  <kbd>move mouse</kbd> aim &nbsp;·&nbsp; <kbd>Space</kbd> boost &nbsp;·&nbsp; <kbd>Space</kbd> to advance rounds<br>
+  A hard turn or a boost <strong>commits</strong> you — you can't change course until the amber ring fades.
+  Bait the AI into committing, then juke and strike its <span style="color:var(--amber)">rear</span>. Best 2 of 3.
+</p>
 <script type="module" src="./duel.js"></script>
 </body></html>
