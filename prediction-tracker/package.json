@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "test:games": "node --test \"public/games/**/*.test.js\""
   },
   "dependencies": {
     "@types/d3": "^7.4.3",
