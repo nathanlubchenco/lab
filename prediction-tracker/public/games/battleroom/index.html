@@ -1,11 +1,17 @@
 <!DOCTYPE html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Battle Room — Ender Games</title>
-<style>body{margin:0;background:#070b14;color:#9fb6d6;font-family:monospace;display:flex;flex-direction:column;align-items:center;gap:12px;padding:20px}canvas{border:1px solid #123;max-width:100%}a{color:#4da3ff}</style>
+<title>Battle Room — Battle School</title>
+<link rel="stylesheet" href="../shell.css">
 </head><body>
-<h1>Battle Room</h1>
-<canvas id="game"></canvas>
-<p>Zero-G: WASD thrusts, you keep drifting. Mouse-aim freeze beams. The enemy's gate is up top. · <a href="/games/">back</a></p>
+<div class="crumb"><a href="../index.html">‹ battle school</a><span>sim-b · null-g infantry</span></div>
+<h1>BATTLE&nbsp;ROOM</h1>
+<p class="sub">zero gravity · flash suits · freeze guns</p>
+<div class="screen"><canvas id="game"></canvas></div>
+<p class="controls">
+  <kbd>W A S D</kbd> thrust &nbsp;·&nbsp; <kbd>Space</kbd> brake &nbsp;·&nbsp; <kbd>mouse</kbd> aim &nbsp;·&nbsp; <kbd>click</kbd> fire<br>
+  No friction — you keep drifting. Use the blocks for cover; beams don't pass through them.
+  Freeze every hostile, or dive through their gate. <span style="color:var(--amber)">The enemy's gate is down.</span>
+</p>
 <script type="module" src="./battleroom.js"></script>
 </body></html>
