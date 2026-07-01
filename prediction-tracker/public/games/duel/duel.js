@@ -6,9 +6,16 @@ import { COLORS, drawCRT, drawFrame } from '../engine/theme.js';
 import { createFX, createStarfield } from '../engine/fx.js';
 import { sfx, resumeAudio } from '../engine/audio.js';
 import { makeButton, buttonPressed, drawButton, inButton } from '../engine/touchui.js';
-import { createShip, setDesiredHeading, boost, stepShip } from './ship.js';
+import { createShip, setDesiredHeading, boost, lunge, stepShip } from './ship.js';
 import { hitZone, inRange } from './combat.js';
 import { decideHeading } from './ai.js';
+import { createVariants, drawVariantHUD } from '../engine/variants.js';
+
+const V = createVariants('duel', [
+  { id: 'hunter', name: 'HUNTER', blurb: 'free steering · SPACE lunges · punish the enemy while EXPOSED' },
+  { id: 'overdrive', name: 'OVERDRIVE', blurb: 'no commitments at all · pure positioning' },
+  { id: 'classic', name: 'CLASSIC', blurb: 'v1 — hard turns commit YOU too' },
+]);
 
 const W = 760, H = 520;
 const canvas = document.getElementById('game');
@@ -25,16 +32,20 @@ const boostBtn = makeButton(W - 84, H - 92, 64, 64);
 let player, enemy, round, pWins, eWins;
 let state, stateT, msg, slow, pointerMoved = false, tclock = 0;
 
-function mkShip(x, y, heading, color) {
-  const s = createShip({ pos: { x, y }, heading, color, speed: 165, turnRate: 3.0 });
-  s.trail = []; s.hp = 100; s.flash = 0; s.beamZone = null;
+function mkShip(x, y, heading, color, commitOnTurn) {
+  const s = createShip({ pos: { x, y }, heading, color, speed: 165, turnRate: 3.0, commitOnTurn });
+  s.trail = []; s.hp = 100; s.flash = 0; s.beamZone = null; s.windup = 0;
   return s;
 }
 
 function reset(full) {
-  player = mkShip(W * 0.28, H * 0.72, -Math.PI / 2, COLORS.blue);
-  enemy = mkShip(W * 0.72, H * 0.28, Math.PI / 2, COLORS.red);
-  enemy.turnRate = 2.35; // slower than the player (3.0) so juking can out-turn it
+  // hunter/overdrive: latency never gates YOUR steering — commitment is the enemy's
+  // weakness (hunter) or gone entirely (overdrive control variant).
+  const playerCommits = V.is('classic');
+  const enemyCommits = !V.is('overdrive');
+  player = mkShip(W * 0.28, H * 0.72, -Math.PI / 2, COLORS.blue, playerCommits);
+  enemy = mkShip(W * 0.72, H * 0.28, Math.PI / 2, COLORS.red, enemyCommits);
+  enemy.turnRate = V.is('overdrive') ? 2.8 : 2.35; // slower than the player (3.0) so juking can out-turn it
   if (full) { round = 1; pWins = 0; eWins = 0; }
   state = 'intro'; stateT = 0; slow = 0; msg = '';
 }
@@ -51,7 +62,9 @@ function applyBeam(shooter, target, dt) {
   const zone = beamZone(shooter, target);
   shooter.beamZone = zone;
   if (!zone) return;
-  target.hp -= ZONE_DPS[zone] * dt;
+  // hunter: a committed ship is EXPOSED — hits land harder while it can't steer
+  const punish = V.is('hunter') && target.lockTimer > 0 ? 1.7 : 1;
+  target.hp -= ZONE_DPS[zone] * punish * dt;
   target.flash = 0.12;
   // impact sparks at the target hull
   const col = zone === 'rear' ? '#ffffff' : shooter.color;
@@ -124,17 +137,35 @@ function update(dt) {
   // PLAY
   steerPlayer();
   const btnBoost = buttonPressed(boostBtn, input); // evaluate every frame to track edge state
-  if ((input.wasPressed('Space') || btnBoost) && boost(player)) { sfx.boost(); fx.ring(player.pos.x, player.pos.y, COLORS.blue, 26, 0.3, 2); }
+  if (input.wasPressed('Space') || btnBoost) {
+    // hunter/overdrive: SPACE is a lunge — a commitment you choose (overdrive keeps steering)
+    const go = V.is('classic') ? boost(player) : lunge(player);
+    if (go) {
+      if (V.is('overdrive')) player.lockTimer = 0;
+      sfx.boost(); fx.ring(player.pos.x, player.pos.y, COLORS.blue, 26, 0.3, 2);
+    }
+  }
 
   // AI: aggressive, over-commits — it charges and, when it has the player roughly ahead
   // at mid range, slams a boost it can't recover from. That commit window is your opening.
   setDesiredHeading(enemy, decideHeading(enemy, player));
-  if (enemy.lockTimer <= 0) {
+  if (enemy.windup > 0) {
+    // hunter: the charge is telegraphed — windup, then a long committed lunge
+    enemy.windup -= dt;
+    if (enemy.windup <= 0 && lunge(enemy)) {
+      enemy.lockTimer = 0.9; // extended punish window
+      sfx.boost(); fx.ring(enemy.pos.x, enemy.pos.y, COLORS.red, 30, 0.35, 2.5);
+    }
+  } else if (enemy.lockTimer <= 0) {
     const toP = angle(sub(player.pos, enemy.pos));
     const facing = Math.abs(angleDiff(enemy.heading, toP)) < 0.5;
     const d = dist(enemy.pos, player.pos);
     if (facing && d > 90 && d < 300 && Math.random() < 0.05 * (dt * 60)) {
-      if (boost(enemy)) { sfx.boost(); fx.ring(enemy.pos.x, enemy.pos.y, COLORS.red, 24, 0.3, 2); }
+      if (V.is('hunter')) { enemy.windup = 0.4; sfx.blip(); }
+      else if (boost(enemy)) {
+        if (V.is('overdrive')) enemy.lockTimer = 0;
+        sfx.boost(); fx.ring(enemy.pos.x, enemy.pos.y, COLORS.red, 24, 0.3, 2);
+      }
     }
   }
 
@@ -169,6 +200,7 @@ function updateDeath(dt) {
 // route 'death' through update via a wrapper
 const baseUpdate = update;
 function masterUpdate(dt) {
+  if (V.update(input)) { reset(true); input.endFrame(); return; }
   if (state === 'death') return updateDeath(dt);
   return baseUpdate(dt);
 }
@@ -204,14 +236,23 @@ function drawShip(s) {
   }
   ctx.globalAlpha = 1;
 
+  // charge telegraph (hunter): the enemy winds up before it commits — your cue to juke
+  if (s.windup > 0) {
+    const cr = 14 + (0.4 - s.windup) * 60;
+    r.circle(s.pos, Math.max(6, cr), COLORS.red, { fill: false, w: 2, glow: 14 });
+    r.text('CHARGING', s.pos.x, s.pos.y - 24, COLORS.red, 'bold 9px monospace', { glow: 8, align: 'center' });
+  }
+
   // committed (locked) indicator — pulsing amber ring + forward commit vector
   if (s.lockTimer > 0) {
+    const exposed = V.is('hunter') && s === enemy;
+    const ringCol = exposed ? '#ffffff' : COLORS.amber;
     const pulse = 16 + Math.sin(tclock * 22) * 2;
-    r.circle(s.pos, pulse, COLORS.amber, { fill: false, w: 1.5, glow: 10 });
+    r.circle(s.pos, pulse, ringCol, { fill: false, w: exposed ? 2 : 1.5, glow: exposed ? 16 : 10 });
     const tip = fromAngle(s.heading, 34);
-    r.line(s.pos, { x: s.pos.x + tip.x, y: s.pos.y + tip.y }, COLORS.amber, 1, 6);
+    r.line(s.pos, { x: s.pos.x + tip.x, y: s.pos.y + tip.y }, ringCol, 1, 6);
     // vulnerability bracket so the player learns to punish
-    r.text('LOCKED', s.pos.x, s.pos.y - 24, COLORS.amber, 'bold 9px monospace', { glow: 6, align: 'center' });
+    r.text(exposed ? 'EXPOSED' : 'LOCKED', s.pos.x, s.pos.y - 24, ringCol, 'bold 9px monospace', { glow: 8, align: 'center' });
   }
 
   // hull
@@ -274,6 +315,14 @@ function render() {
   r.text('ROUND ' + round + ' / 3', W / 2, 28, COLORS.text, '12px monospace', { align: 'center', glow: 4 });
   pip(W / 2 - 30, 42, pWins >= 1, COLORS.blue); pip(W / 2 - 14, 42, pWins >= 2, COLORS.blue);
   pip(W / 2 + 14, 42, eWins >= 1, COLORS.red); pip(W / 2 + 30, 42, eWins >= 2, COLORS.red);
+
+  drawVariantHUD(r, ctx, W, H, V, COLORS.textDim);
+
+  // per-variant hint
+  const hint = V.is('hunter') ? 'bait the charge · juke it · kill from behind while EXPOSED'
+    : V.is('overdrive') ? 'no lag anywhere — is it better or just flat?'
+      : 'hard turns and boosts commit YOU · plan your maneuvers';
+  r.text(hint, W / 2, H - 16, COLORS.textDim, '10px monospace', { align: 'center' });
 
   // shields
   r.text('YOU', 22, H - 30, COLORS.blue, '11px monospace');

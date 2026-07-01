@@ -7,7 +7,15 @@ import { createFX, createStarfield } from '../engine/fx.js';
 import { sfx, resumeAudio } from '../engine/audio.js';
 import { integrate, applyThrust, bounceWalls } from '../battleroom/physics.js';
 import { createSoldier, applyFreezeHit, projectileHits } from '../battleroom/freeze.js';
-import { issueOrder, updateOrders, resolveBehavior, ORDER_DELAY } from './orders.js';
+import { issueOrder, updateOrders, queueOrder, updateQueue, resolveBehavior, ORDER_DELAY } from './orders.js';
+import { createVariants, drawVariantHUD } from '../engine/variants.js';
+
+const V = createVariants('commander', [
+  { id: 'wego', name: 'WEGO', blurb: 'freeze time · queue orders · SPACE runs 2.5s of battle' },
+  { id: 'direct', name: 'DIRECT', blurb: 'real-time, zero comms lag' },
+  { id: 'classic', name: 'CLASSIC', blurb: 'v1 — real-time with 0.45s comms lag' },
+]);
+const EXEC_LEN = 2.5; // s of simultaneous execution per WeGo turn
 
 const W = 720, H = 560;
 const bounds = { min: { x: 16, y: 16 }, max: { x: W - 16, y: H - 16 } };
@@ -24,16 +32,18 @@ const stars = [
   { x: W * 0.30, y: H * 0.64, s: 40 }, { x: W * 0.70, y: H * 0.64, s: 40 },
 ];
 let squad, foes, projs, state, msg, tclock = 0, frost = 0, lastOrder = null;
+let phase, execT, turn; // WeGo: 'plan' (time frozen, queue orders) / 'exec' (watch it unfold)
 
 function mk(pos, team) {
   const s = createSoldier({ pos, team });
-  s.fireCd = Math.random() * 0.5; s.activeOrder = null; s.pendingOrder = null; s.trail = []; s.flash = 0; s.intent = null;
+  s.fireCd = Math.random() * 0.5; s.activeOrder = null; s.pendingOrder = null; s.orderQueue = []; s.trail = []; s.flash = 0; s.intent = null;
   return s;
 }
 function reset() {
   squad = [mk({ x: W * 0.38, y: H - 56 }, 'blue'), mk({ x: W * 0.5, y: H - 44 }, 'blue'), mk({ x: W * 0.62, y: H - 56 }, 'blue')];
   foes = [mk({ x: W * 0.40, y: 96 }, 'red'), mk({ x: W * 0.60, y: 96 }, 'red'), mk({ x: W / 2, y: H * 0.4 }, 'red')];
   projs = []; state = 'play'; msg = ''; frost = 0; lastOrder = null;
+  phase = 'plan'; execT = 0; turn = 1;
 }
 reset();
 
@@ -75,26 +85,45 @@ function update(dt) {
   if (frost > 0) frost = Math.max(0, frost - dt);
   [...squad, ...foes].forEach(s => s.flash = Math.max(0, s.flash - dt));
 
+  if (V.update(input)) { reset(); input.endFrame(); return; }
   if (state !== 'play') { if (input.wasPressed('Space')) { resumeAudio(); reset(); } input.endFrame(); return; }
   if (input.pointer.down || input.keys.size) resumeAudio();
 
-  // ----- player command input -----
-  if (input.pointer.down && !input._held) {
+  const wego = V.is('wego');
+  // ----- player command input (WeGo: only while time is frozen; orders chain) -----
+  const acceptOrders = !wego || phase === 'plan';
+  if (acceptOrders && input.pointer.down && !input._held) {
     input._held = true;
     const pt = { x: input.pointer.x, y: input.pointer.y };
     const tgtFoe = foes.find(f => !f.frozen && dist(f.pos, pt) < 22);
     const order = tgtFoe ? { type: 'attack', target: tgtFoe } : { type: 'move', target: pt };
     let i = 0;
-    for (const u of squad) if (!u.frozen) { issueOrder(u, order.type === 'move' ? { type: 'move', target: { x: pt.x + (i++ - 1) * 26, y: pt.y } } : order); }
+    for (const u of squad) {
+      if (u.frozen) continue;
+      const uo = order.type === 'move' ? { type: 'move', target: { x: pt.x + (i++ - 1) * 26, y: pt.y } } : order;
+      if (wego) queueOrder(u, uo);
+      else issueOrder(u, uo, V.is('direct') ? 0 : ORDER_DELAY);
+    }
     lastOrder = { ...order, pt, t: 0.6 };
     sfx.order();
   }
   if (!input.pointer.down) input._held = false;
   if (lastOrder) lastOrder.t -= dt;
 
+  // ----- WeGo phase machine -----
+  if (wego) {
+    if (phase === 'plan') {
+      if (input.wasPressed('Space')) { phase = 'exec'; execT = EXEC_LEN; sfx.blip(); }
+      else { input.endFrame(); return; } // time stays frozen: no sim below
+    } else {
+      execT -= dt;
+      if (execT <= 0) { phase = 'plan'; turn++; sfx.order(); input.endFrame(); return; }
+    }
+  }
+
   // ----- squad -----
   for (const u of squad) {
-    updateOrders(u, dt);
+    if (wego) updateQueue(u); else updateOrders(u, dt);
     const underFire = projs.some((p) => p.team === 'red' && Math.hypot(p.pos.x - u.pos.x, p.pos.y - u.pos.y) < 64);
     const b = resolveBehavior(u, { underFire, coverPoint: nearestCover(u) });
     u.intent = b;
@@ -102,6 +131,9 @@ function update(dt) {
     else if (b.action === 'attack' && b.target && !b.target.frozen) {
       const d = dist(u.pos, b.target.pos);
       if (d > 200 || losBlocked(u.pos, b.target.pos)) applyThrust(u, norm(sub(b.target.pos, u.pos)), 260 * u.control, dt);
+    } else if (b.action === 'idle' && wego && len(u.vel) > 8) {
+      // station-keeping between turns: trained soldiers kill their drift while awaiting orders
+      applyThrust(u, norm({ x: -u.vel.x, y: -u.vel.y }), 180 * u.control, dt);
     }
     integrate(u, dt); clampV(u); bounceWalls(u, bounds, 0.5); collideStars(u);
     pushTrail(u);
@@ -166,7 +198,21 @@ function drawUnit(s, isSquad) {
 
   // order legibility (squad only): pending-delay ring + intended path
   if (isSquad && !s.frozen) {
-    if (s.pendingOrder) {
+    if (V.is('wego')) {
+      // the whole plan reads as a route: active order + queued orders chained
+      let from = s.pos;
+      const chain = [...(s.activeOrder ? [s.activeOrder] : []), ...(s.orderQueue || [])];
+      chain.forEach((o, i) => {
+        const tp = o.target.pos || o.target;
+        const col = o.type === 'attack' ? COLORS.red : COLORS.blue;
+        dashLine(from, tp, col, i === 0 ? 0.55 : 0.3);
+        r.circle(tp, 3, col, { glow: 4 });
+        from = tp;
+      });
+      if (s.intent && s.intent.reason === 'self-preservation') {
+        r.text('BREAK', s.pos.x, s.pos.y - 16, COLORS.amber, 'bold 8px monospace', { align: 'center', glow: 6 });
+      }
+    } else if (s.pendingOrder) {
       const frac = Math.min(1, s.pendingOrder.elapsed / ORDER_DELAY);
       ctx.save(); ctx.strokeStyle = COLORS.amber; ctx.lineWidth = 2; ctx.globalAlpha = 0.9; ctx.shadowBlur = 8; ctx.shadowColor = COLORS.amber;
       ctx.beginPath(); ctx.arc(s.pos.x, s.pos.y, RAD + 6, -Math.PI / 2, -Math.PI / 2 + frac * Math.PI * 2); ctx.stroke(); ctx.restore(); ctx.globalAlpha = 1;
@@ -209,6 +255,8 @@ function render() {
 
   drawFrame(ctx, W, H);
   if (frost > 0) { ctx.save(); ctx.globalAlpha = frost * 0.45; ctx.fillStyle = COLORS.ice; ctx.fillRect(0, 0, W, H); ctx.restore(); }
+  // WeGo plan phase: faint ice tint sells "time frozen"
+  if (V.is('wego') && state === 'play' && phase === 'plan') { ctx.save(); ctx.globalAlpha = 0.07; ctx.fillStyle = COLORS.ice; ctx.fillRect(0, 0, W, H); ctx.restore(); }
 
   // HUD
   r.text('SIM-C · FLEET COMMAND', 22, 30, COLORS.text, '12px monospace', { glow: 4 });
@@ -217,7 +265,29 @@ function render() {
   squad.forEach((u, i) => r.circle({ x: W / 2 - 48 + i * 15, y: 26 }, 5, u.frozen ? COLORS.ice : COLORS.blue, u.frozen ? { fill: false, w: 1.5 } : { glow: 6 }));
   r.text('HOSTILE', W / 2 + 16, 30, COLORS.text, '11px monospace');
   foes.forEach((f, i) => r.circle({ x: W / 2 + 74 + i * 15, y: 26 }, 5, f.frozen ? COLORS.ice : COLORS.red, f.frozen ? { fill: false, w: 1.5 } : { glow: 6 }));
-  r.text('click open space: move there  ·  click a hostile: focus-fire  ·  orders carry comms lag + momentum', 22, H - 16, COLORS.textDim, '11px monospace');
+  drawVariantHUD(r, ctx, W, H, V, COLORS.textDim);
+  const hint = V.is('wego')
+    ? 'click open space: queue move  ·  click a hostile: queue focus-fire  ·  orders chain'
+    : V.is('direct')
+      ? 'real-time, zero comms lag — is instant obedience actually more fun?'
+      : 'click open space: move there  ·  click a hostile: focus-fire  ·  orders carry comms lag + momentum';
+  r.text(hint, 22, H - 16, COLORS.textDim, '11px monospace');
+
+  // WeGo phase banner
+  if (V.is('wego') && state === 'play') {
+    if (phase === 'plan') {
+      ctx.globalAlpha = 0.6 + 0.4 * Math.abs(Math.sin(tclock * 2.2));
+      r.text('◼ TIME FROZEN — TURN ' + turn + ' · SPACE TO EXECUTE', W / 2, H - 34, COLORS.amber, 'bold 13px monospace', { align: 'center', glow: 10 });
+      ctx.globalAlpha = 1;
+    } else {
+      const bw = 220, frac = Math.max(0, execT / EXEC_LEN);
+      r.text('▶ EXECUTING', W / 2, H - 40, COLORS.blue, 'bold 12px monospace', { align: 'center', glow: 8 });
+      ctx.save();
+      ctx.globalAlpha = 0.25; ctx.fillStyle = COLORS.blue; ctx.fillRect(W / 2 - bw / 2, H - 34, bw, 6);
+      ctx.globalAlpha = 1; ctx.shadowBlur = 8; ctx.shadowColor = COLORS.blue; ctx.fillRect(W / 2 - bw / 2, H - 34, bw * frac, 6);
+      ctx.restore();
+    }
+  }
 
   drawCRT(ctx, W, H, tclock);
 

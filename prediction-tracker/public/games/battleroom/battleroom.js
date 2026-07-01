@@ -6,12 +6,25 @@ import { COLORS, drawCRT, drawFrame } from '../engine/theme.js';
 import { createFX, createStarfield } from '../engine/fx.js';
 import { sfx, resumeAudio } from '../engine/audio.js';
 import { makeButton, buttonHeld, drawButton, readJoystick, drawJoystick, inButton } from '../engine/touchui.js';
-import { integrate, applyThrust, bounceWalls } from './physics.js';
+import { integrate, applyThrust, applyImpulse, bounceWalls } from './physics.js';
 import { createSoldier, applyFreezeHit, projectileHits } from './freeze.js';
+import { createVariants, drawVariantHUD } from '../engine/variants.js';
+
+const V = createVariants('battleroom', [
+  { id: 'raider', name: 'RAIDER', blurb: 'recoil is movement · wall push-offs boost · surf your momentum' },
+  { id: 'heavy', name: 'HEAVY', blurb: 'v1 mechanics, cranked thrust + brake' },
+  { id: 'classic', name: 'CLASSIC', blurb: 'v1 — floaty zero-G as shipped' },
+]);
+// per-variant feel constants (enemies stay identical so variants compare honestly)
+function tun() {
+  if (V.is('raider')) return { thrust: 560, brake: 5.0, fireCd: 0.16, projV: 470, recoil: 95, wallKick: 240 };
+  if (V.is('heavy')) return { thrust: 820, brake: 6.0, fireCd: 0.22, projV: 430, recoil: 0, wallKick: 0 };
+  return { thrust: 520, brake: 3.0, fireCd: 0.22, projV: 430, recoil: 0, wallKick: 0 };
+}
 
 const W = 720, H = 560;
 const bounds = { min: { x: 16, y: 16 }, max: { x: W - 16, y: H - 16 } };
-const RAD = 9, MAXV = 240, THRUST = 520, BRAKE = 3.0, PROJ_V = 430;
+const RAD = 9, MAXV = 240, PROJ_V = 430;
 const canvas = document.getElementById('game');
 const r = createRenderer(canvas, W, H);
 const ctx = r.ctx;
@@ -66,7 +79,7 @@ function collideStars(body) {
   }
 }
 function clampV(b) { const s = len(b.vel); if (s > MAXV) { b.vel.x *= MAXV / s; b.vel.y *= MAXV / s; } }
-function shoot(from, dir, team, owner) { projs.push({ pos: { x: from.x, y: from.y }, prev: { x: from.x, y: from.y }, vel: { x: dir.x * PROJ_V, y: dir.y * PROJ_V }, team, life: 1.6, owner }); }
+function shoot(from, dir, team, owner, speed = PROJ_V) { projs.push({ pos: { x: from.x, y: from.y }, prev: { x: from.x, y: from.y }, vel: { x: dir.x * speed, y: dir.y * speed }, team, life: 1.6, owner }); }
 
 function hitSoldier(s, kind) {
   const was = s.frozen;
@@ -82,15 +95,17 @@ function update(dt) {
   player.flash = Math.max(0, player.flash - dt);
   enemies.forEach(e => e.flash = Math.max(0, e.flash - dt));
 
+  if (V.update(input)) { reset(); input.endFrame(); return; }
   if (state !== 'play') { if (input.wasPressed('Space')) { resumeAudio(); reset(); } input.endFrame(); return; }
   if (input.pointer.down || input.keys.size) resumeAudio();
 
+  const T = tun();
   // ----- player thrust (zero-G): touch joystick or WASD -----
   let thrustDir = null, thrustMag = 1;
   if (input.isTouch) {
     const js = readJoystick(input, jbX, jbY, jbR, p => p.x < W * 0.42);
     if (js.active) { thrustDir = { x: js.x, y: js.y }; thrustMag = 1; }
-    if (buttonHeld(brakeBtn, input) && len(player.vel) > 4) applyThrust(player, norm({ x: -player.vel.x, y: -player.vel.y }), BRAKE * 100, dt);
+    if (buttonHeld(brakeBtn, input) && len(player.vel) > 4) applyThrust(player, norm({ x: -player.vel.x, y: -player.vel.y }), T.brake * 100, dt);
   } else {
     const t = { x: 0, y: 0 };
     if (input.keys.has('KeyW') || input.keys.has('ArrowUp')) t.y -= 1;
@@ -98,15 +113,22 @@ function update(dt) {
     if (input.keys.has('KeyA') || input.keys.has('ArrowLeft')) t.x -= 1;
     if (input.keys.has('KeyD') || input.keys.has('ArrowRight')) t.x += 1;
     if (t.x || t.y) thrustDir = norm(t);
-    if (input.keys.has('Space') && len(player.vel) > 4) applyThrust(player, norm({ x: -player.vel.x, y: -player.vel.y }), BRAKE * 100, dt);
+    if (input.keys.has('Space') && len(player.vel) > 4) applyThrust(player, norm({ x: -player.vel.x, y: -player.vel.y }), T.brake * 100, dt);
   }
   if (thrustDir && player.control > 0) {
-    applyThrust(player, thrustDir, THRUST * thrustMag * player.control, dt);
+    applyThrust(player, thrustDir, T.thrust * thrustMag * player.control, dt);
     const back = norm({ x: -thrustDir.x || 0.0001, y: -thrustDir.y || 0 });
     fx.trail(player.pos.x + back.x * 9, player.pos.y + back.y * 9, COLORS.blue, back.x * 80, back.y * 80, 2);
     if (Math.random() < 0.4) sfx.thrust();
   }
-  integrate(player, dt); clampV(player); bounceWalls(player, bounds, 0.6); collideStars(player);
+  integrate(player, dt); clampV(player);
+  const bounced = bounceWalls(player, bounds, 0.6);
+  // raider: push off the wall while thrusting — the wall is a launchpad, not a stop
+  if (bounced && T.wallKick && thrustDir && player.control > 0) {
+    applyImpulse(player, thrustDir, T.wallKick); clampV(player);
+    fx.ring(player.pos.x, player.pos.y, COLORS.blue, 22, 0.3, 2); sfx.thrust();
+  }
+  collideStars(player);
   pushTrail(player);
 
   // ----- player fire: touch right-side aim or mouse -----
@@ -115,7 +137,10 @@ function update(dt) {
   if (input.isTouch) { const ft = input.touches.find(t => t.x >= W * 0.42 && !inButton(brakeBtn, t)); if (ft) fireAt = ft; }
   else if (input.pointer.down) fireAt = input.pointer;
   if (fireAt && player.fireCd <= 0 && player.control > 0) {
-    shoot(player.pos, norm(sub(fireAt, player.pos)), 'blue', player); player.fireCd = 0.22; sfx.beam();
+    const dir = norm(sub(fireAt, player.pos));
+    shoot(player.pos, dir, 'blue', player, T.projV); player.fireCd = T.fireCd; sfx.beam();
+    // raider: recoil — every shot is also a thruster burn in the opposite direction
+    if (T.recoil) { applyImpulse(player, { x: -dir.x, y: -dir.y }, T.recoil); clampV(player); }
   }
 
   // enemies: use cover, peek, fire with line of sight
@@ -228,7 +253,11 @@ function render() {
   // hostile freeze pips
   r.text('HOSTILES', W / 2 - 78, 30, COLORS.text, '11px monospace');
   enemies.forEach((e, i) => r.circle({ x: W / 2 + 4 + i * 16, y: 26 }, 5, e.frozen ? COLORS.ice : COLORS.red, e.frozen ? { fill: false, w: 1.5 } : { glow: 6 }));
-  r.text("objective: freeze all hostiles  ·  or  ·  the enemy's gate is DOWN", 22, H - 16, COLORS.textDim, '11px monospace');
+  drawVariantHUD(r, ctx, W, H, V, COLORS.textDim);
+  const objective = V.is('raider')
+    ? "recoil + wall kicks are your engines  ·  the enemy's gate is DOWN"
+    : "objective: freeze all hostiles  ·  or  ·  the enemy's gate is DOWN";
+  r.text(objective, 22, H - 16, COLORS.textDim, '11px monospace');
 
   if (input.isTouch && state === 'play') {
     const js = readJoystick(input, jbX, jbY, jbR, p => p.x < W * 0.42);

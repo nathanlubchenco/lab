@@ -8,6 +8,12 @@ export function applyThrust(body, dir, accel, dt) {
   return body;
 }
 
+// Instant velocity kick (recoil, wall push-off) — dt-independent, unlike applyThrust.
+export function applyImpulse(body, dir, mag) {
+  body.vel = { x: body.vel.x + dir.x * mag, y: body.vel.y + dir.y * mag };
+  return body;
+}
+
 export function bounceWalls(body, bounds, restitution = 0.6) {
   let bounced = false;
   if (body.pos.x < bounds.min.x) { body.pos.x = bounds.min.x; body.vel.x = Math.abs(body.vel.x) * restitution; bounced = true; }

@@ -1,6 +1,12 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { integrate, applyThrust, bounceWalls } from './physics.js';
+import { integrate, applyThrust, applyImpulse, bounceWalls } from './physics.js';
+
+test('applyImpulse kicks velocity instantly, independent of dt', () => {
+  const b = { pos: { x: 0, y: 0 }, vel: { x: 5, y: 0 } };
+  applyImpulse(b, { x: -1, y: 0 }, 20); // e.g. shot recoil opposite the aim
+  assert.deepEqual(b.vel, { x: -15, y: 0 });
+});
 
 test('integrate moves by vel*dt and keeps velocity (no friction)', () => {
   const b = { pos: { x: 0, y: 0 }, vel: { x: 10, y: 0 } };
