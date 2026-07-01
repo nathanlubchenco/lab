@@ -32,7 +32,4 @@ export function drawVariantHUD(r, ctx, W, H, variants, color) {
   const v = variants.current;
   const label = variants.list.map((it, i) => (it === v ? `[${i + 1} ${it.name}]` : ` ${i + 1} ${it.name} `)).join(' ');
   r.text(label, W - 22, 48, color, '10px monospace', { align: 'right' });
-  ctx.globalAlpha = 0.7;
-  r.text(v.blurb, W - 22, 62, color, '9px monospace', { align: 'right' });
-  ctx.globalAlpha = 1;
 }

@@ -92,8 +92,7 @@ function update(dt) {
   const wego = V.is('wego');
   // ----- player command input (WeGo: only while time is frozen; orders chain) -----
   const acceptOrders = !wego || phase === 'plan';
-  if (acceptOrders && input.pointer.down && !input._held) {
-    input._held = true;
+  if (acceptOrders && input.wasClicked()) {
     const pt = { x: input.pointer.x, y: input.pointer.y };
     const tgtFoe = foes.find(f => !f.frozen && dist(f.pos, pt) < 22);
     const order = tgtFoe ? { type: 'attack', target: tgtFoe } : { type: 'move', target: pt };
@@ -107,7 +106,6 @@ function update(dt) {
     lastOrder = { ...order, pt, t: 0.6 };
     sfx.order();
   }
-  if (!input.pointer.down) input._held = false;
   if (lastOrder) lastOrder.t -= dt;
 
   // ----- WeGo phase machine -----

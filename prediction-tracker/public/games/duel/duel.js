@@ -318,12 +318,6 @@ function render() {
 
   drawVariantHUD(r, ctx, W, H, V, COLORS.textDim);
 
-  // per-variant hint
-  const hint = V.is('hunter') ? 'bait the charge · juke it · kill from behind while EXPOSED'
-    : V.is('overdrive') ? 'no lag anywhere — is it better or just flat?'
-      : 'hard turns and boosts commit YOU · plan your maneuvers';
-  r.text(hint, W / 2, H - 16, COLORS.textDim, '10px monospace', { align: 'center' });
-
   // shields
   r.text('YOU', 22, H - 30, COLORS.blue, '11px monospace');
   shieldBar(22, H - 24, player.dead ? 0 : player.hp, COLORS.blue, false);

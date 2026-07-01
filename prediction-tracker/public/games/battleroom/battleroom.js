@@ -135,7 +135,7 @@ function update(dt) {
   player.fireCd = Math.max(0, player.fireCd - dt);
   let fireAt = null;
   if (input.isTouch) { const ft = input.touches.find(t => t.x >= W * 0.42 && !inButton(brakeBtn, t)); if (ft) fireAt = ft; }
-  else if (input.pointer.down) fireAt = input.pointer;
+  else if (input.pointer.down || input.wasClicked()) fireAt = input.pointer;
   if (fireAt && player.fireCd <= 0 && player.control > 0) {
     const dir = norm(sub(fireAt, player.pos));
     shoot(player.pos, dir, 'blue', player, T.projV); player.fireCd = T.fireCd; sfx.beam();

@@ -3,6 +3,7 @@ export function createInput(target = window, canvas = null) {
   const keys = new Set();
   const pressed = new Set();
   const pointer = { x: 0, y: 0, down: false };
+  let clicked = false; // edge: pointer went down since last endFrame (survives sub-frame clicks)
   const touches = []; // [{ id, x, y }] in canvas coords
   const state = { isTouch: false };
 
@@ -16,7 +17,7 @@ export function createInput(target = window, canvas = null) {
 
   if (canvas) {
     canvas.addEventListener('mousemove', (e) => { const p = toCanvas(e.clientX, e.clientY); pointer.x = p.x; pointer.y = p.y; });
-    canvas.addEventListener('mousedown', (e) => { const p = toCanvas(e.clientX, e.clientY); pointer.x = p.x; pointer.y = p.y; pointer.down = true; });
+    canvas.addEventListener('mousedown', (e) => { const p = toCanvas(e.clientX, e.clientY); pointer.x = p.x; pointer.y = p.y; pointer.down = true; clicked = true; });
     window.addEventListener('mouseup', () => { pointer.down = false; });
 
     const syncTouches = (e) => {
@@ -25,7 +26,7 @@ export function createInput(target = window, canvas = null) {
       if (touches.length) { pointer.x = touches[0].x; pointer.y = touches[0].y; pointer.down = true; }
       else pointer.down = false;
     };
-    canvas.addEventListener('touchstart', (e) => { state.isTouch = true; e.preventDefault(); syncTouches(e); }, { passive: false });
+    canvas.addEventListener('touchstart', (e) => { state.isTouch = true; e.preventDefault(); syncTouches(e); clicked = true; }, { passive: false });
     canvas.addEventListener('touchmove', (e) => { e.preventDefault(); syncTouches(e); }, { passive: false });
     canvas.addEventListener('touchend', (e) => { e.preventDefault(); syncTouches(e); }, { passive: false });
     canvas.addEventListener('touchcancel', (e) => { e.preventDefault(); syncTouches(e); }, { passive: false });
@@ -35,6 +36,7 @@ export function createInput(target = window, canvas = null) {
     keys, pointer, touches, state,
     get isTouch() { return state.isTouch; },
     wasPressed(code) { return pressed.has(code); },
-    endFrame() { pressed.clear(); },
+    wasClicked() { return clicked; },
+    endFrame() { pressed.clear(); clicked = false; },
   };
 }
