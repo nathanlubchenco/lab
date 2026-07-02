@@ -4,13 +4,22 @@ import { dist } from '../engine/vec.js';
 // - guards hold posts by their gate and intercept gate-runners
 // - hunters advance cover-to-cover and focus the most wounded squad unit
 
-export function pickTarget(foe, squad) {
+// Enemy command styles, drawn at random each battle so the opposition reads
+// differently game to game. guardShare splits the roster; targeting drives focus.
+export const DOCTRINES = [
+  { id: 'disciplined', name: 'DISCIPLINED', guardShare: 0.4, standoff: 230, cad: [0.85, 1.25], targeting: 'weakest' },
+  { id: 'blitz', name: 'BLITZ', guardShare: 0.2, standoff: 170, cad: [0.72, 1.05], targeting: 'nearest' },
+  { id: 'bulwark', name: 'BULWARK', guardShare: 0.6, standoff: 285, cad: [0.9, 1.35], targeting: 'weakest' },
+];
+
+export function pickTarget(foe, squad, targeting = 'weakest') {
   const alive = squad.filter((s) => !s.frozen);
   if (!alive.length) return null;
-  const weakest = Math.min(...alive.map((s) => s.integrity));
+  const pool = targeting === 'weakest'
+    ? alive.filter((s) => s.integrity === Math.min(...alive.map((a) => a.integrity)))
+    : alive;
   let best = null, bd = Infinity;
-  for (const s of alive) {
-    if (s.integrity !== weakest) continue;
+  for (const s of pool) {
     const d = dist(foe.pos, s.pos);
     if (d < bd) { bd = d; best = s; }
   }

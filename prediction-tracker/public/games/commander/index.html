@@ -9,12 +9,14 @@
 <p class="sub">you direct the toons — you don't fly them</p>
 <div class="screen"><canvas id="game"></canvas></div>
 <p class="controls">
-  <kbd>click</kbd> a soldier to select &nbsp;·&nbsp; <kbd>click</kbd> ground/hostile to order them (or everyone) &nbsp;·&nbsp; <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> switch mode<br>
-  You are <strong>outnumbered 3 to 5</strong> — their commander plans every turn too: guards hold the gate, hunters
-  stalk your <span style="color:var(--amber)">wounded</span> through cover.
-  <strong>WEGO</strong>: time freezes while you queue chained orders (<strong>4 per turn</strong>); <kbd>Space</kbd> runs 2.5&nbsp;s of battle.
+  <kbd>click</kbd> a soldier to select &nbsp;·&nbsp; <kbd>click</kbd> ground/hostile to order them (or everyone) &nbsp;·&nbsp; <kbd>Esc</kbd> deselect &nbsp;·&nbsp; <kbd>1</kbd><kbd>2</kbd><kbd>3</kbd> mode &nbsp;·&nbsp; <kbd>N</kbd> arena<br>
+  <strong>Zero-G, book rules:</strong> soldiers change course only by <span style="color:var(--amber)">pushing off</span> walls,
+  star blocks, and bodies — waypoints snap to surfaces, mid-drift is committed, collisions shove, and you can kick off a frozen enemy.
+  You are always <strong>outnumbered</strong>; the enemy commander draws a random doctrine each battle (watch the OPFOR readout),
+  guards hold their gate, hunters stalk your <span style="color:var(--amber)">wounded</span>.
+  <strong>WEGO</strong>: time freezes while you queue chained orders (limited comms per turn); <kbd>Space</kbd> runs 2.5&nbsp;s of battle.
   <strong>DIRECT</strong>: real-time, instant orders. <strong>CLASSIC</strong>: real-time with comms lag.
-  Freeze them all, or reach the gate.
+  Win every arena: freeze them all, or hold their gate.
 </p>
 <script type="module" src="./commander.js"></script>
 </body></html>

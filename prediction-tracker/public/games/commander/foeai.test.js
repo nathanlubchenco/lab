@@ -13,6 +13,13 @@ test('pickTarget focuses the most wounded squad unit, nearest first on ties', ()
   assert.equal(pickTarget(foe, [at(5, 5, { frozen: true })]), null);
 });
 
+test('pickTarget with nearest targeting ignores wounds and takes proximity', () => {
+  const foe = at(0, 0);
+  const healthyNear = at(10, 0);
+  const woundedFar = at(300, 0, { integrity: 1 });
+  assert.equal(pickTarget(foe, [healthyNear, woundedFar], 'nearest'), healthyNear);
+});
+
 test('guard holds post until a squad unit nears the gate, then intercepts', () => {
   const gate = { x: 0, y: 0 };
   const post = { x: 40, y: 40 };
